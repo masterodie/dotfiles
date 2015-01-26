@@ -3,8 +3,6 @@
 KERNEL=`uname -s`
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-echo $DIR
-
 #VIM files
 declare -A VIM_FILES
 VIM_FILES=( ['vim']='.vim' ['vim/vimrc']='.vimrc' )
@@ -15,7 +13,7 @@ VIM_FILES=( ['tmuxrc']='.tmux.conf' )
 
 #ZSH Files
 declare -A ZSH_FILES
-ZSH_FILES=( ['zshrc']='.zshrc' ['zshrc.local']='.zshrc.local' )
+ZSH_FILES=( ['zshrc']='.zshrc' ['zshrc.local']='.zshrc.local' ['zshenv']='.zshenv' )
 ZSH_SYSTEM_FILE=
 case "$KERNEL" in
         "Linux")
@@ -25,7 +23,6 @@ case "$KERNEL" in
                 ZSH_SYSTEM_FILE="zshrc.macos"
                 ;;
 esac
-
 
 #OH MY ZSH
 declare -A OH_MY_ZSH_FILES
@@ -46,8 +43,8 @@ function _create_zsh_symlinks {
 for key in ${!ZSH_FILES[@]}
 do
         ln -s ${DIR}/${key} ${HOME}/${ZSH_FILES[${key}]}
-        ln -s ${DIR}/${ZSH_SYSTEM_FILE} ${HOME}/.zshrc.system
 done
+ln -s ${DIR}/${ZSH_SYSTEM_FILE} ${HOME}/.zshrc.system
 }
 
 function _create_oh_my_zsh_symlinks {
@@ -77,6 +74,7 @@ for key in ${!ZSH_FILES[@]}
 do
         unlink ${HOME}/${ZSH_FILES[${key}]}
 done
+unlink ${HOME}/.zshrc.system
 }
 
 function _remove_oh_my_zsh_symlinks {
@@ -163,10 +161,13 @@ case "$1" in
                 ;;
         relink)
                 _remove_vim_symlinks
-                _create_vim_symlinks
                 _remove_oh_my_zsh_symlinks
-                _create_oh_my_zsh_symlinks
+                _remove_zsh_symlinks
                 _remove_misc_symlinks
+
+                _create_vim_symlinks
+                _create_oh_my_zsh_symlinks
+                _create_zsh_symlinks
                 _create_misc_symlinks
                 ;;
         *)
