@@ -18,7 +18,7 @@ cd ..
 #update symlinks
 for i in *
 do
-        if [[ $i == $0 ]]
+        if [[ $i == "update.sh" ]]
         then
                 continue
         fi
