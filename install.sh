@@ -15,6 +15,8 @@ VIM_FILES=( ['tmuxrc']='.tmux.conf' )
 
 #ZSH Files
 declare -A ZSH_FILES
+ZSH_FILES=( ['zshrc']='.zshrc' ['zshrc.local']='.zshrc.local' )
+ZSH_SYSTEM_FILE=
 case "$KERNEL" in
         "Linux")
                 ZSH_SYSTEM_FILE="zshrc.linux"
@@ -24,7 +26,6 @@ case "$KERNEL" in
                 ;;
 esac
 
-ZSH_FILES=( ['zshrc']='.zshrc' ['zshrc.local']='.zshrc.local' )
 
 #OH MY ZSH
 declare -A OH_MY_ZSH_FILES
