@@ -24,7 +24,7 @@ case "$KERNEL" in
                 ;;
 esac
 
-ZSH_FILES=( ['zshrc']='.zshrc' [${ZSH_SYSTEM_FILE}]='.zshrc.system' ['zshrc.local']='.zshrc.local' )
+ZSH_FILES=( ['zshrc']='.zshrc' ['zshrc.local']='.zshrc.local' )
 
 #OH MY ZSH
 declare -A OH_MY_ZSH_FILES
@@ -45,6 +45,7 @@ function _create_zsh_symlinks {
 for key in ${!ZSH_FILES[@]}
 do
         ln -s ${DIR}/${key} ${HOME}/${ZSH_FILES[${key}]}
+        ln -s ${DIR}/${ZSH_SYSTEM_FILE} ${HOME}/.zshrc.system
 done
 }
 
