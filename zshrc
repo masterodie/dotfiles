@@ -1,4 +1,7 @@
-###Get local environment settings
+###Get local machine settings
+[ -e ~/.zshrc.system ]  && source ~/.zshrc.system
+
+###Get local machine settings
 [ -e ~/.zshrc.local ]  && source ~/.zshrc.local
 
 export DEFAULT_USER=`whoami`
