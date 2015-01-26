@@ -76,7 +76,7 @@ fi
 
 function all {
         cd $DIR
-        #_update_git
+        _update_git
         _create_vim_symlinks
         _create_zsh_symlinks
         _create_oh_my_zsh_symlinks
