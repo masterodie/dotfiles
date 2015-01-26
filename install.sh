@@ -73,28 +73,28 @@ done
 function _remove_zsh_symlinks {
 for key in ${!ZSH_FILES[@]}
 do
-        unlink ${ZSH_FILES[${key}]}
+        unlink ${HOME}/${ZSH_FILES[${key}]}
 done
 }
 
 function _remove_oh_my_zsh_symlinks {
 for key in ${!OH_MY_ZSH_FILES[@]}
 do
-        unlink ${OH_MY_ZSH_FILES[${key}]}
+        unlink ${HOME}/${OH_MY_ZSH_FILES[${key}]}
 done
 }
 
 function _remove_vim_symlinks {
 for key in ${!VIM_FILES[@]}
 do
-        unlink ${VIM_FILES[${key}]}
+        unlink ${HOME}/${VIM_FILES[${key}]}
 done
 }
 
 function _remove_misc_symlinks {
 for key in ${!MISC_FILES[@]}
 do
-        unlink ${MISC_FILES[${key}]}
+        unlink ${HOME}/${MISC_FILES[${key}]}
 done
 }
 
