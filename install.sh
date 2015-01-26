@@ -44,7 +44,7 @@ cd $DIR/vim; git submodule update --init --recursive
 function _create_zsh_symlinks {
 for key in ${!ZSH_FILES[@]}
 do
-        ln -s "${DIR}/${key}" "${HOME}/${ZSH_FILES[${key}]}"
+        ln -s ${DIR}/${key} ${HOME}/${ZSH_FILES[${key}]}
 done
 }
 
