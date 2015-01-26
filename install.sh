@@ -8,8 +8,8 @@ declare -A VIM_FILES
 VIM_FILES=( ['vim']='.vim' ['vim/vimrc']='.vimrc' )
 
 #Misc files
-declare -A VIM_FILES
-VIM_FILES=( ['tmuxrc']='.tmux.conf' )
+declare -A MISC_FILES
+MISC_FILES=( ['tmuxrc']='.tmux.conf' )
 
 #ZSH Files
 declare -A ZSH_FILES
