@@ -9,7 +9,7 @@ VIM_FILES=( ['vim']='.vim' ['vim/vimrc']='.vimrc' )
 
 #Misc files
 declare -A MISC_FILES
-MISC_FILES=( ['tmux.conf']='.tmux.conf' )
+MISC_FILES=( ['tmux.conf']='.tmux.conf' ['tmux.theme']='.tmux.theme' )
 
 #ZSH Files
 declare -A ZSH_FILES
