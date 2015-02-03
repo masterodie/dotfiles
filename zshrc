@@ -4,7 +4,10 @@
 ###Get local machine settings
 [ -e ~/.zshrc.local ]  && source ~/.zshrc.local
 
-if (set -u; : $DEFAULT_USER) then
+if (set -u; : $DEFAULT_USER) 2> /dev/null
+then
+        echo "DEFAULT_USER SET"
+else
         export DEFAULT_USER=$USER
 fi
 
