@@ -6,7 +6,6 @@
 
 if (set -u; : $DEFAULT_USER) 2> /dev/null
 then
-        echo "DEFAULT_USER SET"
 else
         export DEFAULT_USER=$USER
 fi
@@ -51,7 +50,7 @@ bindkey "\e[2~" quoted-insert # Ins
 bindkey "\e[3~" delete-char # Del
 
 
-command -v fortune >/dev/null 2>&1 || fortune 25% tbbt 25% starwars 25% futurama 25% chalkboard
+fortune 25% tbbt 25% starwars 25% futurama 25% chalkboard 2>/dev/null
 
 ##### OH MY ZSH
 
