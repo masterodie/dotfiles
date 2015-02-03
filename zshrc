@@ -4,7 +4,9 @@
 ###Get local machine settings
 [ -e ~/.zshrc.local ]  && source ~/.zshrc.local
 
-export DEFAULT_USER=`whoami`
+if (set -u; : $DEFAULT_USER) then
+        export DEFAULT_USER=$USER
+fi
 
 if which rbenv > /dev/null; then eval "$(rbenv init - --no-rehash)"; fi
 
