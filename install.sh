@@ -11,6 +11,10 @@ VIM_FILES=( ['vim']='.vim' ['vim/vimrc']='.vimrc' )
 declare -A MISC_FILES
 MISC_FILES=( ['tmux.conf']='.tmux.conf' ['tmux.theme']='.tmux.theme' )
 
+#Misc files
+declare -A MUTT_FILES
+MISC_FILES=( ['muttrc']='.muttrc' ['mutt']='.mutt' )
+
 #ZSH Files
 declare -A ZSH_FILES
 ZSH_FILES=( ['zshrc']='.zshrc' ['zshrc.local']='.zshrc.local' ['zshenv']='.zshenv' )
@@ -61,6 +65,13 @@ do
 done
 }
 
+function _create_mutt_symlinks {
+for key in ${!MUTT_FILES[@]}
+do
+        ln -s ${DIR}/${key} ${HOME}/${MUTT_FILES[${key}]}
+done
+}
+
 function _create_misc_symlinks {
 for key in ${!MISC_FILES[@]}
 do
@@ -91,6 +102,13 @@ do
 done
 }
 
+function _remove_mutt_symlinks {
+for key in ${!MUTT_FILES[@]}
+do
+        unlink ${HOME}/${MUTT_FILES[${key}]}
+done
+}
+
 function _remove_misc_symlinks {
 for key in ${!MISC_FILES[@]}
 do
@@ -115,13 +133,17 @@ function _install_vim {
 
 function _install_zsh {
         cd $DIR
-        _update_git_base
         _create_zsh_symlinks
 }
 
 function _install_oh_my_zsh {
         cd $DIR
         _create_oh_my_zsh_symlinks
+}
+
+function _install_mutt {
+        cd $DIR
+        _create_mutt_symlinks
 }
 
 function _install_misc {
@@ -135,10 +157,16 @@ case "$1" in
                 _install_vim
                 _install_zsh
                 _install_oh_my_zsh
+                _install_mutt
+                _install_misc
                 ;;
         vim)
-                _update_git_base
+                _update_git_vim
                 _install_vim
+                ;;
+        mutt)
+                _update_git_base
+                _install_mutt
                 ;;
         misc)
                 _update_git_base
@@ -171,5 +199,5 @@ case "$1" in
                 _create_misc_symlinks
                 ;;
         *)
-                echo "Usage: ${0} {all|vim|zsh|oh-my-zsh|misc|unlink|relink}"
+                echo "Usage: ${0} {all|vim|zsh|oh-my-zsh|mutt|misc|unlink|relink}"
 esac

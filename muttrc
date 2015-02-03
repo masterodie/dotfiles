@@ -1,0 +1,3 @@
+mailboxes ! +linux-suse +linux-debian +freebsd +osx
+
+source ~/.mutt/themes/solarized
