@@ -1,1 +1,2 @@
 #File for Machine Specific Settings
+alias tmux="TERM=screen-256color-bce tmux"
