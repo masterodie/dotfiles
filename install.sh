@@ -127,32 +127,38 @@ fi
 
 function _install_vim {
         cd $DIR
+        _remove_vim_symlinks
         _create_vim_symlinks
         _compile_vim_youcompleteme
 }
 
 function _install_zsh {
         cd $DIR
+        _remove_zsh_symlinks
         _create_zsh_symlinks
 }
 
 function _install_oh_my_zsh {
         cd $DIR
+        _remove_oh_my_zsh_symlinks
         _create_oh_my_zsh_symlinks
 }
 
 function _install_mutt {
         cd $DIR
+        _remove_mutt_symlinks
         _create_mutt_symlinks
 }
 
 function _install_misc {
         cd $DIR
+        _remove_misc_symlinks
         _create_misc_symlinks
 }
 
 case "$1" in
         all)
+                _update_git_base
                 _update_git_vim
                 _install_vim
                 _install_zsh
