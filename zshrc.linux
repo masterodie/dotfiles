@@ -7,6 +7,6 @@ alias emacs='emacsclient -c -a ""'
 alias newncmpc="urxvt -e ncmpc"
 alias trende="google-translate en de"
 alias scrot="scrot -e 'mv \$f ~/screenshots/'"
-alias gvim="gvim --remote-silent"
 alias mvim=/usr/bin/gvim
 
+[ -e /etc/arch-release ] && plugins=($plugins archlinux)

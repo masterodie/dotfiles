@@ -1,16 +1,14 @@
 ###Get local machine settings
-[ -e ~/.zshrc.system ]  && source ~/.zshrc.system
+[ -e ~/.zshrc.local ]  && source ~/.zshrc.local
 
 ###Get local machine settings
-[ -e ~/.zshrc.local ]  && source ~/.zshrc.local
+[ -e ~/.zshrc.system ]  && source ~/.zshrc.system
 
 if (set -u; : $DEFAULT_USER) 2> /dev/null
 then
 else
         export DEFAULT_USER=$USER
 fi
-
-if which rbenv > /dev/null; then eval "$(rbenv init - --no-rehash)"; fi
 
 ##### Avoid beeing
 setopt nobeep
@@ -54,8 +52,8 @@ fortune 25% tbbt 25% starwars 25% futurama 25% chalkboard 2>/dev/null
 
 ##### OH MY ZSH
 
-#Get zsh settins
-[ -e ~/.zshrc.oh-my-zsh ] && source ~/.zshrc.oh-my-zsh && source ~/.oh-my-zsh/oh-my-zsh.sh
+# Path to your oh-my-zsh configuration.
+ZSH=$HOME/.dotfiles/oh-my-zsh
 
-
-
+# Source oh-my-zsh
+[ -e ~/.zshrc.oh-my-zsh ] && source ~/.zshrc.oh-my-zsh && source $ZSH/oh-my-zsh.sh
