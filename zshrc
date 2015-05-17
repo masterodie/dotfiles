@@ -4,6 +4,8 @@
 ###Get local machine settings
 [ -e ~/.zshrc.system ]  && source ~/.zshrc.system
 
+export EDITOR=vim
+
 if (set -u; : $DEFAULT_USER) 2> /dev/null
 then
 else
