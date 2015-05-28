@@ -1,0 +1,14 @@
+"hg7195
+
+loadplugins '\.(js|penta)$'
+group user
+
+colorscheme solarized
+
+set cdpath=''
+set defsearch=duckduckgo
+set guioptions=bCrsmT
+set hlfind
+set visualbell
+
+" vim: set ft=pentadactyl:
