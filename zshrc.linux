@@ -1,9 +1,6 @@
-alias pacman='sudo pacman-color'
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias archey='LC_ALL=en_US.UTF8 archey'
-alias chromium="run-or-raise chromium chromium"
-alias emacs='emacsclient -c -a ""'
 alias newncmpc="urxvt -e ncmpc"
 alias trende="google-translate en de"
 alias scrot="scrot -e 'mv \$f ~/screenshots/'"
