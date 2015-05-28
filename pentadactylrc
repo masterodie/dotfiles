@@ -3,12 +3,39 @@
 loadplugins '\.(js|penta)$'
 group user
 
-colorscheme solarized
+colorscheme molokai
 
 set cdpath=''
 set defsearch=duckduckgo
-set guioptions=bCrsmT
+set guioptions+=mT
 set hlfind
 set visualbell
+
+" Faster scrolling
+map -builtin <C-e> 3<C-e>
+map -builtin <C-y> 3<C-y>
+"nmap <BS> <Space>
+"nmap <S-BS> <S-Space>
+
+map -builtin h 5h
+map -builtin j 5j
+map -builtin k 5k
+map -builtin l 5l
+
+map -builtin J 2j
+map -builtin K 2k
+
+"map -builtin s f
+"map -builtin S F
+"map -builtin e d
+"map -builtin ;s g;b
+"map -builtin ;t ;y
+"map -builtin ;n ;i
+"map -builtin ;N ;I
+
+"nmap <Down> r
+"nmap <Left> v
+"nmap <Right> w
+"nmap <Up> d
 
 " vim: set ft=pentadactyl:
