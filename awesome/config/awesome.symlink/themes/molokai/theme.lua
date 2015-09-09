@@ -24,7 +24,7 @@ local MOLOKAI_FG_MUTED = "#75715E"
 local MOLOKAI_URGENT = "#CC9393"
 local MOLOKAI_URGENT_BG = "#3F3F3F"
 
-theme.font = AWESOME_FONT
+theme.font = "Inconsolata 11"
 
 -- {{{ Colors
 theme.bg_focus  = MOLOKAI_BG -- "#1E2320"

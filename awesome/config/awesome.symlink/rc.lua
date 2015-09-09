@@ -12,8 +12,6 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 -- Redshift integration
 local redshift = require("redshift")
--- Run or raise
-local ror = require("aweror")
 
 
 -- {{{ Functions
@@ -332,6 +330,9 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     awful.key({ modkey },            "n",     function ()  run_or_raise('firefox', { class = "Firefox" }) end),
+    awful.key({ modkey, },            "y",     function ()  run_or_raise(terminal .. ' -e mux start default', { name = "tmux - system" }) end),
+    awful.key({ modkey, },            "x",     function ()  run_or_raise(terminal .. ' -e mux start nhweb', { name = "tmux - nhweb" }) end),
+    awful.key({ modkey, },            "c",     function ()  run_or_raise(terminal .. ' -e mux start coding', { name = "tmux - coding" }) end),
 
     -- dmenu
     -- Run or raise applications with dmenu
@@ -354,7 +355,7 @@ globalkeys = awful.util.table.join(
     -- Prompt
     awful.key({ modkey, "Control" },            "r",     function () mypromptbox[mouse.screen]:run() end),
 
-    awful.key({ modkey }, "x",
+    awful.key({ modkey, 'Control' }, "x",
               function ()
                   awful.prompt.run({ prompt = "Run Lua code: " },
                   mypromptbox[mouse.screen].widget,
@@ -451,6 +452,8 @@ awful.rules.rules = {
                      raise = true,
                      keys = clientkeys,
                      buttons = clientbuttons } },
+    { rule = { class = "mpv" },
+      properties = { floating = false } },
     { rule = { class = "MPlayer" },
       properties = { floating = true } },
     { rule = { class = "pinentry" },
@@ -460,6 +463,12 @@ awful.rules.rules = {
     -- Set Firefox to always map on tags number 2 of screen 1.
     { rule = { class = "Firefox" },
       properties = { tag = tags[1][1] } },
+    { rule = { name = "tmux - coding" },
+      properties = { tag = tags[1][2] } },
+    { rule = { name = "tmux - nhweb" },
+      properties = { tag = tags[1][2] } },
+    { rule = { name = "tmux - system" },
+      properties = { tag = tags[1][4] } },
 }
 -- }}}
 
@@ -538,6 +547,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 --{{{ Autostart
 run_once("xscreensaver -no-splash")
+run_once("cairo-compmgr")
 --}}}
 --
 --vim: ft=lua tw=4
