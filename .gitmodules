@@ -1,8 +1,8 @@
 [submodule "vim"]
-	path = vim
+	path = vim/vim.symlink
 	url = https://github.com/masterodie/vim.git
 [submodule "oh-my-zsh"]
-	path = oh-my-zsh
+	path = zsh/oh-my-zsh.symlink
 	url = https://github.com/robbyrussell/oh-my-zsh
 [submodule "tmux/plugins/tpm"]
 	path = tmux/plugins/tpm

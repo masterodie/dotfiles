@@ -1,4 +1,5 @@
-tmux/plugins
+tmux/tmux.symlink/plugins
 pentadactyl/info
 
+zshrc.local
 zshrc.local
