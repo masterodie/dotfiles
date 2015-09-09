@@ -6,12 +6,14 @@ echo "Initializing submodule(s)"
 git submodule update --init --recursive
 
 source install/link.sh
+source install/copy.sh
 
-echo "creating vim directories"
-mkdir -p ~/.vim-tmp
-
-
-echo "Configuring zsh as default shell"
-chsh -s $(which zsh)
+if [[ ! $SHELL =~ 'zsh' ]]
+then
+    echo "Configuring zsh as default shell"
+    chsh -s $(which zsh)
+else
+    echo "zsh is already the default shell"
+fi
 
 echo "Done."
