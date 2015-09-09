@@ -3,3 +3,5 @@ pentadactyl/pentadactyl.symlink/info
 
 zshrc.local
 zshrc.local
+
+*/.tags
