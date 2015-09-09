@@ -5,8 +5,8 @@ echo "Installing dotfiles"
 echo "Initializing submodule(s)"
 git submodule update --init --recursive
 
-source install/link.sh
-source install/copy.sh
+source _install/link.sh
+source _install/copy.sh
 
 if [[ ! $SHELL =~ 'zsh' ]]
 then
