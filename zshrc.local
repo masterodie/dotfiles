@@ -1,2 +1,0 @@
-#File for Machine Specific Settings
-plugins=(rbenv rails virtualenv virtualenvwrapper)

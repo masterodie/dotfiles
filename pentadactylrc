@@ -7,7 +7,7 @@ colorscheme molokai
 
 set cdpath=''
 set defsearch=duckduckgo
-set guioptions+=mT
+set guioptions-=mT
 set hlfind
 set visualbell
 
