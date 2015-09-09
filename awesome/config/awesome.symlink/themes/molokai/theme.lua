@@ -1,11 +1,11 @@
 --------------------------------------------
--- "Molokai" awm theme 
--- by Brandon Thomas 
+-- "Molokai" awm theme
+-- by Brandon Thomas
 -- http://posbl.org
 -- echelon@gmail
--- echelon@github 
+-- echelon@github
 -- Licensed under the MIT license
--- 
+--
 -- Based on molokai vim theme by ________
 -- Based on Zenburn awm By Adrian C. (anrxc)
 --------------------------------------------
@@ -15,7 +15,7 @@
 
 -- {{{ Main
 theme = {}
-theme.wallpaper_cmd = { "" }
+theme.wallpaper_cmd = { "feh --bg-scale /home/odie/Bilder/Wallpaper/1400.jpg" }
 -- }}}
 
 local MOLOKAI_PINK = '#D7005F'
@@ -96,7 +96,7 @@ theme.taglist_squares_unsel = "/usr/share/awesome/themes/zenburn/taglist/squarez
 -- }}}
 
 -- {{{ Misc
-theme.awesome_icon           = "/home/brandon/.config/awesome/themes/molokai/triforce-icon-small.png"
+theme.awesome_icon           = "/home/odie/.config/awesome/themes/molokai/triforce-icon-small.png"
 theme.menu_submenu_icon      = "/usr/share/awesome/themes/default/submenu.png"
 theme.tasklist_floating_icon = "/usr/share/awesome/themes/default/tasklist/floatingw.png"
 -- }}}

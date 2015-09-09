@@ -46,7 +46,7 @@ bind C-c run "tmux show-buffer | xsel -i -b"
 bind C-v run "tmux set-buffer -- \"$(xsel -o -b)\"; tmux paste-buffer"
 
 # Source theme file
-source-file ~/.dotfiles/tmux.theme
+source-file ~/.tmux/tmux.theme
 
 # List of plugins
 # Supports `github_username/repo` or full git repo URLs
