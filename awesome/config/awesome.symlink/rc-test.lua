@@ -148,8 +148,10 @@ redshift.init(1)
     --awful.layout.suit.magnifier
 local layouts =
 {
-    awful.layout.suit.tile.left,
+    awful.layout.suit.floating,
     awful.layout.suit.tile,
+    awful.layout.suit.tile.left,
+    awful.layout.suit.fair,
     awful.layout.suit.max
 }
 -- }}}
@@ -164,11 +166,25 @@ end
 
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
-tags = {}
+-- Each screen has its own tag table.
+tags = {
+    settings = {
+    -- names = { "☠", "⌥", "✇", "⌤", "⍜", "✣", "⌨", "⌘", "☕" },
+    --names = { "☭", "⌥", "✇", "⌤", "☼", "⌘" },
+    {
+        names = { "web", "dev", "media", "system", "misc" },
+        layout = { layouts[5], layouts[2], layouts[2], layouts[2], layouts[2] }
+    },
+    {
+        names = { "web", "media", "misc" },
+        layout = { layouts[2], layouts[2], layouts[2] }
+    }
+}}
 for s = 1, screen.count() do
-    -- Each screen has its own tag table.
-    tags[s] = awful.tag({ "web", "dev", "media", "system", "misc" }, s, layouts[1])
+    tags[s] = tags.settings[s].names, s, tags.settings[s].layout
 end
+
+
 -- }}}
 
 -- {{{ Menu
@@ -724,7 +740,7 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons } },
     { rule = { class = "mpv" },
-      properties = { floating = false } },
+      properties = { floating = false, focus = false, callback = awful.client.setslave } },
     { rule = { class = "MPlayer" },
       properties = { floating = true } },
     { rule = { class = "pinentry" },

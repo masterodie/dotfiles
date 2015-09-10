@@ -148,8 +148,8 @@ redshift.init(1)
     --awful.layout.suit.magnifier
 local layouts =
 {
-    awful.layout.suit.tile.left,
     awful.layout.suit.tile,
+    awful.layout.suit.tile.left,
     awful.layout.suit.max
 }
 -- }}}
@@ -724,7 +724,7 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons } },
     { rule = { class = "mpv" },
-      properties = { floating = false } },
+      properties = { floating = false, focus = false, callback = awful.client.setslave } },
     { rule = { class = "MPlayer" },
       properties = { floating = true } },
     { rule = { class = "pinentry" },
