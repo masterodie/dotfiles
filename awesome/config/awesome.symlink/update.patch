@@ -1,12 +1,13 @@
---- rc.lua	2015-09-10 21:24:25.061078688 +0200
-+++ rc-test.lua	2015-09-10 21:29:20.367257233 +0200
-@@ -148,8 +148,8 @@
-     --awful.layout.suit.magnifier
- local layouts =
- {
--    awful.layout.suit.tile.left,
-     awful.layout.suit.tile,
-+    awful.layout.suit.tile.left,
-     awful.layout.suit.max
- }
- -- }}}
+--- rc.lua	2015-09-10 23:28:06.244898527 +0200
++++ rc-test.lua	2015-09-10 23:28:49.593910435 +0200
+@@ -869,8 +869,8 @@
+         vicious.force({ alsa_widget.bar })
+         alsa_widget.notify()
+     end),
+-    awful.key({}, "Pause", function() raise_conky() end, function() lower_conky() end),
+-    awful.key({}, "Insert", function() toggle_conky() end)
++    awful.key({}, "Insert", function() raise_conky() end, function() lower_conky() end),
++    awful.key({}, "Pause", function() toggle_conky() end)
+ )
+ 
+ clientkeys = awful.util.table.join(
