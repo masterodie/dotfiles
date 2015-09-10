@@ -14,7 +14,7 @@ local menubar = require("menubar")
 local redshift = require("redshift")
 --Viious widgets
 local vicious = require("vicious")
-local shifty = require("shifty")
+local tyrannical = require("tyrannical")
 
 
 -- {{{ Functions
@@ -216,184 +216,100 @@ end
 -- Define a tag table which hold all screen tags.
 -- Each screen has its own tag table.
 --
--- Shifty
 
 
--- Shifty configured tags.
-shifty.config.tags = {
-    web = {
-        layout    = awful.layout.suit.max,
-        mwfact    = 0.60,
-        position  = 1,
-        init      = true,
-        screen    = 1,
-        slave     = true,
-        exclusive = false,
-    },
-    dev = {
-        layout      = awful.layout.suit.tile,
-        mwfact      = 0.65,
+-- First, set some settings
+tyrannical.settings.default_layout =  awful.layout.suit.tile.left
+tyrannical.settings.mwfact = 0.66
+
+-- Setup some tags
+tyrannical.tags = {
+    {
+        name        = "web",
+        init        = true,
         exclusive   = true,
-        position    = 2,
-        init      = true,
-        screen    = 1,
-    },
-    media = {
-        layout    = awful.layout.suit.tile,
-        mwfact    = 0.55,
-        exclusive = false,
-        position  = 3,
-        init      = true,
-        slave     = true
-    },
-    system = {
-        layout    = awful.layout.suit.tile,
-        exclusive = false,
-        init      = true,
-        position  = 4,
-    },
-    misc = {
-        layout   = awful.layout.suit.tile,
-        exclusive = false,
-        init      = true,
-        position  = 5,
-    },
+      --icon        = "~net.png",                 -- Use this icon for the tag (uncomment with a real path)
+        screen      = screen.count()>1 and 2 or 1,-- Setup on screen 2 if there is more than 1 screen, else on screen 1
+        layout      = awful.layout.suit.max,      -- Use the max layout
+        class = {
+            "Opera"         , "Firefox"        , "Rekonq"    , "Dillo"        , "Arora",
+            "Chromium"      , "nightly"        , "minefield"     }
+    } ,
+    {
+        name        = "system",                 -- Call the tag "Term"
+        init        = true,                   -- Load the tag on startup
+        exclusive   = true,                   -- Refuse any other type of clients (by classes)
+        screen      = {1,2},                  -- Create this tag on screen 1 and screen 2
+        layout      = awful.layout.suit.tile, -- Use the tile layout
+        selected    = true,
+        class       = { --Accept the following classes, refuse everything else (because of "exclusive=true")
+            "xterm" , "urxvt" , "aterm","URxvt","XTerm","konsole","terminator","gnome-terminal"
+        }
+    } ,
+    {
+        name = "dev",
+        init        = true,
+        exclusive   = true,
+        screen      = 1,
+        clone_on    = 2, -- Create a single instance of this tag on screen 1, but also show it on screen 2
+                         -- The tag can be used on both screen, but only one at once
+        layout      = awful.layout.tile,
+        mwfact      = 0.66,
+        class ={
+            "Kate", "KDevelop", "Codeblocks", "Code::Blocks" , "DDD", "kate4", "vim", "gvim" }
+    } ,
+    {
+        name        = "media",
+        init        = true, -- This tag wont be created at startup, but will be when one of the
+                             -- client in the "class" section will start. It will be created on
+                             -- the client startup screen
+        exclusive   = true,
+        layout      = awful.layout.suit.max,
+        class       = {
+            "Assistant"     , "Okular"         , "Evince"    , "EPDFviewer"   , "xpdf",
+            "Xpdf"          ,                                        }
+    } ,
+    {
+        name        = "misc",
+        init        = true, -- This tag wont be created at startup, but will be when one of the
+                             -- client in the "class" section will start. It will be created on
+                             -- the client startup screen
+        exclusive   = true,
+        layout      = awful.layout.suit.max,
+        class       = {
+            "Assistant"     , "Okular"         , "Evince"    , "EPDFviewer"   , "xpdf",
+            "Xpdf"          ,                                        }
+    } ,
 }
 
--- SHIFTY: application matching rules
--- order here matters, early rules will be applied first
-shifty.config.apps = {
-    {
-        match = {
-            "Conky.*",
-            "Conky",
-            "conky.*",
-            "conky",
-        },
-        floating = true,
-        sticky = true,
-        ontop = false,
-        nofocus = true,
-        skip_taskbar = true,
-        focusable = false,
-        size_hints = {"program_position", "program_size"},
-        tag = "system"
-    },
-    {
-        match = {
-            "Navigator",
-            "Vimperator",
-            "Gran Paradiso",
-            "Mozilla Firefox",
-            "Mozilla Firefox.*",
-            "Pentadactyl",
-        },
-        tag = "web",
-        sticky = false,
-    },
-    {
-        match = {
-            "Shredder.*",
-            "Thunderbird",
-            "mutt",
-        },
-        tag = "mail",
-        sticky = false,
-    },
-    {
-        match = {
-            "pcmanfm",
-        },
-        slave = true
-    },
-    {
-        match = {
-            "OpenOffice.*",
-            "Abiword",
-            "Gnumeric",
-        },
-        tag = "office",
-    },
-    {
-        match = {
-            "Mplayer.*",
-            "Mirage",
-            "gimp",
-            "gtkpod",
-            "Ufraw",
-            "easytag",
-            "youtube.*",
-            "xephyr.*",
-        },
-        tag = "media",
-        nopopup = true,
-    },
-    {
-        match = {
-            "MPlayer",
-            "Gnuplot",
-            "galculator",
-        },
-        float = true,
-    },
-    {
-        match = {
-            "mpv.*",
-        },
-        slave = true,
-        nofocus = true,
-        intrusive = true,
-    },
-    {
-        match = {
-            "nhweb.*",
-        },
-        tag = "dev",
-    },
-{
-        match = {
-            "system.*",
-        },
-        tag = "system",
-    },
-    {
-        match = {
-            terminal,
-        },
-        intrusive = true,
-        honorsizehints = false,
-        slave = true,
-    },
-    {
-        match = {""},
-        buttons = awful.util.table.join(
-            awful.button({}, 1, function (c) client.focus = c; c:raise() end),
-            awful.button({modkey}, 1, function(c)
-                client.focus = c
-                c:raise()
-                awful.mouse.client.move(c)
-                end),
-            awful.button({modkey}, 3, awful.mouse.client.resize)
-            )
-    },
+-- Ignore the tag "exclusive" property for the following clients (matched by classes)
+tyrannical.properties.intrusive = {
+    "ksnapshot"     , "pinentry"       , "gtksu"     , "kcalc"        , "xcalc"               ,
+    "feh"           , "Gradient editor", "About KDE" , "Paste Special", "Background color"    ,
+    "kcolorchooser" , "plasmoidviewer" , "Xephyr"    , "kruler"       , "plasmaengineexplorer",
+    "mpv"
 }
 
--- SHIFTY: default tag creation rules
--- parameter description
---  * floatBars : if floating clients should always have a titlebar
---  * guess_name : should shifty try and guess tag names when creating
---                 new (unconfigured) tags?
---  * guess_position: as above, but for position parameter
---  * run : function to exec when shifty creates a new tag
---  * all other parameters (e.g. layout, mwfact) follow awesome's tag API
-shifty.config.defaults = {
-    layout = awful.layout.suit.tile.bottom,
-    ncol = 1,
-    mwfact = 0.60,
-    floatBars = true,
-    guess_name = true,
-    guess_position = true,
+-- Ignore the tiled layout for the matching clients
+tyrannical.properties.floating = {
+    "MPlayer"      , "pinentry"        , "ksnapshot"  , "pinentry"     , "gtksu"          ,
+    "xine"         , "feh"             , "kmix"       , "kcalc"        , "xcalc"          ,
+    "yakuake"      , "Select Color$"   , "kruler"     , "kcolorchooser", "Paste Special"  ,
+    "New Form"     , "Insert Picture"  , "kcharselect", "mythfrontend" , "plasmoidviewer"
 }
+
+-- Make the matching clients (by classes) on top of the default layout
+tyrannical.properties.ontop = {
+    "Xephyr"       , "ksnapshot"       , "kruler"
+}
+
+-- Force the matching clients (by classes) to be centered on the screen on init
+tyrannical.properties.centered = {
+    "kcalc"
+}
+
+-- Do not honor size hints request for those classes
+tyrannical.properties.size_hints_honor = { xterm = false, URxvt = false, aterm = false, sauer_client = false, mythfrontend  = false}
 
 --
 -- }}}
@@ -747,12 +663,6 @@ for s = 1, screen.count() do
 end
 -- }}}
 
--- SHIFTY: initialize shifty
--- the assignment of shifty.taglist must always be after its actually
--- initialized with awful.widget.taglist.new()
-shifty.taglist = mytaglist
-shifty.init()
-
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
     awful.button({ }, 3, function () mymainmenu:toggle() end),
@@ -893,31 +803,40 @@ clientkeys = awful.util.table.join(
         end)
 )
 
+
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
-for i = 1, (shifty.config.maxtags or 9) do
+for i = 1, 9 do
     globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey }, "#" .. i + 9,
     function ()
-        awful.tag.viewonly(shifty.getpos(i))
+        local screen = mouse.screen
+        local tag = awful.tag.gettags(screen)[i]
+        if tag then
+            awful.tag.viewonly(tag)
+        end
     end),
     awful.key({ modkey, "Control" }, "#" .. i + 9,
     function ()
-        awful.tag.viewtoggle(shifty.getpos(i))
+        local screen = mouse.screen
+        local tag = awful.tag.gettags(screen)[i]
+        if tag then
+            awful.tag.viewtoggle(tag)
+        end
     end),
     awful.key({ modkey, "Shift" }, "#" .. i + 9,
     function ()
-        if client.focus then
-            local t = shifty.getpos(i)
-            awful.client.movetotag(t)
-            awful.tag.viewonly(t)
+        local tag = awful.tag.gettags(client.focus.screen)[i]
+        if client.focus and tag then
+            awful.client.movetotag(tag)
         end
     end),
     awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
     function ()
-        if client.focus then
-            awful.client.toggletag(shifty.getpos(i))
+        local tag = awful.tag.gettags(client.focus.screen)[i]
+        if client.focus and tag then
+            awful.client.toggletag(tag)
         end
     end))
 end
@@ -929,8 +848,27 @@ clientbuttons = awful.util.table.join(
 
 -- Set keys
 root.keys(globalkeys)
-shifty.config.globalkeys = globalkeys
-shifty.config.clientkeys = clientkeys
+-- }}}
+
+-- {{{ Rules
+awful.rules.rules = {
+    -- All clients will match this rule.
+    { rule = { },
+      properties = { border_width = beautiful.border_width,
+                     border_color = beautiful.border_normal,
+                     focus = awful.client.focus.filter,
+                     keys = clientkeys,
+                     buttons = clientbuttons } },
+    { rule = { class = "MPlayer" },
+      properties = { floating = true } },
+    { rule = { class = "pinentry" },
+      properties = { floating = true } },
+    { rule = { class = "gimp" },
+      properties = { floating = true } },
+    -- Set Firefox to always map on tags number 2 of screen 1.
+    -- { rule = { class = "Firefox" },
+    --   properties = { tag = tags[1][2] } },
+}
 -- }}}
 
 -- {{{ Signals
@@ -1007,9 +945,11 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 --{{{ Autostart
+run_once("xrdb -load ~/.Xresources")
 run_once("xscreensaver -no-splash")
 run_once("cairo-compmgr")
 run_once("conky")
+run_once("lightsOn 300")
 --}}}
 --
 --vim: ft=lua tw=4

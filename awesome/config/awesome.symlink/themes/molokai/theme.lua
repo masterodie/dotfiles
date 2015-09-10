@@ -44,7 +44,7 @@ theme.status_fg_bad = molokai.red
 
 -- {{{ Borders
 theme.border_width  = 1
-theme.border_normal = molokai.fg_urgent
+theme.border_normal = molokai.bg
 theme.border_focus  = molokai.pink
 theme.border_marked = molokai.fg_urgent
 -- }}}

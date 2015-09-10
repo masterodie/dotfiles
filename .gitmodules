@@ -10,3 +10,6 @@
 [submodule "awesome/config/awesome.symlink/redshift"]
 	path = awesome/config/awesome.symlink/redshift
 	url = https://github.com/YoRyan/awesome-redshift
+[submodule "awesome/config/awesome.symlink/tyrannical"]
+	path = awesome/config/awesome.symlink/tyrannical
+	url = https://github.com/Elv13/tyrannical.git
