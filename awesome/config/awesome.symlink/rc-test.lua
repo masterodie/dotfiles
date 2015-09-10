@@ -39,7 +39,7 @@ function run_or_raise(cmd, properties)
    local n = 0
    for i, c in pairs(clients) do
       --make an array of matched clients
-      if match(properties, c) then
+      if match_client(properties, c) then
          n = n + 1
          matched_clients[n] = c
          if c == focused then
@@ -71,7 +71,7 @@ function run_or_raise(cmd, properties)
 end
 
 -- Returns true if all pairs in table1 are present in table2
-function match (table1, table2)
+function match_client(table1, table2)
    for k, v in pairs(table1) do
       if table2[k] ~= v and not table2[k]:find(v) then
          return false
@@ -236,27 +236,16 @@ tyrannical.tags = {
             "Chromium"      , "nightly"        , "minefield"     }
     } ,
     {
-        name        = "system",                 -- Call the tag "Term"
-        init        = true,                   -- Load the tag on startup
-        exclusive   = true,                   -- Refuse any other type of clients (by classes)
-        screen      = {1,2},                  -- Create this tag on screen 1 and screen 2
-        layout      = awful.layout.suit.tile, -- Use the tile layout
-        selected    = true,
-        class       = { --Accept the following classes, refuse everything else (because of "exclusive=true")
-            "xterm" , "urxvt" , "aterm","URxvt","XTerm","konsole","terminator","gnome-terminal"
-        }
-    } ,
-    {
         name = "dev",
         init        = true,
         exclusive   = true,
         screen      = 1,
         clone_on    = 2, -- Create a single instance of this tag on screen 1, but also show it on screen 2
                          -- The tag can be used on both screen, but only one at once
-        layout      = awful.layout.tile,
+        layout      = awful.layout.suit.tile,
         mwfact      = 0.66,
         class ={
-            "Kate", "KDevelop", "Codeblocks", "Code::Blocks" , "DDD", "kate4", "vim", "gvim" }
+            "Kate", "KDevelop", "Codeblocks", "Code::Blocks" , "DDD", "kate4", "vim", "gvim", "urxvt:dev" }
     } ,
     {
         name        = "media",
@@ -266,8 +255,18 @@ tyrannical.tags = {
         exclusive   = true,
         layout      = awful.layout.suit.max,
         class       = {
-            "Assistant"     , "Okular"         , "Evince"    , "EPDFviewer"   , "xpdf",
-            "Xpdf"          ,                                        }
+            "urxvt:media", "Xephyr"                                        }
+    } ,
+    {
+        name        = "system",                 -- Call the tag "Term"
+        init        = true,                   -- Load the tag on startup
+        exclusive   = true,                   -- Refuse any other type of clients (by classes)
+        screen      = {1,2},                  -- Create this tag on screen 1 and screen 2
+        layout      = awful.layout.suit.tile, -- Use the tile layout
+        selected    = true,
+        class       = { --Accept the following classes, refuse everything else (because of "exclusive=true")
+            "xterm" , "urxvt" , "aterm","URxvt","XTerm","konsole","terminator","gnome-terminal", "conky", "urxvt:system"
+        }
     } ,
     {
         name        = "misc",
@@ -286,8 +285,8 @@ tyrannical.tags = {
 tyrannical.properties.intrusive = {
     "ksnapshot"     , "pinentry"       , "gtksu"     , "kcalc"        , "xcalc"               ,
     "feh"           , "Gradient editor", "About KDE" , "Paste Special", "Background color"    ,
-    "kcolorchooser" , "plasmoidviewer" , "Xephyr"    , "kruler"       , "plasmaengineexplorer",
-    "mpv"
+    "kcolorchooser" , "plasmoidviewer" , "kruler"       , "plasmaengineexplorer",
+    "mpv",
 }
 
 -- Ignore the tiled layout for the matching clients
@@ -310,6 +309,9 @@ tyrannical.properties.centered = {
 
 -- Do not honor size hints request for those classes
 tyrannical.properties.size_hints_honor = { xterm = false, URxvt = false, aterm = false, sauer_client = false, mythfrontend  = false}
+
+tyrannical.properties.no_autofocus = { "mpv" }
+tyrannical.properties.sticky = { "mpv" }
 
 --
 -- }}}
@@ -851,20 +853,57 @@ root.keys(globalkeys)
 -- }}}
 
 -- {{{ Rules
+-- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
-      properties = { border_width = beautiful.border_width,
-                     border_color = beautiful.border_normal,
-                     focus = awful.client.focus.filter,
-                     keys = clientkeys,
-                     buttons = clientbuttons } },
+        properties = { border_width = beautiful.border_width,
+        border_color = beautiful.border_normal,
+        focus = awful.client.focus.filter,
+        raise = true,
+        keys = clientkeys,
+        honor_size_hints = false,
+        buttons = clientbuttons } },
+    { rule = { class = "mpv" },
+    properties = {
+        floating = false,
+        nofocus = true,
+        focusable = false,
+        slave = true,
+        no_autofocus = true,
+        callback = awful.client.setslave } },
     { rule = { class = "MPlayer" },
-      properties = { floating = true } },
+        properties = { floating = true } },
     { rule = { class = "pinentry" },
-      properties = { floating = true } },
+        properties = { floating = true } },
     { rule = { class = "gimp" },
-      properties = { floating = true } },
+        properties = { floating = true } },
+    {
+        rule = { name = "tmux - system"  },
+        callback = function(c)
+            awful.client.property.set(c, "overwrite_class", "urxvt:system")
+        end
+    },
+    {
+        rule = { name = "tmux - youtube"  },
+        callback = function(c)
+            awful.client.property.set(c, "overwrite_class", "urxvt:media")
+        end
+    },
+    {
+        rule = { name = "tmux - nhweb"  },
+        callback = function(c)
+            awful.client.property.set(c, "overwrite_class", "urxvt:dev")
+        end
+    },
+    { rule = { class = "conky" },
+        properties = {
+                floating = true,
+                sticky = true,
+                ontop = false,
+                focusable = false,
+                size_hints = {"program_position", "program_size"}
+      } }
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
@@ -950,6 +989,7 @@ run_once("xscreensaver -no-splash")
 run_once("cairo-compmgr")
 run_once("conky")
 run_once("lightsOn 300")
+--
 --}}}
 --
 --vim: ft=lua tw=4
