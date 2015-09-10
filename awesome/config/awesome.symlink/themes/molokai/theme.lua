@@ -24,6 +24,15 @@ local MOLOKAI_FG_MUTED = "#75715E"
 local MOLOKAI_URGENT = "#CC9393"
 local MOLOKAI_URGENT_BG = "#3F3F3F"
 
+theme.molokai_bg = "#1b1d1e"
+theme.molokai_fg = "#f8f8f2"
+theme.molokai_red = "#D25252"
+theme.molokai_green = "#7fb347"
+theme.molokai_orange = '#EA7D02'
+theme.molokai_purple = '#AF5FFF'
+theme.molokai_pink = '#D7005F'
+theme.molokai_blue = '#5FD7FF'
+
 theme.font = "Inconsolata 11"
 
 -- {{{ Colors
@@ -32,7 +41,7 @@ theme.bg_minimize = MOLOKAI_BG
 theme.bg_normal = MOLOKAI_BG -- "#3F3F3F"
 theme.bg_urgent = MOLOKAI_URGENT_BG
 theme.fg_focus  = MOLOKAI_BLUE -- "#F0DFAF"
-theme.fg_minimize   = MONOKAI_FG
+theme.fg_minimize   = MOLOKAI_FG
 theme.fg_normal = MOLOKAI_FG
 theme.fg_urgent = MOLOKAI_URGENT
 
