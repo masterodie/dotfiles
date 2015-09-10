@@ -1,23 +1,19 @@
---- rc.lua	2015-09-10 02:28:39.473687737 +0200
-+++ rc-test.lua	2015-09-10 02:30:09.381567588 +0200
-@@ -439,7 +439,7 @@
-     mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
+--- rc.lua	2015-09-10 02:31:40.469420195 +0200
++++ rc-test.lua	2015-09-10 02:39:37.524849358 +0200
+@@ -308,6 +308,7 @@
+ end, 5, alsawidget.channel) -- relatively high update time, use of keys/mouse will force update
+ alsawidget.text = wibox.widget.textbox()
+ alsawidget.text:set_text("Vol:")
++alsabox = wibox.layout.margin(alsawidget.bar, 2, 2, 5, 5)
  
-     -- Create the wibox
--    mywibox[s] = awful.wibox({ position = "top", screen = s })
-+    mywibox[s] = awful.wibox({ position = "bottom", screen = s })
- 
-     -- Widgets that are aligned to the left
-     local left_layout = wibox.layout.fixed.horizontal()
-@@ -449,7 +449,10 @@
- 
-     -- Widgets that are aligned to the right
-     local right_layout = wibox.layout.fixed.horizontal()
--    if s == 1 then right_layout:add(wibox.widget.systray()) end
-+    if s == 1 then
-+        right_layout:add(wibox.widget.systray())
-+        right_layout:add(separator)
-+    end
+ battery_widget = wibox.widget.textbox()
+ function batteryInfo(adapter)
+@@ -456,7 +457,7 @@
      right_layout:add(battery_widget)
      right_layout:add(separator)
      right_layout:add(alsawidget.text)
+-    right_layout:add(alsawidget.bar)
++    right_layout:add(alsabox)
+     right_layout:add(separator)
+     right_layout:add(datewidget)
+     right_layout:add(separator)

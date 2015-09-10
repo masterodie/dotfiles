@@ -308,6 +308,7 @@ vicious.register (alsawidget.bar, vicious.widgets.volume, function (widget, args
 end, 5, alsawidget.channel) -- relatively high update time, use of keys/mouse will force update
 alsawidget.text = wibox.widget.textbox()
 alsawidget.text:set_text("Vol:")
+alsabox = wibox.layout.margin(alsawidget.bar, 2, 2, 5, 5)
 
 battery_widget = wibox.widget.textbox()
 function batteryInfo(adapter)
@@ -456,7 +457,7 @@ for s = 1, screen.count() do
     right_layout:add(battery_widget)
     right_layout:add(separator)
     right_layout:add(alsawidget.text)
-    right_layout:add(alsawidget.bar)
+    right_layout:add(alsabox)
     right_layout:add(separator)
     right_layout:add(datewidget)
     right_layout:add(separator)
