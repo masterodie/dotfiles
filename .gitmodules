@@ -13,3 +13,6 @@
 [submodule "awesome/config/awesome.symlink/tyrannical"]
 	path = awesome/config/awesome.symlink/tyrannical
 	url = https://github.com/Elv13/tyrannical.git
+[submodule "awesome/config/awesome.symlink/vicious"]
+	path = awesome/config/awesome.symlink/vicious
+	url = http://git.sysphere.org/vicious
