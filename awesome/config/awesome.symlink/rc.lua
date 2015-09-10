@@ -364,7 +364,16 @@ globalkeys = awful.util.table.join(
               end),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end),
-    awful.key({ modkey }, "d", redshift.toggle)
+
+    -- Toggle redshift
+    awful.key({ modkey }, "d", redshift.toggle),
+
+    awful.key({ }, "XF86AudioRaiseVolume", function ()
+        awful.util.spawn("amixer -c 0 -q set Master 2dB+", false) end),
+    awful.key({ }, "XF86AudioLowerVolume", function ()
+        awful.util.spawn("amixer -c 0 -q set Master 2dB-", false) end),
+    awful.key({ }, "XF86AudioMute", function ()
+        awful.util.spawn("amixer -D pulse -q set Master toggle", false) end)
 )
 
 clientkeys = awful.util.table.join(

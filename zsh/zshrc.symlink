@@ -110,3 +110,4 @@ function precmd()
 {
     echo -ne '\a'
 }
+export DISABLE_AUTO_TITLE=true

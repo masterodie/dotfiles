@@ -1,19 +1,17 @@
---- rc.lua	2015-09-10 00:18:58.806979497 +0200
-+++ rc-test.lua	2015-09-10 00:31:21.956530857 +0200
-@@ -452,6 +452,8 @@
-                      raise = true,
-                      keys = clientkeys,
-                      buttons = clientbuttons } },
-+    { rule = { class = "mpv" },
-+      properties = { floating = false } },
-     { rule = { class = "MPlayer" },
-       properties = { floating = true } },
-     { rule = { class = "pinentry" },
-@@ -545,6 +547,7 @@
+--- rc.lua	2015-09-10 00:45:54.016079448 +0200
++++ rc-test.lua	2015-09-10 00:48:18.479359483 +0200
+@@ -369,11 +369,11 @@
+     awful.key({ modkey }, "d", redshift.toggle),
  
- --{{{ Autostart
- run_once("xscreensaver -no-splash")
-+run_once("cairo-compmgr")
- --}}}
- --
- --vim: ft=lua tw=4
+     awful.key({ }, "XF86AudioRaiseVolume", function ()
+-        awful.util.spawn("amixer set Master 2dB+", false) end),
++        awful.util.spawn("amixer -c 0 -q set Master 2dB+", false) end),
+     awful.key({ }, "XF86AudioLowerVolume", function ()
+-        awful.util.spawn("amixer set Master 2dB-", false) end),
++        awful.util.spawn("amixer -c 0 -q set Master 2dB-", false) end),
+     awful.key({ }, "XF86AudioMute", function ()
+-        awful.util.spawn("amixer set -D pulse Master toggle", false) end)
++        awful.util.spawn("amixer -D pulse -q set Master toggle", false) end)
+ )
+ 
+ clientkeys = awful.util.table.join(
