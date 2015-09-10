@@ -112,7 +112,8 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 theme_name = 'molokai'
-beautiful.init(awful.util.getdir('config') .. "/themes/" .. theme_name .. "/theme.lua")
+theme_path = awful.util.getdir('config') .. "/themes/" .. theme_name
+beautiful.init(theme_path .. "/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
@@ -132,11 +133,23 @@ redshift.redshift = "/usr/bin/redshift"
 redshift.init(1)
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
+-- All possible layouts:
+    --awful.layout.suit.floating
+    --awful.layout.suit.tile
+    --awful.layout.suit.tile.left
+    --awful.layout.suit.tile.bottom
+    --awful.layout.suit.tile.top
+    --awful.layout.suit.fair
+    --awful.layout.suit.fair.horizontal
+    --awful.layout.suit.spiral
+    --awful.layout.suit.spiral.dwindle
+    --awful.layout.suit.max
+    --awful.layout.suit.max.fullscreen
+    --awful.layout.suit.magnifier
 local layouts =
 {
-    awful.layout.suit.tile,
     awful.layout.suit.tile.left,
-    awful.layout.suit.floating,
+    awful.layout.suit.tile,
     awful.layout.suit.max
 }
 -- }}}
@@ -179,14 +192,76 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 -- {{{ Widgets
-local alsawidget =
+
+my_widgets = {
+    width = 6,
+    height = 10,
+    vertical = true,
+    color = {
+        bg = beautiful.bg_normal,
+        fg = molokai.fg_light,
+        border = nil,
+        good = beautiful.status_fg_good,
+        okay = beautiful.status_fg_okay,
+        bad = beautiful.status_fg_bad,
+        gradient = function (from, to)
+            return {type="linear", from = {0, from}, to = {0, to}, stops = { {0,my_widgets.color.bad}, {0.2, my_widgets.color.okay}, {1.0, my_widgets.color.good} } }
+        end,
+    },
+    margin = { top = 4, bottom = 4, left = 2, right = 2},
+    box = function (widget)
+        margin = wibox.layout.margin()
+        margin:set_left(my_widgets.margin.left)
+        margin:set_right(my_widgets.margin.right)
+        margin:set_top(my_widgets.margin.top)
+        margin:set_bottom(my_widgets.margin.bottom)
+        margin:set_widget(widget)
+        return margin
+    end,
+    progressbar = function (direction)
+        bar = awful.widget.progressbar()
+        bar:set_width(my_widgets.width)
+        bar:set_height(my_widgets.height)
+        bar:set_vertical(my_widgets.vertical)
+        bar:set_background_color(my_widgets.color.bg)
+        bar:set_border_color(my_widgets.color.border)
+        color = my_widgets.color.okay
+        if direction == "up" then color = my_widgets.color.gradient(0, 10)
+        elseif direction == "down" then color = my_widgets.color.gradient(10,0)
+        end
+        bar:set_color(color)
+        return bar
+    end,
+    markup = function(string) return "<span color='" .. my_widgets.color.fg .. "'>".. string .. "</span>" end,
+    text = function(string)
+        if not string then string = "" end
+        text = wibox.widget.textbox()
+        text:set_markup(my_widgets.markup(string))
+        return text
+    end,
+    separator = function()
+        separator = my_widgets.text("|")
+        return separator
+    end,
+    icon_path = function(image)
+        return theme_path .. '/icons/' .. image
+    end,
+    icon = function(image)
+        icon = wibox.widget.imagebox()
+        icon:set_image(my_widgets.icon_path(image))
+        return icon
+    end,
+}
+
+-- {{{ alsa
+local alsa_widget =
 {
 	channel = "Master",
 	step = "5%",
 	colors =
 	{
-		unmute = "#87FF00",
-		mute = "#CC9393"
+        unmute = my_widgets.color.gradient(0, 10),
+		mute = my_widgets.color.bad
 	},
 	mixer = terminal .. " -e alsamixer", -- or whatever your preferred sound mixer is
 	notifications =
@@ -206,171 +281,142 @@ local alsawidget =
 	}
 }
 -- widget
-alsawidget.bar = awful.widget.progressbar()
-alsawidget.bar:set_width(6)
-alsawidget.bar:set_height(10)
-alsawidget.bar:set_vertical(true)
-alsawidget.bar:set_background_color("#808080")
-alsawidget.bar:set_color(alsawidget.colors.unmute)
-alsawidget.bar:buttons(awful.util.table.join (
+alsa_widget.bar = my_widgets.progressbar('up')
+alsa_widget.bar:buttons(awful.util.table.join (
 	awful.button ({}, 1, function()
-		awful.util.spawn (alsawidget.mixer)
+		awful.util.spawn (alsa_widget.mixer)
 	end),
 	awful.button ({}, 3, function()
                 -- You may need to specify a card number if you're not using your main set of speakers.
                 -- You'll have to apply this to every call to 'amixer sset'.
-                -- awful.util.spawn ("amixer sset -c " .. yourcardnumber .. " " .. alsawidget.channel .. " toggle")
-		awful.util.spawn ("amixer sset " .. alsawidget.channel .. " toggle")
-		vicious.force ({ alsawidget.bar })
+                -- awful.util.spawn ("amixer sset -c " .. yourcardnumber .. " " .. alsa_widget.channel .. " toggle")
+		awful.util.spawn ("amixer sset " .. alsa_widget.channel .. " toggle")
+		vicious.force ({ alsa_widget.bar })
 	end),
 	awful.button ({}, 4, function()
-		awful.util.spawn ("amixer sset " .. alsawidget.channel .. " " .. alsawidget.step .. "+")
-		vicious.force ({ alsawidget.bar })
+		awful.util.spawn ("amixer sset " .. alsa_widget.channel .. " " .. alsa_widget.step .. "+")
+		vicious.force ({ alsa_widget.bar })
 	end),
 	awful.button ({}, 5, function()
-		awful.util.spawn ("amixer sset " .. alsawidget.channel .. " " .. alsawidget.step .. "-")
-		vicious.force ({ alsawidget.bar })
+		awful.util.spawn ("amixer sset " .. alsa_widget.channel .. " " .. alsa_widget.step .. "-")
+		vicious.force ({ alsa_widget.bar })
 	end)
 ))
 -- tooltip
-alsawidget.tooltip = awful.tooltip ({ objects = { alsawidget.bar } })
+alsa_widget.text = my_widgets.text("Vol:")
+alsa_widget.icon = my_widgets.icon('spkr_01.png')
+alsa_widget.tooltip = awful.tooltip ({ objects = { alsa_widget.bar, alsa_widget.text, alsa_widget.icon } })
 -- naughty notifications
-alsawidget._current_level = 0
-alsawidget._muted = false
-function alsawidget:notify ()
+alsa_widget._current_level = 0
+alsa_widget._muted = false
+function alsa_widget:notify ()
 	local preset =
 	{
 		height = 75,
 		width = 300,
-		font = alsawidget.notifications.font
+		font = alsa_widget.notifications.font
 	}
 	local i = 1;
-	while alsawidget.notifications.icons[i + 1] ~= nil
+	while alsa_widget.notifications.icons[i + 1] ~= nil
 	do
 		i = i + 1
 	end
 	if i >= 2
 	then
-		preset.icon_size = alsawidget.notifications.icon_size
-		if alsawidget._muted or alsawidget._current_level == 0
+		preset.icon_size = alsa_widget.notifications.icon_size
+		if alsa_widget._muted or alsa_widget._current_level == 0
 		then
-			preset.icon = alsawidget.notifications.icons[1]
-		elseif alsawidget._current_level == 100
+			preset.icon = alsa_widget.notifications.icons[1]
+		elseif alsa_widget._current_level == 100
 		then
-			preset.icon = alsawidget.notifications.icons[i]
+			preset.icon = alsa_widget.notifications.icons[i]
 		else
-			local int = math.modf (alsawidget._current_level / 100 * (i - 1))
-			preset.icon = alsawidget.notifications.icons[int + 2]
+			local int = math.modf (alsa_widget._current_level / 100 * (i - 1))
+			preset.icon = alsa_widget.notifications.icons[int + 2]
 		end
 	end
-	if alsawidget._muted
+	if alsa_widget._muted
 	then
-		preset.title = alsawidget.channel .. " - Muted"
-	elseif alsawidget._current_level == 0
+		preset.title = alsa_widget.channel .. " - Muted"
+	elseif alsa_widget._current_level == 0
 	then
-		preset.title = alsawidget.channel .. " - 0% (muted)"
-		preset.text = "[" .. string.rep (" ", alsawidget.notifications.bar_size) .. "]"
-	elseif alsawidget._current_level == 100
+		preset.title = alsa_widget.channel .. " - 0% (muted)"
+		preset.text = "[" .. string.rep (" ", alsa_widget.notifications.bar_size) .. "]"
+	elseif alsa_widget._current_level == 100
 	then
-		preset.title = alsawidget.channel .. " - 100% (max)"
-		preset.text = "[" .. string.rep ("|", alsawidget.notifications.bar_size) .. "]"
+		preset.title = alsa_widget.channel .. " - 100% (max)"
+		preset.text = "[" .. string.rep ("|", alsa_widget.notifications.bar_size) .. "]"
 	else
-		local int = math.modf (alsawidget._current_level / 100 * alsawidget.notifications.bar_size)
-		preset.title = alsawidget.channel .. " - " .. alsawidget._current_level .. "%"
-		preset.text = "[" .. string.rep ("|", int) .. string.rep (" ", alsawidget.notifications.bar_size - int) .. "]"
+		local int = math.modf (alsa_widget._current_level / 100 * alsa_widget.notifications.bar_size)
+		preset.title = alsa_widget.channel .. " - " .. alsa_widget._current_level .. "%"
+		preset.text = "[" .. string.rep ("|", int) .. string.rep (" ", alsa_widget.notifications.bar_size - int) .. "]"
 	end
-	if alsawidget._notify ~= nil
+	if alsa_widget._notify ~= nil
 	then
 
-		alsawidget._notify = naughty.notify (
+		alsa_widget._notify = naughty.notify (
 		{
-			replaces_id = alsawidget._notify.id,
+			replaces_id = alsa_widget._notify.id,
 			preset = preset
 		})
 	else
-		alsawidget._notify = naughty.notify ({ preset = preset })
+		alsa_widget._notify = naughty.notify ({ preset = preset })
 	end
 end
 -- register the widget through vicious
-vicious.register (alsawidget.bar, vicious.widgets.volume, function (widget, args)
-	alsawidget._current_level = args[1]
+vicious.register (alsa_widget.bar, vicious.widgets.volume, function (widget, args)
+	alsa_widget._current_level = args[1]
 	if args[2] == "♩"
 	then
-		alsawidget._muted = true
-		alsawidget.tooltip:set_text (" [Muted] ")
-		widget:set_color (alsawidget.colors.mute)
+		alsa_widget._muted = true
+		alsa_widget.tooltip:set_text (" [Muted] ")
+		widget:set_color (alsa_widget.colors.mute)
 		return 100
 	end
-	alsawidget._muted = false
-	alsawidget.tooltip:set_text (" " .. alsawidget.channel .. ": " .. args[1] .. "% ")
-	widget:set_color (alsawidget.colors.unmute)
+	alsa_widget._muted = false
+	alsa_widget.tooltip:set_text (" " .. alsa_widget.channel .. ": " .. args[1] .. "% ")
+	widget:set_color (alsa_widget.colors.unmute)
 	return args[1]
-end, 5, alsawidget.channel) -- relatively high update time, use of keys/mouse will force update
-alsawidget.text = wibox.widget.textbox()
-alsawidget.text:set_text("Vol:")
-alsabox = wibox.layout.margin(alsawidget.bar, 2, 2, 5, 5)
+end, 5, alsa_widget.channel) -- relatively high update time, use of keys/mouse will force update
+alsa_widget.box = my_widgets.box(alsa_widget.bar)
+-- }}}
+-- {{{ battery
+battery_widget = {}
+battery_widget.battery = "BAT0"
+battery_widget.text = my_widgets.text('Bat:')
+battery_widget.icon = my_widgets.icon('bat_full_01.png')
+battery_widget.bar = my_widgets.progressbar('down')
+battery_widget.tooltip = awful.tooltip ({ objects = { battery_widget.bar, battery_widget.text, battery_widget.icon } })
 
-battery_widget = wibox.widget.textbox()
-function batteryInfo(adapter)
-    spacer = " "
-    local fcur = io.open("/sys/class/power_supply/"..adapter.."/charge_now")
-    local fcap = io.open("/sys/class/power_supply/"..adapter.."/charge_full")
-    local fsta = io.open("/sys/class/power_supply/"..adapter.."/status")
-    local cur = fcur:read()
-    local cap = fcap:read()
-    local sta = fsta:read()
-    local battery = math.floor(cur * 100 / cap)
-    if sta:match("Charging") then
-        dir = "+"
-        battery = "A/C ("..battery..")"
-    elseif sta:match("Discharging") then
-        dir = "-"
-        if tonumber(battery) > 25 and tonumber(battery) < 75 then
-            battery = battery
-        elseif tonumber(battery) < 25 then
-            if tonumber(battery) < 10 then
-                naughty.notify({ title      = "Battery Warning"
-                , text       = "Battery low!"..spacer..battery.."%"..spacer.."left!"
-                , timeout    = 5
-                , position   = "top_right"
-                , fg         = beautiful.fg_focus
-                , bg         = beautiful.bg_focus
-            })
-            end
-            battery = battery
-        else
-            battery = battery
-        end
-    else
-        dir = "="
-        battery = "A/C"
+battery_widget.box = wibox.layout.margin(battery_widget.bar, 2, 2, 5, 5)
+-- Register widget.bar
+vicious.register(battery_widget.bar, vicious.widgets.bat, function(widget, args)
+    status = ""
+    if args[1] == "-" then
+        status = "discharging"
+    elseif args[1] == "+" then
+        status = 'charging'
+    elseif args[1] == "↯" then
+        status = 'charged'
     end
-    battery_widget:set_markup("Bat:"..spacer..dir..battery)
-    fcur:close()
-    fcap:close()
-    fsta:close()
-end
-battery = "BAT0"
-battery_timer = timer({timeout = 20})
-battery_timer:connect_signal("timeout", function()
-    batteryInfo(battery)
-end)
-battery_timer:start()
 
-batteryInfo(battery)
+    battery_widget.tooltip:set_markup(
+
+        " <b>[ " .. status .. "  ]]</b> \n " .. args[2] .. "% charged "
+        )
+    return args[2]
+end, 30, battery_widget.battery)
+-- }}}
 
 -- }}}
 
 
 
 -- {{{ Wibox
--- Create a textclock widget
-separator = wibox.widget.textbox()
-separator:set_text("|")
 -- Initialize widget
-datewidget = wibox.widget.textbox()
+datewidget = my_widgets.text()
 -- Register widget
-vicious.register(datewidget, vicious.widgets.date, "%d %b %Y %H:%M", 60)
+vicious.register(datewidget, vicious.widgets.date, my_widgets.markup("%d %b %Y %H:%M"), 60)
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -440,7 +486,7 @@ for s = 1, screen.count() do
     mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
     -- Create the wibox
-    mywibox[s] = awful.wibox({ position = "bottom", screen = s })
+    mywibox[s] = awful.wibox({ position = "bottom", screen = s, height = 20 })
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
@@ -452,15 +498,16 @@ for s = 1, screen.count() do
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then
         right_layout:add(wibox.widget.systray())
-        right_layout:add(separator)
+        right_layout:add(my_widgets.separator())
     end
-    right_layout:add(battery_widget)
-    right_layout:add(separator)
-    right_layout:add(alsawidget.text)
-    right_layout:add(alsabox)
-    right_layout:add(separator)
+    right_layout:add(battery_widget.icon)
+    right_layout:add(battery_widget.box)
+    right_layout:add(my_widgets.separator())
+    right_layout:add(alsa_widget.icon)
+    right_layout:add(alsa_widget.box)
+    right_layout:add(my_widgets.separator())
     right_layout:add(datewidget)
-    right_layout:add(separator)
+    right_layout:add(my_widgets.separator())
     right_layout:add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)
@@ -541,7 +588,7 @@ globalkeys = awful.util.table.join(
         local command = assert(f_reader:read('*a'))
         f_reader:close()
         if command == "" then return end
-        run_or_raise(command)
+        run_or_raise(command, { name = command } )
     end),
     -- Run or raise applications with dmenu with elevated privileges
     awful.key({ modkey , "Shift"}, "r", function ()
@@ -569,25 +616,25 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "d", redshift.toggle),
 
     awful.key({ }, "XF86AudioRaiseVolume", function ()
-        awful.util.spawn("amixer sset " .. alsawidget.channel .. " " .. alsawidget.step .. "+")
-        vicious.force({ alsawidget.bar })
-        alsawidget.notify()
+        awful.util.spawn("amixer sset " .. alsa_widget.channel .. " " .. alsa_widget.step .. "+")
+        vicious.force({ alsa_widget.bar })
+        alsa_widget.notify()
     end),
     awful.key({ }, "XF86AudioLowerVolume", function ()
-        awful.util.spawn("amixer sset " .. alsawidget.channel .. " " .. alsawidget.step .. "-")
-        vicious.force({ alsawidget.bar })
-        alsawidget.notify()
+        awful.util.spawn("amixer sset " .. alsa_widget.channel .. " " .. alsa_widget.step .. "-")
+        vicious.force({ alsa_widget.bar })
+        alsa_widget.notify()
     end),
     awful.key({ }, "XF86AudioMute", function ()
 
-        awful.util.spawn("amixer sset " .. alsawidget.channel .. " toggle")
+        awful.util.spawn("amixer sset " .. alsa_widget.channel .. " toggle")
         -- The 2 following lines were needed at least on my configuration, otherwise it would get stuck muted
         -- However, if the channel you're using is "Speaker" or "Headpphone"
         -- instead of "Master", you'll have to comment out their corresponding line below.
         awful.util.spawn("amixer sset " .. "Speaker" .. " unmute")
         awful.util.spawn("amixer sset " .. "Headphone" .. " unmute")
-        vicious.force({ alsawidget.bar })
-        alsawidget.notify()
+        vicious.force({ alsa_widget.bar })
+        alsa_widget.notify()
 end)
 )
 

@@ -4,69 +4,58 @@
 
 theme = {}
 
-theme.font          = "Inconsolata for Powerline 8"
+theme.font          = "Terminess Powerline 8"
 
 theme.path = "~/.config/awesome/themes/molokai"
 
 theme.wallpaper = theme.path .. "/background.png"
 
-
-
-local MOLOKAI_PINK = '#D7005F'
-local MOLOKAI_ORANGE = '#EA7D02'
-local MOLOKAI_PURPLE = '#AF5FFF'
-local MOLOKAI_GREEN = '#87FF00'
-local MOLOKAI_BLUE = '#5FD7FF'
-local MOLOKAI_BG = '#1B1D1E'
-local MOLOKAI_BG_LIGHT = '#808080'
-local MOLOKAI_FG = "#F8F8F2"
-local MOLOKAI_FG_MUTED = "#75715E"
-local MOLOKAI_URGENT = "#CC9393"
-local MOLOKAI_URGENT_BG = "#3F3F3F"
-
-theme.molokai_bg = "#1b1d1e"
-theme.molokai_fg = "#f8f8f2"
-theme.molokai_red = "#D25252"
-theme.molokai_green = "#7fb347"
-theme.molokai_orange = '#EA7D02'
-theme.molokai_purple = '#AF5FFF'
-theme.molokai_pink = '#D7005F'
-theme.molokai_blue = '#5FD7FF'
-
-theme.font = "Inconsolata 11"
+molokai = {}
+molokai.bg = "#1b1d1e"
+molokai.bg_light = '#808080'
+molokai.bg_urgent = "#3F3F3F"
+molokai.fg = "#f8f8f2"
+molokai.fg_light = "#7e8e91"
+molokai.fg_urgent = "#CC9393"
+molokai.red = "#D25252"
+molokai.green = "#7fb347"
+molokai.orange = '#EA7D02'
+molokai.purple = '#AF5FFF'
+molokai.pink = '#D7005F'
+molokai.blue = '#5FD7FF'
 
 -- {{{ Colors
-theme.bg_focus  = MOLOKAI_BG -- "#1E2320"
-theme.bg_minimize = MOLOKAI_BG
-theme.bg_normal = MOLOKAI_BG -- "#3F3F3F"
-theme.bg_urgent = MOLOKAI_URGENT_BG
-theme.fg_focus  = MOLOKAI_BLUE -- "#F0DFAF"
-theme.fg_minimize   = MOLOKAI_FG
-theme.fg_normal = MOLOKAI_FG
-theme.fg_urgent = MOLOKAI_URGENT
+theme.bg_focus  = molokai.bg -- "#1E2320"
+theme.bg_minimize = molokai.bg
+theme.bg_normal = molokai.bg -- "#3F3F3F"
+theme.bg_urgent = molokai.bg_urgent
+theme.fg_focus  = molokai.blue -- "#F0DFAF"
+theme.fg_minimize   = molokai.fg
+theme.fg_normal = molokai.fg
+theme.fg_urgent = molokai.fg_urgent
 
 -- }}}
 
 -- {{ Status colors (battery, wifi, etc.)
-theme.status_fg_good = MOLOKAI_BLUE
-theme.status_fg_okay = MOLOKAI_GREEN
-theme.status_fg_bad = MOLOKAI_ORANGE
+theme.status_fg_good = molokai.blue
+theme.status_fg_okay = molokai.green
+theme.status_fg_bad = molokai.red
 -- }}
 
 -- {{{ Borders
 theme.border_width  = 1
-theme.border_normal = MOLOKAI_URGENT_BG
-theme.border_focus  = MOLOKAI_PINK
-theme.border_marked = MOLOKAI_URGENT
+theme.border_normal = molokai.fg_urgent
+theme.border_focus  = molokai.pink
+theme.border_marked = molokai.fg_urgent
 -- }}}
 
 -- {{{ Titlebars
-theme.titlebar_bg_focus  = MOLOKAI_URGENT_BG
-theme.titlebar_bg_normal = MOLOKAI_URGENT_BG
+theme.titlebar_bg_focus  = molokai.bg_urgent
+theme.titlebar_bg_normal = molokai.bg_urgent
 -- }}}
 
 -- {{{ Mouse finder
-theme.mouse_finder_color = MOLOKAI_URGENT
+theme.mouse_finder_color = molokai.fg_urgent
 
 -- There are other variable sets
 -- overriding the default one when

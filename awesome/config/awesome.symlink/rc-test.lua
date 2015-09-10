@@ -112,7 +112,8 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 theme_name = 'molokai'
-beautiful.init(awful.util.getdir('config') .. "/themes/" .. theme_name .. "/theme.lua")
+theme_path = awful.util.getdir('config') .. "/themes/" .. theme_name
+beautiful.init(theme_path .. "/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
@@ -192,6 +193,66 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- }}}
 -- {{{ Widgets
 
+my_widgets = {
+    width = 6,
+    height = 10,
+    vertical = true,
+    color = {
+        bg = beautiful.bg_normal,
+        fg = molokai.fg_light,
+        border = nil,
+        good = beautiful.status_fg_good,
+        okay = beautiful.status_fg_okay,
+        bad = beautiful.status_fg_bad,
+        gradient = function (from, to)
+            return {type="linear", from = {0, from}, to = {0, to}, stops = { {0,my_widgets.color.bad}, {0.2, my_widgets.color.okay}, {1.0, my_widgets.color.good} } }
+        end,
+    },
+    margin = { top = 4, bottom = 4, left = 2, right = 2},
+    box = function (widget)
+        margin = wibox.layout.margin()
+        margin:set_left(my_widgets.margin.left)
+        margin:set_right(my_widgets.margin.right)
+        margin:set_top(my_widgets.margin.top)
+        margin:set_bottom(my_widgets.margin.bottom)
+        margin:set_widget(widget)
+        return margin
+    end,
+    progressbar = function (direction)
+        bar = awful.widget.progressbar()
+        bar:set_width(my_widgets.width)
+        bar:set_height(my_widgets.height)
+        bar:set_vertical(my_widgets.vertical)
+        bar:set_background_color(my_widgets.color.bg)
+        bar:set_border_color(my_widgets.color.border)
+        color = my_widgets.color.okay
+        if direction == "up" then color = my_widgets.color.gradient(0, 10)
+        elseif direction == "down" then color = my_widgets.color.gradient(10,0)
+        end
+        bar:set_color(color)
+        return bar
+    end,
+    markup = function(string) return "<span color='" .. my_widgets.color.fg .. "'>".. string .. "</span>" end,
+    text = function(string)
+        if not string then string = "" end
+        text = wibox.widget.textbox()
+        text:set_markup(my_widgets.markup(string))
+        return text
+    end,
+    separator = function()
+        separator = my_widgets.text("|")
+        return separator
+    end,
+    icon_path = function(image)
+        return theme_path .. '/icons/' .. image
+    end,
+    icon = function(image)
+        icon = wibox.widget.imagebox()
+        icon:set_image(my_widgets.icon_path(image))
+        return icon
+    end,
+}
+
 -- {{{ alsa
 local alsa_widget =
 {
@@ -199,8 +260,8 @@ local alsa_widget =
 	step = "5%",
 	colors =
 	{
-		unmute = {type="linear", from = {0, 0}, to = {0, 10}, stops = { {0,theme.molokai_red}, {0.2, theme.molokai_orange}, {1.0, theme.molokai_green} } },
-		mute = theme.molokai_red
+        unmute = my_widgets.color.gradient(0, 10),
+		mute = my_widgets.color.bad
 	},
 	mixer = terminal .. " -e alsamixer", -- or whatever your preferred sound mixer is
 	notifications =
@@ -220,12 +281,7 @@ local alsa_widget =
 	}
 }
 -- widget
-alsa_widget.bar = awful.widget.progressbar()
-alsa_widget.bar:set_width(6)
-alsa_widget.bar:set_height(10)
-alsa_widget.bar:set_vertical(true)
-alsa_widget.bar:set_background_color(theme.bg_normal)
-alsa_widget.bar:set_color(alsa_widget.colors.unmute)
+alsa_widget.bar = my_widgets.progressbar('up')
 alsa_widget.bar:buttons(awful.util.table.join (
 	awful.button ({}, 1, function()
 		awful.util.spawn (alsa_widget.mixer)
@@ -247,9 +303,9 @@ alsa_widget.bar:buttons(awful.util.table.join (
 	end)
 ))
 -- tooltip
-alsa_widget.text = wibox.widget.textbox()
-alsa_widget.text:set_text("Vol:")
-alsa_widget.tooltip = awful.tooltip ({ objects = { alsa_widget.bar, alsa_widget.text } })
+alsa_widget.text = my_widgets.text("Vol:")
+alsa_widget.icon = my_widgets.icon('spkr_01.png')
+alsa_widget.tooltip = awful.tooltip ({ objects = { alsa_widget.bar, alsa_widget.text, alsa_widget.icon } })
 -- naughty notifications
 alsa_widget._current_level = 0
 alsa_widget._muted = false
@@ -322,21 +378,15 @@ vicious.register (alsa_widget.bar, vicious.widgets.volume, function (widget, arg
 	widget:set_color (alsa_widget.colors.unmute)
 	return args[1]
 end, 5, alsa_widget.channel) -- relatively high update time, use of keys/mouse will force update
-alsa_widget.box = wibox.layout.margin(alsa_widget.bar, 2, 2, 5, 5)
+alsa_widget.box = my_widgets.box(alsa_widget.bar)
 -- }}}
 -- {{{ battery
 battery_widget = {}
 battery_widget.battery = "BAT0"
-battery_widget.text = wibox.widget.textbox()
-battery_widget.text:set_text('Bat:')
-battery_widget.bar = awful.widget.progressbar()
-battery_widget.bar:set_width(6)
-battery_widget.bar:set_height(10)
-battery_widget.bar:set_vertical(true)
-battery_widget.bar:set_background_color(theme.bg_normal)
-battery_widget.bar:set_border_color(nil)
-battery_widget.bar:set_color({type="linear", from = {0, 10}, to = {0, 0}, stops = { {0,theme.molokai_red}, {0.2, theme.molokai_orange}, {1.0, theme.molokai_green} } })
-battery_widget.tooltip = awful.tooltip ({ objects = { battery_widget.bar, battery_widget.text } })
+battery_widget.text = my_widgets.text('Bat:')
+battery_widget.icon = my_widgets.icon('bat_full_01.png')
+battery_widget.bar = my_widgets.progressbar('down')
+battery_widget.tooltip = awful.tooltip ({ objects = { battery_widget.bar, battery_widget.text, battery_widget.icon } })
 
 battery_widget.box = wibox.layout.margin(battery_widget.bar, 2, 2, 5, 5)
 -- Register widget.bar
@@ -352,7 +402,7 @@ vicious.register(battery_widget.bar, vicious.widgets.bat, function(widget, args)
 
     battery_widget.tooltip:set_markup(
 
-        " <b>[ " .. status .. " ]</b> \n " .. args[2] .. "% charged "
+        " <b>[ " .. status .. "  ]]</b> \n " .. args[2] .. "% charged "
         )
     return args[2]
 end, 30, battery_widget.battery)
@@ -363,13 +413,10 @@ end, 30, battery_widget.battery)
 
 
 -- {{{ Wibox
--- Create a textclock widget
-separator = wibox.widget.textbox()
-separator:set_text("|")
 -- Initialize widget
-datewidget = wibox.widget.textbox()
+datewidget = my_widgets.text()
 -- Register widget
-vicious.register(datewidget, vicious.widgets.date, "%d %b %Y %H:%M", 60)
+vicious.register(datewidget, vicious.widgets.date, my_widgets.markup("%d %b %Y %H:%M"), 60)
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -439,7 +486,7 @@ for s = 1, screen.count() do
     mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
     -- Create the wibox
-    mywibox[s] = awful.wibox({ position = "bottom", screen = s })
+    mywibox[s] = awful.wibox({ position = "bottom", screen = s, height = 20 })
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
@@ -451,16 +498,16 @@ for s = 1, screen.count() do
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then
         right_layout:add(wibox.widget.systray())
-        right_layout:add(separator)
+        right_layout:add(my_widgets.separator())
     end
-    right_layout:add(battery_widget.text)
+    right_layout:add(battery_widget.icon)
     right_layout:add(battery_widget.box)
-    right_layout:add(separator)
-    right_layout:add(alsa_widget.text)
+    right_layout:add(my_widgets.separator())
+    right_layout:add(alsa_widget.icon)
     right_layout:add(alsa_widget.box)
-    right_layout:add(separator)
+    right_layout:add(my_widgets.separator())
     right_layout:add(datewidget)
-    right_layout:add(separator)
+    right_layout:add(my_widgets.separator())
     right_layout:add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)
