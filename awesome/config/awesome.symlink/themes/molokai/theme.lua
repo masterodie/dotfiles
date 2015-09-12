@@ -57,6 +57,8 @@ theme.titlebar_bg_normal = molokai.bg_urgent
 -- {{{ Mouse finder
 theme.mouse_finder_color = molokai.fg_urgent
 
+theme.tasklist_disable_icon = true
+
 -- There are other variable sets
 -- overriding the default one when
 -- defined, the sets are:

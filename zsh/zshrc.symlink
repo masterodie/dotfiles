@@ -92,6 +92,7 @@ set -y
 #####Aliases
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
+alias muxs='mux start default'
 
 ##### Keybindings
 #bindkey -e

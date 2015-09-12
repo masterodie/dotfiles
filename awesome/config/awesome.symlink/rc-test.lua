@@ -722,9 +722,9 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     awful.key({ modkey },            "n",     function ()  run_or_raise('firefox', { class = "Firefox" }) end),
-    awful.key({ modkey, },            "y",     function ()  run_or_raise(terminal .. ' -e mux start default', { name = "tmux - system" }) end),
-    awful.key({ modkey, },            "x",     function ()  run_or_raise(terminal .. ' -e mux start nhweb', { name = "tmux - nhweb" }) end),
-    awful.key({ modkey, },            "c",     function ()  run_or_raise(terminal .. ' -e mux start coding', { name = "tmux - coding" }) end),
+    awful.key({ modkey, },            "x",     function ()  run_or_raise(terminal .. ' -e mux start default', { name = "tmux - system" }) end),
+    awful.key({ modkey, },            "c",     function ()  run_or_raise(terminal .. ' -e mux start nhweb', { name = "tmux - nhweb" }) end),
+    awful.key({ modkey, },            "v",     function ()  run_or_raise(terminal .. ' -e mux start youtube', { name = "tmux - youtube" }) end),
 
     -- dmenu
     -- Run or raise applications with dmenu
