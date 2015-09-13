@@ -24,6 +24,8 @@ molokai.purple = '#AF5FFF'
 molokai.pink = '#D7005F'
 molokai.blue = '#5FD7FF'
 
+theme.molokai = molokai
+
 -- {{{ Colors
 theme.bg_focus  = molokai.bg -- "#1E2320"
 theme.bg_minimize = molokai.bg

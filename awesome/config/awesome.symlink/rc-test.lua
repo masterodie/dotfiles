@@ -161,6 +161,7 @@ terminal = "urxvt"
 editor = os.getenv("EDITOR") or "vim"
 browser = 'firefox'
 editor_cmd = terminal .. " -e " .. editor
+dmenu_options = ' -fn -xos4-terminus-medium-r-*-*-12-* '
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -730,7 +731,7 @@ globalkeys = awful.util.table.join(
     -- dmenu
     -- Run or raise applications with dmenu
     awful.key({ modkey }, "r", function ()
-        local f_reader = io.popen( "dmenu_path | dmenu -b -nb '".. beautiful.bg_normal .."' -nf '".. beautiful.fg_normal .."' -sb '#955'")
+        local f_reader = io.popen( "dmenu_path | dmenu " .. dmenu_options .. " -nb '".. beautiful.bg_normal .."' -nf '".. beautiful.fg_normal .. "' -sb '" .. beautiful.bg_normal .. "' -sf '" .. beautiful.fg_urgent .. "'")
         local command = assert(f_reader:read('*a'))
         f_reader:close()
         if command == "" then return end
@@ -738,7 +739,7 @@ globalkeys = awful.util.table.join(
     end),
     -- Run or raise applications with dmenu with elevated privileges
     awful.key({ modkey , "Shift"}, "r", function ()
-        local f_reader = io.popen( "dmenu_path | dmenu -i -nb '".. beautiful.bg_urgent .."' -nf '".. beautiful.fg_urgent .."' -sb '#955'")
+        local f_reader = io.popen( "dmenu_path | dmenu " .. dmenu_options .. "-nb '".. beautiful.bg_urgent .."' -nf '".. beautiful.fg_urgent .."' -sb '#955'")
         local command = assert(f_reader:read('*a'))
         f_reader:close()
         if command == "" then return end
@@ -863,7 +864,7 @@ awful.rules.rules = {
         focus = awful.client.focus.filter,
         raise = true,
         keys = clientkeys,
-        honor_size_hints = false,
+        -- honor_size_hints = false,
         buttons = clientbuttons } },
     { rule = { class = "mpv" },
     properties = {
