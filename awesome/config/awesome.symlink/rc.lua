@@ -231,7 +231,7 @@ tyrannical.tags = {
         exclusive   = true,
       --icon        = "~net.png",                 -- Use this icon for the tag (uncomment with a real path)
         screen      = screen.count()>1 and 2 or 1,-- Setup on screen 2 if there is more than 1 screen, else on screen 1
-        layout      = awful.layout.suit.max,      -- Use the max layout
+        layout      = awful.layout.suit.tile,      -- Use the max layout
         class = {
             "Opera"         , "Firefox"        , "Rekonq"    , "Dillo"        , "Arora",
             "Chromium"      , "nightly"        , "minefield"     }
@@ -254,7 +254,7 @@ tyrannical.tags = {
                              -- client in the "class" section will start. It will be created on
                              -- the client startup screen
         exclusive   = true,
-        layout      = awful.layout.suit.max,
+        layout      = awful.layout.suit.tile,
         class       = {
             "urxvt:media", "Xephyr"                                        }
     } ,
@@ -275,7 +275,7 @@ tyrannical.tags = {
                              -- client in the "class" section will start. It will be created on
                              -- the client startup screen
         exclusive   = true,
-        layout      = awful.layout.suit.max,
+        layout      = awful.layout.suit.tile,
         class       = {
             "Assistant"     , "Okular"         , "Evince"    , "EPDFviewer"   , "xpdf",
             "Xpdf"          ,                                        }
