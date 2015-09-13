@@ -6,3 +6,7 @@ zshrc.local
 
 */.tags
 .tags
+
+/ranger/**/history
+/ranger/**/bookmarks
+/ranger/**/tagged
