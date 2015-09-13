@@ -1,0 +1,67 @@
+gap_x 30
+gap_y 30
+alignment top_right
+update_interval 0.5
+use_xft yes
+xftfont Terminess Powerline:size=8
+own_window yes
+own_window_type desktop
+own_window_transparent no
+own_window_colour 1b1d1e
+own_window_hints below,skip_taskbar,skip_pager
+own_window_argb_visual yes
+own_window_argb_value 128
+double_buffer yes
+draw_shades no
+draw_graph_borders no
+uppercase no
+default_bar_size 0 4
+default_graph_size 0 24
+border_inner_margin 16
+default_color f8f8f2
+
+TEXT
+system ${hr 1}
+${alignc}'${nodename}'
+${alignc}linux ${kernel}
+
+processor ${hr 1}
+${alignc}${exec lscpu | grep -i "model name" | cut -c 24-}
+${alignc}${freq}MHz
+cpu0${alignr}${cpu cpu1}%
+${cpubar cpu1}
+cpu1${alignr}${cpu cpu2}%
+${cpubar cpu2}
+cpu usage${alignr} %
+${top name 1}${alignr}${top cpu 1}
+${top name 2}${alignr}${top cpu 2}
+${top name 3}${alignr}${top cpu 3}
+total${alignr}${cpu}%
+
+memory ${hr 1}
+${mem}${alignr}${memperc}%
+${membar}
+ram usage${alignr} %
+${top_mem name 1}${alignr}${top_mem mem 1}
+${top_mem name 2}${alignr}${top_mem mem 2}
+${top_mem name 3}${alignr}${top_mem mem 3}
+total${alignr}${memperc}%
+
+disks ${hr 1}
+/${alignr}${fs_size /}
+${fs_bar /}
+${fs_used_perc /}%${alignr}(${fs_used /})
+
+/home${alignr}${fs_size /home}
+${fs_bar /home}
+${fs_used_perc /home}%${alignr}(${fs_used /home})
+
+ethernet ${hr 1}
+down ${downspeed eth0}${alignr}up ${upspeed eth0}
+${downspeedgraph eth0 16, 96}${alignr}${upspeedgraph eth0 16, 96}
+total ${totaldown eth0}${alignr}total ${totalup eth0}
+
+wireless ${hr 1}
+down ${downspeed wifi1}${alignr}up ${upspeed wifi1}
+${downspeedgraph wifi1 16, 96}${alignr}${upspeedgraph wifi1 16, 96}
+total ${totaldown wifi1}${alignr}total ${totalup wifi1}
