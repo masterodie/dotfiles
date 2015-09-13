@@ -310,7 +310,7 @@ tyrannical.properties.centered = {
 -- Do not honor size hints request for those classes
 tyrannical.properties.size_hints_honor = { xterm = false, URxvt = false, aterm = false, sauer_client = false, mythfrontend  = false}
 
-tyrannical.properties.no_autofocus = { "mpv" }
+tyrannical.properties.no_autofocus = { "mpv", "conky" }
 tyrannical.properties.sticky = { "mpv" }
 
 --
@@ -903,6 +903,9 @@ awful.rules.rules = {
                 sticky = true,
                 ontop = false,
                 focusable = false,
+                raise = false,
+                slave = true,
+                callback = awful.client.setslave,
                 size_hints = {"program_position", "program_size"}
       } }
     -- Set Firefox to always map on tags number 2 of screen 1.
