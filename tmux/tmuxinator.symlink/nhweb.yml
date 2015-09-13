@@ -33,6 +33,6 @@ windows:
         layout: 02e5,159x52,0,0[159x41,0,0,13,159x10,0,42{95x10,0,42,14,63x10,96,42,15}]
         panes:
             - vim ~/code/nethack/nethack_web/
-            - nhweb shell
             -
+            - nhweb shell
     - server: nhweb runserver -p 8080
