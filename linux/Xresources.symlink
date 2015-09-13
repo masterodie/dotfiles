@@ -17,7 +17,7 @@ URxvt.*color10:   #A6E22E
 URxvt.*color3:    #FD971F
 URxvt.*color11:   #E6DB74
 !darkblue blue
-URxvt.*colURxvt.or4:    #266C98
+URxvt.*color4:    #266C98
 URxvt.*color12:   #7070F0
 !darkmagenta magenta
 URxvt.*color5:    #AC0CB1
@@ -45,9 +45,10 @@ URxvt*depth:			32
 !URxvt.foreground:       	#eeeeee
 !URxvt.background:       	rgba:ffff/ffff/ffff/6666
 !URxvt.background: 		[90]#fdf6e3
-URxvt*font:  			xft:Terminess Powerline:antialiasing=true:size=8
+!URxvt*font:  			xft:Terminess Powerline:antialiasing=true:size=8
 !URxvt*font:                     xft:Inconsolata:antialiasing=true:size=12
-!URxvt*boldFont:			xft:Inconsolata:antialiasing=false:size=10
+URxvt*font:              -*-terminesspowerline-medium-r-*-*-12-*-*-*-*-*-*-*
+URxvt*boldFont:              -*-terminesspowerline-bold-r-*-*-12-*-*-*-*-*-*-*
 URxvt*scrollBar:		false
 !URxvt*scrollBar_floating:	false
 !URxvt*scrollBar_right:		false
@@ -87,17 +88,47 @@ URxvt.keysym.M-s:           perl:keyboard-select:search
 
 !!!!! xterm Einstellungen
 
+XTerm*foreground:rgb:CC/CC/CC
+XTerm*background:rgb:1B/1D/1E
+!black darkgray
+XTerm*color0:    rgb:1B/1D/1E
+XTerm*color8:    rgb:80/80/80
+!darkred red
+XTerm*color1:    rgb:FF/00/44
+XTerm*color9:    rgb:F9/26/72
+!darkgreen green
+XTerm*color2:    rgb:82/B4/14
+XTerm*color10:   rgb:A6/E2/2E
+!darkyellow yellow
+XTerm*color3:    rgb:FD/97/1F
+XTerm*color11:   rgb:E6/DB/74
+!darkblue blue
+XTerm*color4:    rgb:26/6C/98
+XTerm*color12:   rgb:70/70/F0
+!darkmagenta magenta
+XTerm*color5:    rgb:AC/0C/B1
+XTerm*color13:   rgb:D6/3A/E1
+!darkcyan cyan
+XTerm*color6:    rgb:AE/81/FF
+XTerm*color14:   rgb:66/D9/EF
+!gray white
+XTerm*color7:    rgb:CC/CC/CC
+XTerm*color15:   rgb:F8/F8/F2
+
+
 !xterm*geometry:           80x25
 !xterm*dynamicColors:      true
-xterm*saveLines:          10240
-xterm*scrollTtyKeypress:  true
-xterm*scrollTtyOutput:    false
-xterm*scrollBar:          false
+XTerm*saveLines:          10240
+XTerm*scrollTtyKeypress:  true
+XTerm*scrollTtyOutput:    false
+XTerm*scrollBar:          false
 !xterm*rightScrollBar:     true
 !xterm*loginShell:         true
 !xterm*jumpScroll:         true
-xterm*multiScroll:        true
-xterm*toolBar:            false
+XTerm*multiScroll:        true
+XTerm*toolBar:            false
+XTerm*font:              -*-terminesspowerline-medium-r-*-*-12-*-*-*-*-*-*-*
+!XTerm*faceName:  			Terminess Powerline:antialiasing=true:size=8
 
 
 !!!!! Emacs einstellungen
