@@ -725,7 +725,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, },            "x",     function ()  run_or_raise(terminal .. ' -e mux start default', { name = "tmux - system" }) end),
     awful.key({ modkey, },            "c",     function ()  run_or_raise(terminal .. ' -e mux start nhweb', { name = "tmux - nhweb" }) end),
     awful.key({ modkey, },            "v",     function ()  run_or_raise(terminal .. ' -e mux start youtube', { name = "tmux - youtube" }) end),
-    awful.key({ modkey, },            "e",     function ()  run_or_raise('xterm -e ranger', { name = "ranger" }) end),
+    awful.key({ modkey, },            "e",     function ()  run_or_raise(terminal .. ' -depth 24 -e mux start filemanager', { name = "tmux - filemanager" }) end),
 
     -- dmenu
     -- Run or raise applications with dmenu
