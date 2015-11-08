@@ -159,6 +159,7 @@ beautiful.init(theme_path .. "/theme.lua")
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
 editor = os.getenv("EDITOR") or "vim"
+print(os.getenv("HOME"))
 browser = 'firefox'
 editor_cmd = terminal .. " -e " .. editor
 dmenu_options = ' -fn -xos4-terminus-medium-r-*-*-12-* '
@@ -868,9 +869,6 @@ awful.rules.rules = {
         buttons = clientbuttons } },
     { rule = { class = "mpv" },
     properties = {
-        floating = false,
-        nofocus = true,
-        focusable = false,
         slave = true,
         no_autofocus = true,
         callback = awful.client.setslave } },
@@ -989,7 +987,8 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 --{{{ Autostart
-run_once("xrdb -load ~/.Xresources")
+awful.util.spawn_with_shell("xset -b")
+
 run_once("xscreensaver -no-splash")
 run_once("cairo-compmgr")
 run_once("conky")

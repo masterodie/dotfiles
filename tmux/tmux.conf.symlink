@@ -29,9 +29,10 @@ set-option -g default-terminal "screen-256color"
 #set -g terminal-overrides 'xterm:colors=88'
 # Enable mouse support (works in iTerm)
 set-option -ga terminal-override ',rxvt-uni*:XT:Ms=\E]52;%p1%s;%p2%s\007'
-set-window-option -g mode-mouse on
-set-option -g mouse-select-pane on
-set-option -g mouse-resize-pane on
+#set-window-option -g mode-mouse on
+#set-option -g mouse-select-pane on
+#set-option -g mouse-resize-pane on
+set-option -g mouse on
 #set-option -g mouse-select-window on
 
 # Increase History limit

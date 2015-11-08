@@ -6,9 +6,9 @@ theme = {}
 
 theme.font          = "Terminess Powerline 8"
 
-theme.path = "~/.config/awesome/themes/molokai"
+theme.path = os.getenv('HOME') .. "/.config/awesome/themes/molokai"
 
-theme.wallpaper = theme.path .. "/background.png"
+theme.wallpaper = os.getenv('HOME') .. "/.wallpaper.jpg" or theme.path .. "/background.png"
 
 molokai = {}
 molokai.bg = "#1b1d1e"
