@@ -7,15 +7,6 @@ plugins=()
 
 
 ##### Variables
-export EDITOR=vim
-export BROWSER="firefox"
-
-if (set -u; : $DEFAULT_USER) 2> /dev/null
-then
-else
-        export DEFAULT_USER=$USER
-fi
-
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.dotfiles/zsh/oh-my-zsh
 

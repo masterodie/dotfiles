@@ -1,0 +1,18 @@
+"3.10.1 (created: 2015/08/25 00:41:59)
+
+colorscheme molokai
+nmap s :open<Space>duckduckgo<Space>
+nmap S :tabopen<Space>duckduckgo<Space>
+nnoremap h 5h
+nnoremap j 5j
+nnoremap l 5l
+nnoremap k 5k
+cmap <C-j> <Tab>
+cmap <C-k> <S-Tab>
+set maxitems=10
+set suggestengines=duckduckgo
+set defsearch=duckduckgo
+set tabnumbers
+source! /home/odie/.vimperatorrc.local
+
+" vim: set ft=vimperator:

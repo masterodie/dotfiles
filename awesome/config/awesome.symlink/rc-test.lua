@@ -15,6 +15,7 @@ local redshift = require("redshift")
 --Viious widgets
 local vicious = require("vicious")
 local tyrannical = require("tyrannical")
+require("xdgmenu")
 
 
 -- {{{ Functions
@@ -162,7 +163,7 @@ editor = os.getenv("EDITOR") or "vim"
 print(os.getenv("HOME"))
 browser = 'firefox'
 editor_cmd = terminal .. " -e " .. editor
-dmenu_options = ' -fn -xos4-terminus-medium-r-*-*-12-* '
+dmenu_options = ' -fn Terminus:12 '
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -250,16 +251,6 @@ tyrannical.tags = {
             "Kate", "KDevelop", "Codeblocks", "Code::Blocks" , "DDD", "kate4", "vim", "gvim", "urxvt:dev" }
     } ,
     {
-        name        = "media",
-        init        = true, -- This tag wont be created at startup, but will be when one of the
-                             -- client in the "class" section will start. It will be created on
-                             -- the client startup screen
-        exclusive   = true,
-        layout      = awful.layout.suit.tile,
-        class       = {
-            "urxvt:media", "Xephyr"                                        }
-    } ,
-    {
         name        = "system",                 -- Call the tag "Term"
         init        = true,                   -- Load the tag on startup
         exclusive   = true,                   -- Refuse any other type of clients (by classes)
@@ -271,6 +262,16 @@ tyrannical.tags = {
         }
     } ,
     {
+        name        = "media",
+        init        = true, -- This tag wont be created at startup, but will be when one of the
+                             -- client in the "class" section will start. It will be created on
+                             -- the client startup screen
+        exclusive   = true,
+        layout      = awful.layout.suit.tile,
+        class       = {
+            "urxvt:media", "Xephyr"                                        }
+    } ,
+    {
         name        = "misc",
         init        = true, -- This tag wont be created at startup, but will be when one of the
                              -- client in the "class" section will start. It will be created on
@@ -279,7 +280,7 @@ tyrannical.tags = {
         layout      = awful.layout.suit.tile,
         class       = {
             "Assistant"     , "Okular"         , "Evince"    , "EPDFviewer"   , "xpdf",
-            "Xpdf"          ,                                        }
+            "Xpdf", "mupdf"          ,                                        }
     } ,
 }
 
@@ -327,10 +328,12 @@ myawesomemenu = {
    { "quit", awesome.quit }
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
-                                  }
-                        })
+mymainmenu = awful.menu({ items = {
+	{ "apps", xdgmenu },
+	{ "awesome", myawesomemenu, beautiful.awesome_icon },
+	{ "open terminal", terminal }
+	}
+	})
 
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
@@ -387,7 +390,7 @@ my_widgets = {
         return text
     end,
     separator = function()
-        separator = my_widgets.text("|")
+        separator = my_widgets.text(" |")
         return separator
     end,
     icon_path = function(image)
@@ -395,7 +398,7 @@ my_widgets = {
     end,
     icon = function(image)
         icon = wibox.widget.imagebox()
-        icon:set_image(my_widgets.icon_path(image))
+        icon:set_image(image)
         return icon
     end,
 }
@@ -451,7 +454,7 @@ alsa_widget.bar:buttons(awful.util.table.join (
 ))
 -- tooltip
 alsa_widget.text = my_widgets.text("Vol:")
-alsa_widget.icon = my_widgets.icon('spkr_01.png')
+alsa_widget.icon = my_widgets.icon(beautiful.icon_spkr_01)
 alsa_widget.tooltip = awful.tooltip ({ objects = { alsa_widget.bar, alsa_widget.text, alsa_widget.icon } })
 -- naughty notifications
 alsa_widget._current_level = 0
@@ -523,6 +526,18 @@ vicious.register (alsa_widget.bar, vicious.widgets.volume, function (widget, arg
 	alsa_widget._muted = false
 	alsa_widget.tooltip:set_text (" " .. alsa_widget.channel .. ": " .. args[1] .. "% ")
 	widget:set_color (alsa_widget.colors.unmute)
+
+    local paraone = tonumber(args[1])
+
+    if args[2] == "♩" or paraone == 0 then
+        alsa_widget.icon:set_image(beautiful.icon_spkr_01_mute)
+    elseif paraone >= 67 and paraone <= 100 then
+        alsa_widget.icon:set_image(beautiful.icon_spkr_01_high)
+    elseif paraone >= 33 and paraone <= 66 then
+        alsa_widget.icon:set_image(beautiful.icon_spkr_01_med)
+    else
+        alsa_widget.icon:set_image(beautiful.icon_spkr_01_low)
+    end
 	return args[1]
 end, 5, alsa_widget.channel) -- relatively high update time, use of keys/mouse will force update
 alsa_widget.box = my_widgets.box(alsa_widget.bar)
@@ -531,11 +546,11 @@ alsa_widget.box = my_widgets.box(alsa_widget.bar)
 battery_widget = {}
 battery_widget.battery = "BAT0"
 battery_widget.text = my_widgets.text('Bat:')
-battery_widget.icon = my_widgets.icon('bat_full_01.png')
+battery_widget.icon = my_widgets.icon(beautiful.icon_bat_full_01)
 battery_widget.bar = my_widgets.progressbar('down')
 battery_widget.tooltip = awful.tooltip ({ objects = { battery_widget.bar, battery_widget.text, battery_widget.icon } })
 
-battery_widget.box = wibox.layout.margin(battery_widget.bar, 2, 2, 5, 5)
+battery_widget.box = my_widgets.box(battery_widget.bar)
 -- Register widget.bar
 vicious.register(battery_widget.bar, vicious.widgets.bat, function(widget, args)
     status = ""
@@ -557,13 +572,30 @@ end, 30, battery_widget.battery)
 
 -- }}}
 
+---{{---| Wifi Signal Widget |-------
+my_wifi_widget = {}
+my_wifi_widget.interface = 'wifi0'
+my_wifi_widget.icon = my_widgets.icon(beautiful.icon_wifi_02_high)
+neticon = wibox.widget.imagebox()
+vicious.register(neticon, vicious.widgets.wifi, function(widget, args)
+    local sigstrength = tonumber(args["{link}"])
+    if sigstrength > 69 then
+        my_wifi_widget.icon:set_image(beautiful.icon_wifi_02_high)
+    elseif sigstrength > 40 and sigstrength < 70 then
+        my_wifi_widget.icon:set_image(beautiful.icon_wifi_02_med)
+    else
+        my_wifi_widget.icon:set_image(beautiful.icon_wifi_02_low)
+    end
+end, 120, my_wifi_widget.interface)
 
 
 -- {{{ Wibox
 -- Initialize widget
-datewidget = my_widgets.text()
+my_datewidget = {}
+my_datewidget.icon = my_widgets.icon(beautiful.icon_clock)
+my_datewidget.text = my_widgets.text()
 -- Register widget
-vicious.register(datewidget, vicious.widgets.date, my_widgets.markup("%d %b %Y %H:%M"), 60)
+vicious.register(my_datewidget.text, vicious.widgets.date, my_widgets.markup("%d %b %Y %H:%M"), 60)
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -633,7 +665,7 @@ for s = 1, screen.count() do
     mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
     -- Create the wibox
-    mywibox[s] = awful.wibox({ position = "bottom", screen = s, height = 20 })
+    mywibox[s] = awful.wibox({ position = "top", screen = s, height = 20 })
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
@@ -653,7 +685,10 @@ for s = 1, screen.count() do
     right_layout:add(alsa_widget.icon)
     right_layout:add(alsa_widget.box)
     right_layout:add(my_widgets.separator())
-    right_layout:add(datewidget)
+    right_layout:add(my_wifi_widget.icon)
+    right_layout:add(my_widgets.separator())
+    right_layout:add(my_datewidget.icon)
+    right_layout:add(my_datewidget.text)
     right_layout:add(my_widgets.separator())
     right_layout:add(mylayoutbox[s])
 
@@ -878,8 +913,9 @@ awful.rules.rules = {
         properties = { floating = true } },
     { rule = { class = "gimp" },
         properties = { floating = true } },
-    {
-        rule = { name = "tmux - system"  },
+    { rule = { instance = "plugin-container" },
+        properties = { floating = true } },
+    { rule = { name = "tmux - system"  },
         callback = function(c)
             awful.client.property.set(c, "overwrite_class", "urxvt:system")
         end
@@ -990,8 +1026,8 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 awful.util.spawn_with_shell("xset -b")
 
 run_once("xscreensaver -no-splash")
-run_once("cairo-compmgr")
-run_once("conky")
+run_once("xcompmgr")
+-- run_once("conky")
 run_once("lightsOn 300")
 --
 --}}}

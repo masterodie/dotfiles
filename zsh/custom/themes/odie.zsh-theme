@@ -72,11 +72,16 @@ function _virtualenv() {
   echo -n '$(virtualenv_prompt_info)'
 }
 
+function _mode() {
+  echo -n '$(vi_mode_prompt_info)'
+}
+
 function _build_rprompt() {
   RETVAL=$?
   _git_status
   _git_branch
   _virtualenv
+  _mode
 }
 
 PROMPT="$(_build_prompt)"

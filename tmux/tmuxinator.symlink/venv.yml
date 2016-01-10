@@ -1,7 +1,7 @@
 # ~/.tmuxinator/default.yml
 
-name: coding
-root: ~/code
+name: venv
+root: .
 
 # Optional tmux socket
 # socket_name: foo
@@ -29,7 +29,9 @@ root: ~/code
 
 windows:
     - main:
-        layout: main-horizontal
+        layout: main-vertical
         panes:
+            - nvim .
             -
-            -
+            - nosy -c nosy.cfg
+    - server:

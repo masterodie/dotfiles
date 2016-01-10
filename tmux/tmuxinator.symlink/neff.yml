@@ -1,13 +1,15 @@
 # ~/.tmuxinator/default.yml
 
-name: coding
-root: ~/code
+name: neff
+root: ~/code/python/neff
 
 # Optional tmux socket
 # socket_name: foo
 
 # Runs before everything. Use it to start daemons etc.
 # pre: sudo /etc/rc.d/mysqld start
+pre:
+    - source venv/bin/activate
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 # pre_window: rbenv shell 2.0.0-p247
@@ -33,3 +35,5 @@ windows:
         panes:
             -
             -
+            -
+    - htop:

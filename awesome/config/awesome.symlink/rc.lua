@@ -9,15 +9,44 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
-local menubar = require("menubar")
+-- local menubar = require("menubar")
 -- Redshift integration
 local redshift = require("redshift")
 --Viious widgets
 local vicious = require("vicious")
 local tyrannical = require("tyrannical")
+require("xdgmenu")
 
 
 -- {{{ Functions
+function os.system(cmd, raw)
+    local f = assert(io.popen(cmd, 'r'))
+    local s = assert(f:read('*a'))
+    f:close()
+    if raw then return s end
+    s = string.gsub(s, '^%s+', '')
+    s = string.gsub(s, '%s+$', '')
+    s = string.gsub(s, '[\n\r]+', ' ')
+    return s
+end
+
+function get_active_wifi()
+    retval = os.system('bash ~/.config/awesome/wifi_cards.sh')
+    interfaces = {}
+    for i in string.gmatch(retval, '%S+') do
+        table.insert(interfaces, i)
+    end
+    for idx, i in pairs(interfaces) do
+        interface = {}
+        for j in string.gmatch(i, '(%w+)') do
+            table.insert(interface, j)
+        end
+        if interface[2] == 'UP' then
+            return interface[1]
+        end
+    end
+end
+
 function run_once(cmd)
   findme = cmd
   firstspace = cmd:find(" ")
@@ -162,7 +191,7 @@ editor = os.getenv("EDITOR") or "vim"
 print(os.getenv("HOME"))
 browser = 'firefox'
 editor_cmd = terminal .. " -e " .. editor
-dmenu_options = ' -fn -xos4-terminus-medium-r-*-*-12-* '
+dmenu_options = ' -fn Terminus:14 '
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -250,16 +279,6 @@ tyrannical.tags = {
             "Kate", "KDevelop", "Codeblocks", "Code::Blocks" , "DDD", "kate4", "vim", "gvim", "urxvt:dev" }
     } ,
     {
-        name        = "media",
-        init        = true, -- This tag wont be created at startup, but will be when one of the
-                             -- client in the "class" section will start. It will be created on
-                             -- the client startup screen
-        exclusive   = true,
-        layout      = awful.layout.suit.tile,
-        class       = {
-            "urxvt:media", "Xephyr"                                        }
-    } ,
-    {
         name        = "system",                 -- Call the tag "Term"
         init        = true,                   -- Load the tag on startup
         exclusive   = true,                   -- Refuse any other type of clients (by classes)
@@ -271,15 +290,37 @@ tyrannical.tags = {
         }
     } ,
     {
+        name        = "media",
+        init        = false, -- This tag wont be created at startup, but will be when one of the
+                             -- client in the "class" section will start. It will be created on
+                             -- the client startup screen
+        exclusive   = true,
+        layout      = awful.layout.suit.tile,
+        class       = {
+            "mpv", "VLC", "mplayer", "libprs500"
+        }
+    } ,
+    {
         name        = "misc",
-        init        = true, -- This tag wont be created at startup, but will be when one of the
+        init        = false, -- This tag wont be created at startup, but will be when one of the
                              -- client in the "class" section will start. It will be created on
                              -- the client startup screen
         exclusive   = true,
         layout      = awful.layout.suit.tile,
         class       = {
             "Assistant"     , "Okular"         , "Evince"    , "EPDFviewer"   , "xpdf",
-            "Xpdf"          ,                                        }
+            "Xpdf", "mupdf"          ,                                        }
+    } ,
+    {
+        name        = "games",
+        init        = false, -- This tag wont be created at startup, but will be when one of the
+                             -- client in the "class" section will start. It will be created on
+                             -- the client startup screen
+        exclusive   = true,
+        layout      = awful.layout.suit.tile,
+        class       = {
+            "Steam", "Duskers Configuration", "Duskers"
+        }
     } ,
 }
 
@@ -296,7 +337,7 @@ tyrannical.properties.floating = {
     "MPlayer"      , "pinentry"        , "ksnapshot"  , "pinentry"     , "gtksu"          ,
     "xine"         , "feh"             , "kmix"       , "kcalc"        , "xcalc"          ,
     "yakuake"      , "Select Color$"   , "kruler"     , "kcolorchooser", "Paste Special"  ,
-    "New Form"     , "Insert Picture"  , "kcharselect", "mythfrontend" , "plasmoidviewer"
+    "New Form"     , "Insert Picture"  , "kcharselect", "mythfrontend" , "plasmoidviewer", "Duskers Configuration"
 }
 
 -- Make the matching clients (by classes) on top of the default layout
@@ -327,16 +368,18 @@ myawesomemenu = {
    { "quit", awesome.quit }
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
-                                  }
-                        })
+mymainmenu = awful.menu({ items = {
+	{ "apps", xdgmenu },
+	{ "awesome", myawesomemenu, beautiful.awesome_icon },
+	{ "open terminal", terminal }
+	}
+	})
 
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
 
 -- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
+-- menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 -- {{{ Widgets
 
@@ -387,7 +430,7 @@ my_widgets = {
         return text
     end,
     separator = function()
-        separator = my_widgets.text("|")
+        separator = my_widgets.text(" |")
         return separator
     end,
     icon_path = function(image)
@@ -395,7 +438,7 @@ my_widgets = {
     end,
     icon = function(image)
         icon = wibox.widget.imagebox()
-        icon:set_image(my_widgets.icon_path(image))
+        icon:set_image(image)
         return icon
     end,
 }
@@ -451,7 +494,7 @@ alsa_widget.bar:buttons(awful.util.table.join (
 ))
 -- tooltip
 alsa_widget.text = my_widgets.text("Vol:")
-alsa_widget.icon = my_widgets.icon('spkr_01.png')
+alsa_widget.icon = my_widgets.icon(beautiful.icon_spkr_01)
 alsa_widget.tooltip = awful.tooltip ({ objects = { alsa_widget.bar, alsa_widget.text, alsa_widget.icon } })
 -- naughty notifications
 alsa_widget._current_level = 0
@@ -523,6 +566,18 @@ vicious.register (alsa_widget.bar, vicious.widgets.volume, function (widget, arg
 	alsa_widget._muted = false
 	alsa_widget.tooltip:set_text (" " .. alsa_widget.channel .. ": " .. args[1] .. "% ")
 	widget:set_color (alsa_widget.colors.unmute)
+
+    local paraone = tonumber(args[1])
+
+    if args[2] == "♩" or paraone == 0 then
+        alsa_widget.icon:set_image(beautiful.icon_spkr_01_mute)
+    elseif paraone >= 67 and paraone <= 100 then
+        alsa_widget.icon:set_image(beautiful.icon_spkr_01_high)
+    elseif paraone >= 33 and paraone <= 66 then
+        alsa_widget.icon:set_image(beautiful.icon_spkr_01_med)
+    else
+        alsa_widget.icon:set_image(beautiful.icon_spkr_01_low)
+    end
 	return args[1]
 end, 5, alsa_widget.channel) -- relatively high update time, use of keys/mouse will force update
 alsa_widget.box = my_widgets.box(alsa_widget.bar)
@@ -531,11 +586,11 @@ alsa_widget.box = my_widgets.box(alsa_widget.bar)
 battery_widget = {}
 battery_widget.battery = "BAT0"
 battery_widget.text = my_widgets.text('Bat:')
-battery_widget.icon = my_widgets.icon('bat_full_01.png')
+battery_widget.icon = my_widgets.icon(beautiful.icon_bat_full_01)
 battery_widget.bar = my_widgets.progressbar('down')
 battery_widget.tooltip = awful.tooltip ({ objects = { battery_widget.bar, battery_widget.text, battery_widget.icon } })
 
-battery_widget.box = wibox.layout.margin(battery_widget.bar, 2, 2, 5, 5)
+battery_widget.box = my_widgets.box(battery_widget.bar)
 -- Register widget.bar
 vicious.register(battery_widget.bar, vicious.widgets.bat, function(widget, args)
     status = ""
@@ -557,13 +612,40 @@ end, 30, battery_widget.battery)
 
 -- }}}
 
+---{{---| Wifi Signal Widget |-------
+my_wifi_widget = {}
+my_wifi_widget.interface = get_active_wifi()
+my_wifi_widget.icon = my_widgets.icon(beautiful.icon_wifi_02_high)
+my_wifi_widget.tooltip = awful.tooltip ({ objects = { my_wifi_widget.icon } })
+vicious.register(my_wifi_widget, vicious.widgets.wifi, function(widget, args)
+    local sigstrength = tonumber(args["{link}"])
+    if sigstrength > 69 then
+        my_wifi_widget.icon:set_image(beautiful.icon_wifi_02_high)
+    elseif sigstrength > 40 and sigstrength < 70 then
+        my_wifi_widget.icon:set_image(beautiful.icon_wifi_02_med)
+    else
+        my_wifi_widget.icon:set_image(beautiful.icon_wifi_02_low)
+    end
+    my_wifi_widget.tooltip:set_markup(
+        " <b>" .. my_wifi_widget.interface .. "</b> \n" ..
+        " \n" ..
+        " SSID: " .. args['{ssid}'] .. "\n" ..
+        " Link: " .. args['{link}'] .. "\n" ..
+        " Rate: " .. args['{rate}'] .. "\n"
+    )
+    my_wifi_widget.interface = get_active_wifi()
+end, 120, my_wifi_widget.interface)
 
 
 -- {{{ Wibox
 -- Initialize widget
-datewidget = my_widgets.text()
+my_datewidget = {}
+my_datewidget.icon = my_widgets.icon(beautiful.icon_clock)
+my_datewidget.text = my_widgets.text()
+my_datewidget.tooltip = awful.tooltip({ objects = { my_datewidget.text } })
 -- Register widget
-vicious.register(datewidget, vicious.widgets.date, my_widgets.markup("%d %b %Y %H:%M"), 60)
+vicious.register(my_datewidget.text, vicious.widgets.date, my_widgets.markup("%H:%M"), 10)
+vicious.register(my_datewidget.tooltip, vicious.widgets.date, my_widgets.markup("%H:%M\n%d %b %Y"), 60)
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -633,7 +715,7 @@ for s = 1, screen.count() do
     mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
     -- Create the wibox
-    mywibox[s] = awful.wibox({ position = "bottom", screen = s, height = 20 })
+    mywibox[s] = awful.wibox({ position = "top", screen = s, height = 20 })
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
@@ -653,7 +735,11 @@ for s = 1, screen.count() do
     right_layout:add(alsa_widget.icon)
     right_layout:add(alsa_widget.box)
     right_layout:add(my_widgets.separator())
-    right_layout:add(datewidget)
+    right_layout:add(my_wifi_widget.icon)
+    --right_layout:add(my_wifi_widget.text)
+    right_layout:add(my_widgets.separator())
+    right_layout:add(my_datewidget.icon)
+    right_layout:add(my_datewidget.text)
     right_layout:add(my_widgets.separator())
     right_layout:add(mylayoutbox[s])
 
@@ -664,6 +750,7 @@ for s = 1, screen.count() do
     layout:set_right(right_layout)
 
     mywibox[s]:set_widget(layout)
+    mywibox[s].opacity = 0.7
 end
 -- }}}
 
@@ -732,11 +819,12 @@ globalkeys = awful.util.table.join(
     -- dmenu
     -- Run or raise applications with dmenu
     awful.key({ modkey }, "r", function ()
-        local f_reader = io.popen( "dmenu_path | dmenu " .. dmenu_options .. " -nb '".. beautiful.bg_normal .."' -nf '".. beautiful.fg_normal .. "' -sb '" .. beautiful.bg_normal .. "' -sf '" .. beautiful.fg_urgent .. "'")
-        local command = assert(f_reader:read('*a'))
-        f_reader:close()
-        if command == "" then return end
-        run_or_raise(command, { name = command } )
+        --local f_reader = io.popen( "dmenu_path | dmenu " .. dmenu_options .. " -nb '".. beautiful.bg_normal .."' -nf '".. beautiful.fg_normal .. "' -sb '" .. beautiful.bg_normal .. "' -sf '" .. beautiful.fg_urgent .. "'")
+        local f_reader = io.popen( "dmenu_extended_run " .. dmenu_options .. " -nb '".. beautiful.bg_normal .."' -nf '".. beautiful.fg_normal .. "' -sb '" .. beautiful.bg_normal .. "' -sf '" .. beautiful.fg_urgent .. "'")
+        --local command = assert(f_reader:read('*a'))
+        --f_reader:close()
+        --if command == "" then return end
+        --run_or_raise(command, { name = command } )
     end),
     -- Run or raise applications with dmenu with elevated privileges
     awful.key({ modkey , "Shift"}, "r", function ()
@@ -758,7 +846,7 @@ globalkeys = awful.util.table.join(
                   awful.util.getdir("cache") .. "/history_eval")
               end),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end),
+    -- awful.key({ modkey }, "p", function() menubar.show() end),
 
     -- Toggle redshift
     awful.key({ modkey }, "d", redshift.toggle),
@@ -783,6 +871,18 @@ globalkeys = awful.util.table.join(
         awful.util.spawn("amixer sset " .. "Headphone" .. " unmute")
         vicious.force({ alsa_widget.bar })
         alsa_widget.notify()
+    end),
+    awful.key({ }, "XF86AudioPlay", function ()
+        awful.util.spawn('mpc toggle')
+    end),
+    awful.key({ }, "XF86AudioStop", function ()
+        awful.util.spawn('mpc stop')
+    end),
+    awful.key({ }, "XF86AudioNext", function ()
+        awful.util.spawn('mpc next')
+    end),
+    awful.key({ }, "XF86AudioPrev", function ()
+        awful.util.spawn('mpc prev')
     end),
     awful.key({}, "Insert", function() raise_conky() end, function() lower_conky() end),
     awful.key({}, "Pause", function() toggle_conky() end)
@@ -878,8 +978,19 @@ awful.rules.rules = {
         properties = { floating = true } },
     { rule = { class = "gimp" },
         properties = { floating = true } },
-    {
-        rule = { name = "tmux - system"  },
+    { rule = { instance = "plugin-container" },
+        properties = { floating = true } },
+    { rule = { name = "Duskers"  },
+        callback = function(c)
+            awful.client.property.set(c, "overwrite_class", "Duskers")
+        end
+    },
+    { rule = { name = "Duskers Configuration"  },
+        callback = function(c)
+            awful.client.property.set(c, "overwrite_class", "Duskers Configuration")
+        end
+    },
+    { rule = { name = "tmux - system"  },
         callback = function(c)
             awful.client.property.set(c, "overwrite_class", "urxvt:system")
         end
@@ -982,16 +1093,27 @@ client.connect_signal("manage", function (c, startup)
     end
 end)
 
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+client.connect_signal("focus", function(c)
+    c.border_color = beautiful.border_focus
+    c.opacity = 1
+end)
+client.connect_signal("unfocus", function(c)
+    c.border_color = beautiful.border_normal
+    c.opacity = 0.7
+end)
+
+awesome.connect_signal("Exit", function() awful.util.spawn("~/bin/graceful_close.sh") end)
+
+-- Opacity
+
 -- }}}
 
 --{{{ Autostart
 awful.util.spawn_with_shell("xset -b")
 
 run_once("xscreensaver -no-splash")
-run_once("cairo-compmgr")
-run_once("conky")
+-- run_once("xcompmgr")
+-- run_once("conky")
 run_once("lightsOn 300")
 --
 --}}}

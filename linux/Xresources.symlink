@@ -47,8 +47,8 @@ URxvt*depth:			32
 !URxvt.background: 		[90]#fdf6e3
 !URxvt*font:  			xft:Terminess Powerline:antialiasing=true:size=8
 !URxvt*font:                     xft:Inconsolata:antialiasing=true:size=12
-URxvt*font:              -*-terminesspowerline-medium-r-*-*-12-*-*-*-*-*-*-*
-URxvt*boldFont:              -*-terminesspowerline-bold-r-*-*-12-*-*-*-*-*-*-*
+URxvt*font:              -*-terminesspowerline-medium-r-*-*-14-*-*-*-*-*-*-*
+URxvt*boldFont:              -*-terminesspowerline-bold-r-*-*-14-*-*-*-*-*-*-*
 URxvt*scrollBar:		false
 !URxvt*scrollBar_floating:	false
 !URxvt*scrollBar_right:		false

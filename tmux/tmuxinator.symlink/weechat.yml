@@ -1,7 +1,7 @@
-# ~/.tmuxinator/default.yml
+# ~/.tmuxinator/weechat.yml
 
-name: coding
-root: ~/code
+name: weechat
+root: ~/
 
 # Optional tmux socket
 # socket_name: foo
@@ -28,8 +28,4 @@ root: ~/code
 # post: tmux -CC attach -t default
 
 windows:
-    - main:
-        layout: main-horizontal
-        panes:
-            -
-            -
+    - main: weechat
