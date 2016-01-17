@@ -1,0 +1,6 @@
+alias venv="source venv/bin/activate"
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias muxs='mux start default'
+alias e=$EDITOR
+alias less=$PAGER
