@@ -7,6 +7,9 @@ zshrc.local
 */.tags
 .tags
 
-/ranger/**/history
-/ranger/**/bookmarks
-/ranger/**/tagged
+ranger/**/history
+ranger/**/bookmarks
+ranger/**/tagged
+
+vimperator/**/info
+vimperator/vimperator.symlink/info/default/history*
