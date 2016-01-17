@@ -11,5 +11,5 @@ ranger/**/history
 ranger/**/bookmarks
 ranger/**/tagged
 
-vimperator/**/info
-vimperator/vimperator.symlink/info/default/history*
+vimperator/vimperator.symlink/info/*
+vimperator/vimperator.symlink/info
