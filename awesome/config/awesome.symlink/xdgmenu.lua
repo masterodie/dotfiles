@@ -1,6 +1,7 @@
  local menu63909e8219db0bcede147cb7926a07fa = {
      {"Calibre", "calibre --detach ", "/usr/share/icons/hicolor/16x16/apps/calibre-gui.png" },
      {"Edit E-book", "ebook-edit --detach ", "/usr/share/icons/hicolor/16x16/apps/calibre-ebook-edit.png" },
+     {"XMind", "XMind", "/usr/share/pixmaps/XMind.png" },
      {"pPub", "ppub ", "/usr/share/icons/hicolor/24x24/apps/ppub.png" },
  }
 
@@ -9,6 +10,7 @@
      {"DB Browser for SQLite", "sqlitebrowser ", "/usr/share/icons/hicolor/256x256/apps/sqlitebrowser.png" },
      {"Emacs", "emacs ", "/usr/share/icons/hicolor/16x16/apps/emacs.png" },
      {"Giggle", "giggle ", "/usr/share/icons/hicolor/16x16/apps/giggle.png" },
+     {"MySQL Workbench", "mysql-workbench", "/usr/share/icons/hicolor/16x16/apps/mysql-workbench.png" },
      {"OpenJDK 1.7.0 Policy Tool", "_BINDIR_/policytool"},
      {"Qt Assistant", "/usr/lib/qt/bin/assistant", "/usr/share/icons/hicolor/32x32/apps/assistant.png" },
      {"Qt Designer", "/usr/lib/qt/bin/designer", "/usr/share/icons/hicolor/128x128/apps/QtProject-designer.png" },
@@ -19,8 +21,8 @@
      {"Qt4 Linguist ", "linguist-qt4", "/usr/share/icons/hicolor/16x16/apps/linguist-qt4.png" },
      {"Qt4 QDbusViewer ", "qdbusviewer-qt4", "/usr/share/icons/hicolor/32x32/apps/qdbusviewer-qt4.png" },
      {"Winpdb", "winpdb", "///usr/share/icons/winpdb-icon-16.png" },
-     {"ipython", "xterm -e ipython"},
-     {"ipython2", "xterm -e ipython2"},
+     {"ipython", "xterm -e ipython", "/usr/share/pixmaps/ipython.png" },
+     {"ipython2", "xterm -e ipython2", "/usr/share/pixmaps/ipython2.png" },
  }
 
  local menue64b29f9c504872c202fabd746ddbf8a = {
@@ -34,25 +36,23 @@
  local menuc8205c7636e728d448c2774e6a4a944b = {
      {"Avahi SSH-Server-Browser", "/usr/bin/bssh", "/usr/share/icons/gnome/16x16/devices/network-wired.png" },
      {"Avahi VNC-Server-Browser", "/usr/bin/bvnc", "/usr/share/icons/gnome/16x16/devices/network-wired.png" },
-     {"Cauldron", "cauldron", "/usr/share/pixmaps/cauldron.png" },
      {"Chromium", "chromium ", "/usr/share/icons/hicolor/16x16/apps/chromium.png" },
      {"Corebird", "corebird", "/usr/share/icons/hicolor/16x16/apps/corebird.png" },
      {"Dropbox", "dropbox", "/usr/share/pixmaps/dropbox.png" },
      {"ELinks", "xterm -e /usr/bin/elinks ", "/usr/share/icons/gnome/16x16/mimetypes/html.png" },
+     {"FileZilla", "filezilla", "/usr/share/icons/hicolor/16x16/apps/filezilla.png" },
      {"Firefox", "firefox ", "/usr/share/icons/hicolor/16x16/apps/firefox.png" },
      {"JDownloader", "JDownloader", "/usr/share/icons/hicolor/16x16/apps/jdownloader.png" },
      {"NixNote2", "/usr/bin/nixnote2", "///usr/share/nixnote2/images/windowIcon.png" },
      {"Polly", "polly", "/usr/share/icons/hicolor/16x16/apps/polly.svg" },
      {"Steam", "/usr/bin/steam ", "/usr/share/icons/hicolor/16x16/apps/steam.png" },
      {"Transmission", "transmission-gtk ", "/usr/share/icons/hicolor/16x16/apps/transmission.png" },
+     {"dwb", "dwb ", "/usr/share/pixmaps/dwb.png" },
  }
 
  local menu4dbd6bf38858b519ac080da88da20042 = {
      {"Dosbox", "dosbox", "/usr/share/pixmaps/dosbox.png" },
-     {"Dwarf Fortress Spacefox", "dwarffortress-sf", "///usr/share/pixmaps/dwarffortress-sf.png" },
-     {"Dwarf Therapist", "dwarftherapist", "/usr/share/icons/hicolor/128x128/apps/dwarftherapist.png" },
      {"Exult", "exult", "/usr/share/icons/exult.png" },
-     {"Factorio", "factorio", "///usr/share/factorio/core/graphics/factorio.png" },
      {"Steam", "/usr/bin/steam ", "/usr/share/icons/hicolor/16x16/apps/steam.png" },
  }
 
@@ -83,8 +83,8 @@
      {"Redshift", "redshift-gtk"},
      {"Xarchiver", "xarchiver", "/usr/share/icons/hicolor/16x16/apps/xarchiver.png" },
      {"gpa", "gpa", "/usr/share/pixmaps/gpa.png" },
-     {"ipython", "xterm -e ipython"},
-     {"ipython2", "xterm -e ipython2"},
+     {"ipython", "xterm -e ipython", "/usr/share/pixmaps/ipython.png" },
+     {"ipython2", "xterm -e ipython2", "/usr/share/pixmaps/ipython2.png" },
  }
 
 xdgmenu = {

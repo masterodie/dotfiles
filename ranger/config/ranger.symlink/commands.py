@@ -130,3 +130,22 @@ class compress(Command):
         return ['compress ' +
                 os.path.basename(self.fm.thisdir.path) +
                 ext for ext in extension]
+
+
+class mpv(Command):
+    def execute(self):
+        cwd = self.fm.thisdir
+        marked = cwd.get_selection()
+
+        if not marked:
+            marked = [self.fm.thisfile,]
+
+        directory = []
+        for f in marked:
+            directory.append('"' + f.path + '"')
+
+        files = ' '.join(directory)
+
+        mpvcmd = 'mpv '
+        mpvcmd = mpvcmd + files
+        self.fm.execute_command(mpvcmd)
