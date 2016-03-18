@@ -16,4 +16,7 @@ else
     echo "zsh is already the default shell"
 fi
 
+echo "Installing vim Plugins"
+$EDITOR -c PlugUpgrade -c PlugInstall -c PlugUpdate -c quitall
+
 echo "Done."
