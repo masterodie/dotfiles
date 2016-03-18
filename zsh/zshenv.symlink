@@ -1,0 +1,12 @@
+export PATH="$HOME/bin:$PATH"
+export ENV_NAME=".venv"
+export PAGER="vimpager"
+export EDITOR="nvim"
+export SUDO_EDITOR=$EDITOR
+export GIT_EDITOR=$EDITOR
+export BROWSER="firefox"
+if (set -u; : $DEFAULT_USER) 2> /dev/null
+then
+else
+        export DEFAULT_USER=$USER
+fi
