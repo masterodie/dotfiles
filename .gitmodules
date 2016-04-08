@@ -7,15 +7,6 @@
 [submodule "tmux/plugins/tpm"]
 	path = tmux/tmux.symlink/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
-[submodule "awesome/config/awesome.symlink/redshift"]
-	path = awesome/config/awesome.symlink/redshift
-	url = https://github.com/YoRyan/awesome-redshift
-[submodule "awesome/config/awesome.symlink/tyrannical"]
-	path = awesome/config/awesome.symlink/tyrannical
-	url = https://github.com/Elv13/tyrannical.git
-[submodule "awesome/config/awesome.symlink/vicious"]
-	path = awesome/config/awesome.symlink/vicious
-	url = http://git.sysphere.org/vicious
 [submodule "zsh/custom/plugins/zsh-syntax-highlighting"]
 	path = zsh/custom/plugins/zsh-syntax-highlighting
 	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
