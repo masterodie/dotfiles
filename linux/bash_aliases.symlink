@@ -1,6 +1,34 @@
-alias venv="source venv/bin/activate"
-alias ls='ls --color=auto'
+# File listing
+alias ls='ls --color=auto -F'
+alias ll='ls -l'
+alias la='ls -al'
+
+# Colors
 alias grep='grep --color=auto'
-alias muxs='mux start default'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias diff='colordiff'
+
+# Convinience
+alias mkdir='mkdir -p'
+alias rm='rm -I --preserve-root'
+alias mv='mv -i'
+alias cp='cp -i'
+alias ln='ln -i'
+
+# Editor
+alias vi='vim'
 alias e=$EDITOR
+
+# Pager
 alias less=$PAGER
+
+# Python
+alias venv="source venv/bin/activate"
+alias serve='python -m http.server'
+
+# TMUX
+alias muxs='mux start default'
+
+# Network
+alias ports='netstat -tulpna'

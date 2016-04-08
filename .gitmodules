@@ -10,3 +10,6 @@
 [submodule "zsh/custom/plugins/zsh-syntax-highlighting"]
 	path = zsh/custom/plugins/zsh-syntax-highlighting
 	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule "awesome/config/awesome.symlink"]
+	path = awesome/config/awesome.symlink
+	url = https://github.com/masterodie/awesome
