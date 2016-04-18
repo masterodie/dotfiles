@@ -32,3 +32,17 @@ alias muxs='mux start default'
 
 # Network
 alias ports='netstat -tulpna'
+
+# Web Development
+alias lamp='sudo systemctl start nginx php-fpm mysqld'
+alias slamp='sudo systemctl stop nginx php-fpm mysqld'
+alias rlamp='sudo systemctl restart nginx php-fpm mysqld'
+
+# Shortcuts
+alias cdV='cd ~/.vim'
+alias eV='$EDITOR ~/.vimrc'
+alias cdA='cd ~/.config/awesome'
+alias eA='$EDITOR ~/.config/awesome/rc.lua'
+alias cdD='cd ~/.dotfiles'
+alias eZ='$EDITOR ~/.zshrc'
+alias eZl='$EDITOR ~/.zshrc.local'

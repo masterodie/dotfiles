@@ -1,0 +1,25 @@
+[alias]
+  aa = add --all
+  ca = commit --amend
+  co = checkout
+  delete-branch = !sh -c 'git push origin :refs/heads/$1 && git branch -D $1' -
+  merge-branch = !git checkout master && git merge @{-1}
+  st = status
+
+[push]
+	default = matching
+
+[url "ssh://git@github.com/"]
+            pushInsteadOf = https://github.com/
+[url "git://github.com/"]
+            insteadOf = https://github.com/
+
+[core]
+  excludesfile = ~/.gitignore
+  autocrlf = input
+
+[include]
+  path = .gitconfig.local
+
+[commit]
+  template = ~/.gitmessage
