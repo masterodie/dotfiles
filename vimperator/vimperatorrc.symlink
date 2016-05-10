@@ -13,6 +13,7 @@ set maxitems=10
 set suggestengines=duckduckgo
 set defsearch=duckduckgo
 set tabnumbers
+set complete=slb
 source! /home/odie/.vimperatorrc.local
 
 " vim: set ft=vimperator:
