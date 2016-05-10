@@ -1,6 +1,6 @@
 # Unicode
-setw -g utf8 on
-set -g status-utf8 on
+#setw -g utf8 on
+#set -g status-utf8 on
 # prefix like screen
 unbind C-b
 set -g prefix ^A

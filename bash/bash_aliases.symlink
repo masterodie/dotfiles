@@ -1,5 +1,5 @@
 # File listing
-alias ls='ls --color=auto -F'
+alias ls='ls -F'
 alias ll='ls -l'
 alias la='ls -al'
 
@@ -11,14 +11,15 @@ alias diff='colordiff'
 
 # Convinience
 alias mkdir='mkdir -p'
-alias rm='rm -I --preserve-root'
+alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
 alias ln='ln -i'
 
 # Editor
+alias vim='$EDITOR'
 alias vi='vim'
-alias e=$EDITOR
+alias e=vim
 
 # Pager
 alias less=$PAGER
