@@ -47,3 +47,5 @@ alias eA='$EDITOR ~/.config/awesome/rc.lua'
 alias cdD='cd ~/.dotfiles'
 alias eZ='$EDITOR ~/.zshrc'
 alias eZl='$EDITOR ~/.zshrc.local'
+
+. ~/.bash_aliases.local

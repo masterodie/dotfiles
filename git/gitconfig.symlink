@@ -15,7 +15,7 @@
             insteadOf = https://github.com/
 
 [core]
-  excludesfile = ~/.gitignore
+	excludesfile = /Users/odie/.gitignore
   autocrlf = input
 
 [include]
@@ -23,3 +23,9 @@
 
 [commit]
   template = ~/.gitmessage
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
