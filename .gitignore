@@ -13,3 +13,5 @@ ranger/**/tagged
 
 vimperator/vimperator.symlink/info/*
 vimperator/vimperator.symlink/info
+
+virtualenvwrapper/virtualenvs.symlink/*/*
