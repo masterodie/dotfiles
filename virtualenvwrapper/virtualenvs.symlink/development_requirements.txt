@@ -9,3 +9,4 @@ flake8-deprecated
 neovim
 nosy
 rednose
+ropevim
