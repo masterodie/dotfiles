@@ -15,6 +15,7 @@ then
         echo "Configuring zsh as default shell"
         chsh -s $(which zsh)
     else
+        echo "zsh not found using default"
     fi
 else
     echo "zsh is already the default shell"
