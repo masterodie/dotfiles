@@ -1,7 +1,12 @@
 export PATH="$HOME/bin:$PATH"
 export ENV_NAME=".venv"
 export PAGER="vimpager"
-export EDITOR="nvim"
+if [ -b `which nvim` ]
+then
+	export EDITOR="nvim"
+else
+	export EDITOR="vim"
+fi
 export SUDO_EDITOR=$EDITOR
 export GIT_EDITOR=$EDITOR
 export BROWSER="firefox"
