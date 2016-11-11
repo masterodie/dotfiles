@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "Installing dotfiles"
+git pull
 
 echo "Initializing submodule(s)"
 git submodule update --init --recursive
