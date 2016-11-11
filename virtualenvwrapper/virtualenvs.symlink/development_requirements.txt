@@ -1,11 +1,6 @@
 ipython
-nose
 coverage
-sphinx
 pep8
 flake8
-flake8-pep257
 flake8-deprecated
 neovim
-nosy
-rednose
