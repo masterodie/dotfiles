@@ -1,7 +1,7 @@
 export PATH="$HOME/bin:$PATH"
 export ENV_NAME=".venv"
 export PAGER="vimpager"
-if [ -b `which nvim` ]
+if [ -b /usr/bin/nvim ]
 then
 	export EDITOR="nvim"
 else
