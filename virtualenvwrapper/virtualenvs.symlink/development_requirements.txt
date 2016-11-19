@@ -1,4 +1,5 @@
 ipython
+idbg
 coverage
 pep8
 flake8
