@@ -15,3 +15,7 @@ then
 else
         export DEFAULT_USER=$USER
 fi
+
+
+source ~/.bash_aliases
+source ~/.bash_aliases.local

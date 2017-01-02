@@ -23,6 +23,7 @@ alias e=vim
 
 # Pager
 alias less=$PAGER
+alias zless=$PAGER
 
 # Python
 alias venv="source venv/bin/activate"
@@ -47,5 +48,3 @@ alias eA='$EDITOR ~/.config/awesome/rc.lua'
 alias cdD='cd ~/.dotfiles'
 alias eZ='$EDITOR ~/.zshrc'
 alias eZl='$EDITOR ~/.zshrc.local'
-
-. ~/.bash_aliases.local

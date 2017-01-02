@@ -1,4 +1,5 @@
 # Configuration file for ipython.
+import sys
 
 #------------------------------------------------------------------------------
 # InteractiveShellApp(Configurable) configuration
@@ -162,7 +163,7 @@ c.TerminalIPythonApp.display_banner = True
 
 ## The part of the banner to be printed before the profile
 #c.InteractiveShell.banner1 = 'Python 3.5.2 (default, Jun 28 2016, 08:45:52) \nType "copyright", "credits" or "license" for more information.\n\nIPython 5.1.0 -- An enhanced Interactive Python.\n?         -> Introduction and overview of IPython\'s features.\n%quickref -> Quick reference.\nhelp      -> Python\'s own help system.\nobject?   -> Details about \'object\', use \'object??\' for extra details.\n'
-c.InteractiveShell.banner1 = 'Python 3.5.2 (default, Jun 28 2016, 08:45:52)\n'
+c.InteractiveShell.banner1 = 'IPython on {version}\n'.format(version=sys.version)
 
 ## The part of the banner to be printed after the profile
 #c.InteractiveShell.banner2 = ''

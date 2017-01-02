@@ -95,6 +95,7 @@ bindkey "\e[3~" delete-char # Del
 
 ###Load bash aliases
 [ -e ~/.bash_aliases ]  && source ~/.bash_aliases
+[ -e ~/.bash_aliases.local ]  && source ~/.bash_aliases.local
 
 function precmd()
 {

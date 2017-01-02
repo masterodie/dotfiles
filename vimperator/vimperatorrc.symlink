@@ -1,19 +1,46 @@
 "3.10.1 (created: 2015/08/25 00:41:59)
 
+"" Settings
+
 colorscheme molokai
-nmap s :open<Space>duckduckgo<Space>
-nmap S :tabopen<Space>duckduckgo<Space>
+
+set editor='urxvt -e nvim'
+set maxitems=10
+set suggestengines=duckduckgo,google
+set defsearch=duckduckgo
+set tabnumbers
+set complete=slb
+
+""Commands
+
+command! -nargs=+ -description='Search with duckduckgo' search open duckduckgo <args>
+command! -nargs=+ -description='Search with duckduckgo in a new tab' tabsearch tabopen duckduckgo <args>
+
+command! -nargs=0 -description="Add current page to Instapaper read later list" readlater open javascript:function%20iprl5(){var%20d=document,z=d.createElement('scr'+'ipt'),b=d.body,l=d.location;try{if(!b)throw(0);d.title='(Saving...)%20'+d.title;z.setAttribute('src',l.protocol+'//www.instapaper.com/j/uYPNi2mDxCEs?a=read-later&u='+encodeURIComponent(l.href)+'&t='+(new%20Date().getTime()));b.appendChild(z);}catch(e){alert('Please%20wait%20until%20the%20page%20has%20loaded.');}}iprl5();void(0)
+command! -nargs=0 -description="Read the current page now, rendered with Instapaper" readnow open javascript:function%20iptxt(){var%20d=document;try{if(!d.body)throw(0);window.location='http://www.instapaper.com/text?u='+encodeURIComponent(d.location.href);}catch(e){alert('Please%20wait%20until%20the%20page%20has%20loaded.');}}iptxt();void(0)
+
+
+"" Keybindings
+
+let mapleader=','
+
+nmap s :search<Space>
+nmap S :tabsearch<Space>
+
+nmap <Leader>rl :readlater<CR>
+nmap <Leader>rn :readnow<CR>
+nnoremap gr :readnow<CR>
+
 nnoremap h 5h
 nnoremap j 5j
 nnoremap l 5l
 nnoremap k 5k
+nnoremap J gT
+nnoremap K gt
+
 cmap <C-j> <Tab>
 cmap <C-k> <S-Tab>
-set maxitems=10
-set suggestengines=duckduckgo
-set defsearch=duckduckgo
-set tabnumbers
-set complete=slb
+
 source! /home/odie/.vimperatorrc.local
 
 " vim: set ft=vimperator:

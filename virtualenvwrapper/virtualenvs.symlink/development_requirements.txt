@@ -1,8 +1,12 @@
 ipython
-idbg
+ipdb
 coverage
 pep8
 flake8
+flake8-pep257
+flake8-quotes
+flake8-docstrings
+flake8-todo
 flake8-deprecated
-neovim
-ropevim
+flake8-future
+pytest

@@ -1,5 +1,5 @@
 # This tmux statusbar config was created by tmuxline.vim
-# on Di, 10 Mai 2016
+# on Sa, 19 Nov 2016
 
 set -g status-bg "colour67"
 set -g message-command-fg "colour253"
@@ -13,7 +13,6 @@ set -g status-right-attr "none"
 set -g message-fg "colour253"
 set -g message-command-bg "colour16"
 set -g status-attr "none"
-set -g status-utf8 "on"
 set -g pane-border-fg "colour16"
 set -g status-left-attr "none"
 setw -g window-status-fg "colour253"
