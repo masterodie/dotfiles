@@ -77,7 +77,7 @@ URxvt*scrollTtyOutput:      	false
 !urxvt*cursorColor:		#999999
 !urxvt*highlightColor:		#999999
 URxvt.urgentOnBell: 		True
-URxvt.perl-ext-common:  default,url-select,clipboard,keyboard-select,osx-xterm-clipboard
+URxvt.perl-ext-common:  default,url-select,clipboard,keyboard-select
 URxvt*url-select.launcher:              /usr/bin/firefox
 URxvt*url-select.underline:              true
 URxvt.matcher.button:   1
