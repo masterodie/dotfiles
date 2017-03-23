@@ -47,9 +47,9 @@ function _directory() {
 }
 
 function _end() {
-  symbol="▸"
-  end="%(0?.%{$fg[green]%}.%{$fg[red]%})%{$symbol%}%{$reset_color%}"
-  echo -n " $end "
+  symbol=" ▸ "
+  end="%(0?.%{$fg[green]%}.%{$fg[red]%})%{$symbol%3G%}%{$reset_color%}"
+  echo -n "$end"
 }
 
 function _build_prompt() {
