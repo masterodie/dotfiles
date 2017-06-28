@@ -8,5 +8,4 @@ flake8-quotes
 flake8-docstrings
 flake8-todo
 flake8-deprecated
-flake8-future
 pytest
