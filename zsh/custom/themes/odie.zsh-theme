@@ -13,6 +13,8 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%} ✭%{$reset_color%}"
 ZSH_THEME_VIRTUALENV_PREFIX="%{$fg[yellow]%} ["
 ZSH_THEME_VIRTUALENV_SUFFIX="]%{$reset_color%}"
 
+SEPARATOR='::'
+USER=
 
 function _separator() {
   echo -n "::"

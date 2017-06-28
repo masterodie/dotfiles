@@ -4,11 +4,10 @@
 
 colorscheme molokai
 
-set editor='urxvt -e nvim'
+set editor='urxvt -e "nvim"'
 set maxitems=10
 set suggestengines=duckduckgo,google
 set defsearch=duckduckgo
-set tabnumbers
 set complete=slb
 
 ""Commands
