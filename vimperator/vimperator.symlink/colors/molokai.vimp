@@ -3,7 +3,7 @@
 " See also term colors: https://github.com/vehk/dotfiles/blob/master/colors/molokai
 " ~ Wolfgang Mueller
 hi Normal               background: #121112; color:#D0CFD0;
-hi CmdLine              background: #121112; color:#D0CFD0;
+hi CmdLine              background: #121112; color:#D0CFD0; font-size:12px;
 hi CompGroup            background: #121112; color:#D0CFD0;
 hi CompTitle            background: #1c1b1c; font-weight: bold;
 hi CompTitle>*          color: #D0CFD0; padding: 1px 0.5ex;
