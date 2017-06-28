@@ -1,4 +1,4 @@
-! Font rendering 
+! Font rendering
 Xft.dpi:        96
 Xft.autohint: 0
 Xft.lcdfilter:  lcddefault
@@ -155,7 +155,7 @@ xscreensaver.Dialog.background:         #3f3f3f
 xscreensaver.Dialog.topShadowColor:     #111111
 xscreensaver.Dialog.bottomShadowColor:  #111111
 xscreensaver.Dialog.Button.foreground:  #dcdccc
-xscreensaver.Dialog.Button.background:  #4f4f4f
+xscreensaver.Dialog.Button.background:  #444444
 !!username/password input box and date text colour
 xscreensaver.Dialog.text.foreground:    #dcdccc
 xscreensaver.Dialog.text.background:    #333333

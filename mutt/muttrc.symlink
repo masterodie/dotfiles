@@ -1,3 +1,4 @@
-mailboxes ! +linux-suse +linux-debian +freebsd +osx
-
-source ~/.mutt/themes/solarized
+set mbox_type=Maildir
+set folder=$HOME/Maildir
+set spoolfile=+/
+set header_cache=~/.cache/mutt
