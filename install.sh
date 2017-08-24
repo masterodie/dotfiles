@@ -6,6 +6,7 @@ git pull
 echo "Initializing submodule(s)"
 git submodule update --init --recursive
 
+mkdir $HOME/.config
 source _install/link.sh
 source _install/copy.sh
 
