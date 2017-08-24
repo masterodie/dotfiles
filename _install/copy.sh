@@ -3,7 +3,7 @@
 DOTFILES=$HOME/.dotfiles
 
 echo "copying files"
-linkables=$( find -H "$DOTFILES" -maxdepth 3 -name '*.copy' )
+linkables=$( find -H "$DOTFILES" -maxdepth 4 -name '*.copy' )
 for file in $linkables ; do
     target="$HOME/.$( basename $file ".copy" )"
     if [ -f $target ]
