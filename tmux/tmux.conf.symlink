@@ -43,7 +43,6 @@ set -s escape-time 0
 
 bind-key b set-option status
 
-
 ##CLIPBOARD selection integration
 ##Requires prefix key before the command key
 #Copy tmux paste buffer to CLIPBOARD
@@ -56,8 +55,6 @@ source-file ~/.tmux/tmux.theme
 
 set -g set-titles on
 set -g set-titles-string "tmux - #S"
-
-
 
 # List of plugins
 # Supports `github_username/repo` or full git repo URLs

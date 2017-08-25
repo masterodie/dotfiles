@@ -13,6 +13,8 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%} ✭%{$reset_color%}"
 ZSH_THEME_VIRTUALENV_PREFIX="%{$fg[yellow]%} ["
 ZSH_THEME_VIRTUALENV_SUFFIX="]%{$reset_color%}"
 
+SEPARATOR='::'
+USER=
 
 function _separator() {
   echo -n "::"
@@ -26,6 +28,9 @@ function _user() {
     else
       name="%{$fg[green]%}%n%{$reset_color%}"
     fi
+  fi
+  if [[ $UID == 0 ]]; then
+    name="%{$fg[red]%}%n%{$reset_color%}"
   fi
   if [[ -n $name ]]; then
     echo -n "$name$(_separator)"
@@ -47,9 +52,9 @@ function _directory() {
 }
 
 function _end() {
-  symbol=" ▸ "
-  end="%(0?.%{$fg[green]%}.%{$fg[red]%})%{$symbol%3G%}%{$reset_color%}"
-  echo -n "$end"
+  symbol="▸"
+  end="%(0?.%{$fg[green]%}.%{$fg[red]%})$symbol%{$reset_color%}"
+  echo -n " $end "
 }
 
 function _build_prompt() {
@@ -61,19 +66,19 @@ function _build_prompt() {
 }
 
 function _git_branch() {
-  echo -n "$(git_prompt_info)"
+  echo -n '$(git_prompt_info)'
 }
 
 function _git_status() {
-  echo -n "$(git_prompt_status) "
+  echo -n '$(git_prompt_status) '
 }
 
 function _virtualenv() {
-  echo -n "$(virtualenv_prompt_info)"
+  echo -n '$(virtualenv_prompt_info)'
 }
 
 function _mode() {
-  echo -n "$(vi_mode_prompt_info)"
+  echo -n '$(vi_mode_prompt_info)'
 }
 
 function _build_rprompt() {
