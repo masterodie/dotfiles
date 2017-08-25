@@ -2,8 +2,9 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 
 
-if filereadable($HOME . "/.vimrc.local")
-    exec "source $HOME/.vimrc.local"
+let globalLocalSettingsFile = "$HOME/.vimrc.local"
+if filereadable(globalLocalSettingsFile)
+    exec "source globalLocalSettingsFile"
 endif
 
 source ~/.vimrc
