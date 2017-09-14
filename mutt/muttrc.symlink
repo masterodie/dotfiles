@@ -1,7 +1,4 @@
-#set mbox_type=Maildir
-#set folder=$HOME/Maildir
-#set spoolfile=+/
-#set header_cache=~/.cache/mutt
-macro index A \
-    "<tag-pattern>~N<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" \
-        "mark all new as read"
+set mbox_type=Maildir
+set folder=$HOME/Maildir
+set spoolfile=+/
+set header_cache=~/.cache/mutt
