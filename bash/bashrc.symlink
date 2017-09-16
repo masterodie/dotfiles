@@ -7,7 +7,7 @@
 
 # Normal Colors
 Black="\[$(tput setaf 0)\]"        # Black
-Red="$(tput setaf 1)\]"          # Red
+Red="\[$(tput setaf 1)\]"          # Red
 Green="\[$(tput setaf 2)\]"        # Green
 Yellow="\[$(tput setaf 3)\]"       # Yellow
 Blue="\[$(tput setaf 4)\]"         # Blue
