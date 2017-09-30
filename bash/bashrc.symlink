@@ -37,13 +37,13 @@ NC=$Reset               # Color Reset
 function prompt_username {
     # Test user type:
     if [[ "${USER}" == "root" ]]; then
+        DEFAULT_USER="unknown"
         SU=${Red}           # User is root.
-        DEFAULT_USER=""
     elif [[ "$[UID]" == "0" ]]; then
-        DEFAULT_USER=""
+        DEFAULT_USER="unknown"
         SU=${Red}           # User is root.
-    #elif [[ ${USER} != $(logname) ]]; then
-        #SU=${BRed}          # User is not login user.
+    elif [[ ${USER} != $(logname) ]]; then
+        SU=${BRed}          # User is not login user.
     else
         SU=${Green}         # User is normal (well ... most of us are).
     fi
