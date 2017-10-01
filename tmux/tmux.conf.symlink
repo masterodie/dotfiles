@@ -25,7 +25,7 @@ bind-key k select-pane -U
 bind-key l select-pane -R
 
 # Look good
-set -g default-terminal "screen-256color"
+#set -g default-terminal "screen-256color"
 #set -g terminal-overrides 'xterm:colors=88'
 #set-option -ga terminal-override ',rxvt-uni*:XT:Ms=\E]52;%p1%s;%p2%s\007'
 # Enable mouse support (works in iTerm)
@@ -43,7 +43,6 @@ set -s escape-time 0
 
 bind-key b set-option status
 
-
 ##CLIPBOARD selection integration
 ##Requires prefix key before the command key
 #Copy tmux paste buffer to CLIPBOARD
@@ -56,8 +55,6 @@ source-file ~/.tmux/tmux.theme
 
 set -g set-titles on
 set -g set-titles-string "tmux - #S"
-
-
 
 # List of plugins
 # Supports `github_username/repo` or full git repo URLs
