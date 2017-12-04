@@ -99,6 +99,6 @@ bindkey "\e[3~" delete-char # Del
 
 function precmd()
 {
-    echo -ne '\a'
+    #echo -ne '\a'
 }
 export DISABLE_AUTO_TITLE=true

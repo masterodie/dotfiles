@@ -23,3 +23,6 @@
 
 [commit]
 	template = ~/.gitmessage
+[user]
+	email = odie86@gmail.com
+	name = Patrick Neff
