@@ -14,8 +14,9 @@ for file in $linkables ; do
     if [ -L $target ]
     then
         echo "'$target' exists"
+        ln -sff $file $target &> /dev/null
     else
         echo "creating symlink for '$file' at '$target'"
-        ln -sf $file $target &> /dev/null
+        ln -s $file $target &> /dev/null
     fi
 done
