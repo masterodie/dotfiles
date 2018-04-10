@@ -41,6 +41,9 @@ function _host() {
   if [[ -n $SSH_CONNECTION ]]; then
     hostname="%{$fg[cyan]%}%m%{$reset_color%}"
   fi
+  if [[ -n $container ]]; then
+    hostname="%{$fg[cyan]%}%m%{$reset_color%}"
+  fi
   if [[ -n $hostname ]]; then
     echo -n "$hostname$(_separator)"
   fi
