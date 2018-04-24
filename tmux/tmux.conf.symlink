@@ -25,7 +25,7 @@ bind-key k select-pane -U
 bind-key l select-pane -R
 
 # Look good
-#set -g default-terminal "screen-256color"
+set -g default-terminal "screen-256color"
 #set -g terminal-overrides 'xterm:colors=88'
 #set-option -ga terminal-override ',rxvt-uni*:XT:Ms=\E]52;%p1%s;%p2%s\007'
 # Enable mouse support (works in iTerm)
