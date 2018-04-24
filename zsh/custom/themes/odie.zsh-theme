@@ -80,11 +80,17 @@ function _git_status() {
 }
 
 function _virtualenv() {
-  echo -n '$(virtualenv_prompt_info)'
+if type "virtualenv_prompt_info" > /dev/null
+then
+    echo -n '$(virtualenv_prompt_info)'
+fi
 }
 
 function _nodeenv() {
-  echo -n '$(nodeenv_prompt_info)'
+if type "nodeenv_prompt_info" > /dev/null
+then
+    echo -n '$(nodeenv_prompt_info)'
+fi
 }
 
 function _mode() {
