@@ -42,7 +42,7 @@ function prompt_username {
     elif [[ "$[UID]" == "0" ]]; then
         DEFAULT_USER="unknown"
         SU=${Red}           # User is root.
-    elif [[ ${USER} != $(logname) ]]; then
+    elif [[ ${USER} != $(whoami) ]]; then
         SU=${BRed}          # User is not login user.
     else
         SU=${Green}         # User is normal (well ... most of us are).
@@ -68,3 +68,4 @@ function prompt_end {
 
 # PS1='[\u@\h \W]\$ '
 PS1="$(prompt_username)$(prompt_hostname)$(prompt_directory)$(prompt_end)"
+

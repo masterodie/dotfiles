@@ -15,3 +15,11 @@ vimperator/vimperator.symlink/info/*
 vimperator/vimperator.symlink/info
 
 virtualenvwrapper/virtualenvs.symlink/*/*
+
+ipython/ipython.symlink/*/*.sqlite
+ipython/ipython.symlink/*/db
+ipython/ipython.symlink/*/log
+ipython/ipython.symlink/*/pid
+
+pentadactyl/*
+vimperator/*
