@@ -13,3 +13,6 @@
 [submodule "nodeenvwrapper/nodeenvwrapper"]
 	path = nodeenvwrapper/nodeenvwrapper
 	url = https://github.com/aubricus/nodeenvwrapper
+[submodule "ranger/ranger_devicons"]
+	path = ranger/ranger_devicons
+	url = https://github.com/tonietto/ranger_devicons
