@@ -27,3 +27,7 @@ fi
 export WORKON_HOME=${HOME}/.virtualenvs
 
 source ~/.zshenv.local
+
+if which ruby >/dev/null && which gem >/dev/null; then
+    PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+fi

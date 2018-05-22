@@ -23,3 +23,7 @@ ipython/ipython.symlink/*/pid
 
 pentadactyl/*
 vimperator/*
+
+
+__pycache__/*
+*.pyc
