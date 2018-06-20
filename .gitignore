@@ -24,6 +24,7 @@ ipython/ipython.symlink/*/pid
 pentadactyl/*
 vimperator/*
 
+vscode/settings/Code.symlink/User/workspaceStorage/*
 
 __pycache__/*
 *.pyc
