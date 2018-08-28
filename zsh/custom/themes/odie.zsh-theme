@@ -41,10 +41,17 @@ function _user() {
 }
 
 function _host() {
+  show_hostname=1
+  if [ "$(ls -id /)" != "2" ]; then
+    show_hostname=0
+  fi
   if [[ -n $SSH_CONNECTION ]]; then
-    hostname="%{$fg[cyan]%}%m%{$reset_color%}"
+    show_hostname=0
   fi
   if [[ -n $container ]]; then
+    show_hostname=0
+  fi
+  if [[ $show_hostname == "0" ]]; then
     hostname="%{$fg[cyan]%}%m%{$reset_color%}"
   fi
   if [[ -n $hostname ]]; then
