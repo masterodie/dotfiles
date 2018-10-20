@@ -28,3 +28,6 @@ vscode/settings/Code.symlink/User/workspaceStorage/*
 
 __pycache__/*
 *.pyc
+
+fish/config/fish.symlink/fishd.*
+fish/config/omf.symlink/themes

@@ -1,3 +1,10 @@
-theme /usr/home/odie/.config/omf/themes/odie
+package composer
+package config
+package foreign-env
+package fzf
+package node
+package nvm
+package tmux-zen
 theme default
+theme git://github.com/masterodie/fish-theme-odie.git
 theme mars
