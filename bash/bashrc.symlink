@@ -69,3 +69,5 @@ function prompt_end {
 # PS1='[\u@\h \W]\$ '
 PS1="$(prompt_username)$(prompt_hostname)$(prompt_directory)$(prompt_end)"
 
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

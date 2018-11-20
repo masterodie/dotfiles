@@ -1,10 +1,9 @@
 {
-    "editor.fontFamily": "SauceCodePro NF",
+    "editor.fontFamily": "Source Code Pro",
     "editor.fontSize": 13,
     "editor.formatOnType": true,
     "editor.minimap.enabled": false,
     "editor.renderWhitespace": "all",
-    "editor.wordWrap": "wordWrapColumn",
     "editor.wordWrapColumn": 79,
     "explorer.confirmDelete": false,
     "explorer.openEditors.visible": 0,
@@ -34,7 +33,7 @@
     "vim.enableNeovim": true,
     "vim.hlsearch": true,
     "vim.leader": ",",
-    "vim.neovimPath": "C:\\Tools\\neovim\\Neovim\\bin\\nvim.exe",
+    "vim.neovimPath": "/usr/bin/nvim",
     "vim.normalModeKeyBindingsNonRecursive": [
         {
             "before": [";"],
@@ -64,5 +63,9 @@
     "workbench.iconTheme": "vscode-icons",
     "workbench.startupEditor": "none",
     "editor.renderIndentGuides": false,
-    "workbench.colorTheme": "Dark (Molokai)"
+    "workbench.colorTheme": "Monokai",
+    "window.titleBarStyle": "custom",
+    "extensions.ignoreRecommendations": false,
+    "terminal.external.linuxExec": "termite",
+    "terminal.integrated.shell.linux": "/home/odie/bin/vscode-terminal"
 }

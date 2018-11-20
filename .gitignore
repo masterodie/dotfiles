@@ -25,6 +25,21 @@ pentadactyl/*
 vimperator/*
 
 vscode/settings/Code.symlink/User/workspaceStorage/*
+vscode/config/Code.symlink/Backups/
+vscode/config/Code.symlink/Cache/
+vscode/config/Code.symlink/CachedData/
+vscode/config/Code.symlink/CachedExtensions/
+vscode/config/Code.symlink/Cookies
+vscode/config/Code.symlink/Cookies-journal
+vscode/config/Code.symlink/GPUCache/
+vscode/config/Code.symlink/Local Storage/
+vscode/config/Code.symlink/Preferences
+vscode/config/Code.symlink/User/workspaceStorage/
+vscode/config/Code.symlink/languagepacks.json
+vscode/config/Code.symlink/logs/
+vscode/config/Code.symlink/machineid
+vscode/config/Code.symlink/storage.json
+
 
 __pycache__/*
 *.pyc

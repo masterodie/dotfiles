@@ -16,3 +16,6 @@
 [submodule "ranger/ranger_devicons"]
 	path = ranger/ranger_devicons
 	url = https://github.com/tonietto/ranger_devicons
+[submodule "zsh/antigen"]
+	path = zsh/antigen
+	url = https://github.com/zsh-users/antigen
