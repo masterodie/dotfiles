@@ -30,7 +30,7 @@ if (( $+commands[tmux] )); then
 fi
 
 if [ -f ${DOTFILE_LOCATION}/fzf/fzf.zsh ]; then
-    source ${DOTFILE_LOCATION}/fzf/.fzf.zsh
+    source ${DOTFILE_LOCATION}/fzf/fzf.zsh
     export FZF_BASE=${DOTFILE_LOCATION}/fzf
     antigen bundle fzf
 fi
