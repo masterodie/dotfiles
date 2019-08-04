@@ -9,23 +9,24 @@ antigen bundle emoji
 antigen bundle vi-mode
 
 if (( $+commands[http] )); then
-antigen bundle httpie
+    antigen bundle httpie
 fi
 
 if (( $+commands[git] )); then
-antigen bundle git
-antigen bundle gitignore
+    antigen bundle git
+    antigen bundle gitignore
 fi
 
 if (( $+commands[node] )); then
-antigen bundle node
+    antigen bundle node
 fi
 
 if (( $+commands[npm] )); then
-antigen bundle npm
+    antigen bundle npm
+fi
 
 if (( $+commands[tmux] )); then
-antigen bundle tmux
+    antigen bundle tmux
 fi
 
 if [ -f ${DOTFILE_LOCATION}/fzf/fzf.zsh ]; then
@@ -35,13 +36,15 @@ if [ -f ${DOTFILE_LOCATION}/fzf/fzf.zsh ]; then
 fi
 
 if (( $+commands[pip] )); then
-antigen bundle pip
+    antigen bundle pip
 fi
+
 if (( $+commands[venv] )); then
-antigen bundle virtualenv
+    antigen bundle virtualenv
 fi
+
 if (( $+commands[virtualenvwrapper] )); then
-antigen bundle virtualenvwrapper
+    antigen bundle virtualenvwrapper
 fi
 
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -49,5 +52,4 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen theme masterodie/zsh-theme-odie odie
 
 antigen apply
-
 
