@@ -4,15 +4,29 @@ source ${DOTFILE_LOCATION}/zsh/antigen/antigen.zsh
 
 antigen use oh-my-zsh
 
-antigen bundle git
-antigen bundle httpie
-antigen bundle node
-antigen bundle npm
 antigen bundle command-not-found
-antigen bundle gitignore
 antigen bundle emoji
 antigen bundle vi-mode
+
+if (( $+commands[http] )); then
+antigen bundle httpie
+fi
+
+if (( $+commands[git] )); then
+antigen bundle git
+antigen bundle gitignore
+fi
+
+if (( $+commands[node] )); then
+antigen bundle node
+fi
+
+if (( $+commands[npm] )); then
+antigen bundle npm
+
+if (( $+commands[tmux] )); then
 antigen bundle tmux
+fi
 
 if [ -f ${DOTFILE_LOCATION}/fzf/fzf.zsh ]; then
     source ${DOTFILE_LOCATION}/fzf/.fzf.zsh
