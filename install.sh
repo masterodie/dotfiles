@@ -26,7 +26,7 @@ else
 fi
 
 echo "Installing FZF"
-bash ${PWD}/fzf/install.sh
+bash ${PWD}/fzf/install --key-bindings --completion --no-update-rc --no-fish
 
 echo "Installing vim Plugins"
 vim -c PlugUpgrade -c PlugInstall -c PlugUpdate -c quitall
