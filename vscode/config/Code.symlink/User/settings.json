@@ -66,6 +66,5 @@
     "workbench.colorTheme": "Monokai",
     "window.titleBarStyle": "custom",
     "extensions.ignoreRecommendations": false,
-    "terminal.external.linuxExec": "termite",
-    "terminal.integrated.shell.linux": "/home/odie/bin/vscode-terminal"
+    "terminal.external.linuxExec": "termite"
 }

@@ -45,8 +45,13 @@ Xcursor.theme: Neutral
 
 URxvt*geometry:         	80x24
 URxvt*depth:			32
-URxvt*font:              -*-terminesspowerline-medium-r-*-*-14-*-*-*-*-*-*-*
-URxvt*boldFont:              -*-terminesspowerline-bold-r-*-*-14-*-*-*-*-*-*-*
+!URxvt*font:              -*-terminesspowerline-medium-r-*-*-14-*-*-*-*-*-*-*
+!URxvt*boldFont:              -*-terminesspowerline-bold-r-*-*-14-*-*-*-*-*-*-*
+!URxvt.font: -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso8859-1
+!URxvt.boldFont: -misc-fixed-bold-r-normal--15-140-75-75-c-90-iso8859-1
+URxvt.font: xft:Source Code Pro:size=10
+URxvt.boldFont: xft:Source Code Pro:bold:size=10
+!URxvt.letterSpace: -6
 URxvt*scrollBar:		false
 URxvt*saveLines:		5500
 URxvt.scrollTtyBuffer:		false

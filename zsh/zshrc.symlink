@@ -15,6 +15,7 @@ antigen bundle emoji
 antigen bundle vi-mode
 antigen bundle tmux
 antigen bundle fzf
+antigen bundle dotenv
 
 antigen bundle zsh-users/zsh-syntax-highlighting
 
