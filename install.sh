@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+DIR=$(pwd)
+
 echo "Installing dotfiles"
 git pull
 
@@ -23,8 +25,12 @@ else
     echo "zsh is already the default shell"
 fi
 
+echo "Installing FZF"
+bash ${PWD}/fzf/install --key-bindings --completion --no-update-rc --no-fish
+
 echo "Installing vim Plugins"
 vim -c PlugUpgrade -c PlugInstall -c PlugUpdate -c quitall
+
 
 echo "Done."
 exit 0

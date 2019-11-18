@@ -1,21 +1,50 @@
-source ${HOME}/.dotfiles/zsh/antigen/antigen.zsh
+export DOTFILE_LOCATION=${HOME}/.dotfiles
+
+source ${DOTFILE_LOCATION}/zsh/antigen/antigen.zsh
 
 antigen use oh-my-zsh
 
-antigen bundle git
-antigen bundle pip
-antigen bundle virtualenv
-antigen bundle virtualenvwrapper
-antigen bundle httpie
-antigen bundle node
-antigen bundle npm
 antigen bundle command-not-found
-antigen bundle gitignore
+antigen bundle git
 antigen bundle emoji
 antigen bundle vi-mode
-antigen bundle tmux
-antigen bundle fzf
-antigen bundle dotenv
+
+if (( $+commands[http] )); then
+    antigen bundle httpie
+fi
+
+if (( $+commands[git] )); then
+    antigen bundle gitignore
+fi
+
+if (( $+commands[node] )); then
+    antigen bundle node
+fi
+
+if (( $+commands[npm] )); then
+    antigen bundle npm
+fi
+
+if (( $+commands[tmux] )); then
+    antigen bundle tmux
+fi
+
+if [ -d ${DOTFILE_LOCATION}/fzf ]; then
+    export FZF_BASE=${DOTFILE_LOCATION}/fzf
+    antigen bundle fzf
+fi
+
+if (( $+commands[pip] )); then
+    antigen bundle pip
+fi
+
+if (( $+commands[venv] )); then
+    antigen bundle virtualenv
+fi
+
+if (( $+commands[virtualenvwrapper] )); then
+    antigen bundle virtualenvwrapper
+fi
 
 antigen bundle zsh-users/zsh-syntax-highlighting
 
@@ -23,4 +52,3 @@ antigen theme masterodie/zsh-theme-odie odie
 
 antigen apply
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

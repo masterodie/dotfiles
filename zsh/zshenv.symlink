@@ -1,6 +1,5 @@
 export PATH="$HOME/bin:$HOME/.gem/ruby/2.4/bin:$PATH"
 export ENV_NAME=".venv"
-#export PAGER="vimpager"
 if [ -x /usr/bin/nvim ]
 then
 	export EDITOR="nvim"
