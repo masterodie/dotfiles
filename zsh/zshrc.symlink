@@ -11,7 +11,6 @@ antigen bundle vi-mode
 antigen bundle tmux
 antigen bundle pip
 antigen bundle virtualenv
-antigen bundle virtualenvwrapper
 antigen bundle direnv
 antigen bundle nvm
 antigen bundle zsh-users/zsh-syntax-highlighting
