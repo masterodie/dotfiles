@@ -28,4 +28,4 @@ source ~/.zshenv.local
 
 export VISUAL=$EDITOR
 export PIPENV_VENV_IN_PROJECT=1
-export PATH="$HOME/.emacs.d/bin:$HOME/.local/bin:$PATH"
+export PATH="$HOME/.dotfiles/emacs/doom-emacs/bin:$HOME/.local/bin:$PATH"

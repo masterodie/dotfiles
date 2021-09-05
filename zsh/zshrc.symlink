@@ -12,13 +12,7 @@ antigen bundle tmux
 antigen bundle pip
 antigen bundle virtualenv
 antigen bundle direnv
-antigen bundle nvm
 antigen bundle zsh-users/zsh-syntax-highlighting
-
-if [ -d ${DOTFILE_LOCATION}/fzf ]; then
-    export FZF_BASE=${DOTFILE_LOCATION}/fzf
-    antigen bundle fzf
-fi
 
 # Fish-like auto suggestions
 antigen bundle zsh-users/zsh-autosuggestions
@@ -27,6 +21,11 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 
 antigen theme masterodie/zsh-theme-odie odie
+
+if [ -d ${DOTFILE_LOCATION}/fzf ]; then
+    export FZF_BASE=${DOTFILE_LOCATION}/fzf
+    antigen bundle fzf
+fi
 
 source ~/.zshrc.local
 

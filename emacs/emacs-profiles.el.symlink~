@@ -1,0 +1,2 @@
+("default" . ((user-emacs-directory . "~/.dotfiles/emacs/doom-emacs")
+           (env . (("DOOMDIR" . "~/.dotfiles/emacs/doom.d.symlink")))))

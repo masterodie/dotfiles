@@ -23,5 +23,8 @@
 	path = fzf
 	url = https://github.com/junegunn/fzf
 [submodule "doom-emacs"]
-	path = emacs/emacs.d.symlink
+	path = emacs/doom-emacs
 	url = https://github.com/hlissner/doom-emacs
+[submodule "emacs/emacs.d.symlink"]
+	path = emacs/emacs.d.symlink
+	url = https://github.com/plexus/chemacs2.git
