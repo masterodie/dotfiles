@@ -29,3 +29,4 @@ source ~/.zshenv.local
 export VISUAL=$EDITOR
 export PIPENV_VENV_IN_PROJECT=1
 export PATH="$HOME/.dotfiles/emacs/doom-emacs/bin:$HOME/.local/bin:$PATH"
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
