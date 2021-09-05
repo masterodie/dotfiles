@@ -26,11 +26,9 @@ antigen bundle zsh-users/zsh-autosuggestions
 # Extra zsh completions
 antigen bundle zsh-users/zsh-completions
 
-antigen bundle /home/odie/Code/python/dooml --no-local-clone
-
-antigen theme /home/odie/Code/zsh/themes/odie odie
-
-antigen apply
+antigen theme masterodie/zsh-theme-odie odie
 
 source ~/.zshrc.local
+
+antigen apply
 
