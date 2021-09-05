@@ -31,6 +31,11 @@ bash ${PWD}/fzf/install --key-bindings --completion --no-update-rc --no-fish
 echo "Installing vim Plugins"
 vim -c PlugUpgrade -c PlugInstall -c PlugUpdate -c quitall
 
+echo "Installing doom-emacs"
+doom sync
+doom env
+emacs --batch -f all-the-icons-install-fonts
+
 
 echo "Done."
 exit 0

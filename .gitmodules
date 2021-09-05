@@ -22,3 +22,6 @@
 [submodule "fzf"]
 	path = fzf
 	url = https://github.com/junegunn/fzf
+[submodule "doom-emacs"]
+	path = emacs/emacs.d.symlink
+	url = https://github.com/hlissner/doom-emacs
