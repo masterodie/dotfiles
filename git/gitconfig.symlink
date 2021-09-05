@@ -26,3 +26,7 @@
 [user]
 	email = odie86@gmail.com
 	name = Patrick Neff
+[pull]
+	rebase = false
+[init]
+	defaultBranch = master

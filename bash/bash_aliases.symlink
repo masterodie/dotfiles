@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # File listing
 alias ls='ls -F'
 alias ll='ls -l'
@@ -21,12 +23,8 @@ alias vim='$EDITOR'
 alias vi='vim'
 alias e=vim
 
-# Pager
-alias less=$PAGER
-alias zless=$PAGER
-
 # Python
-alias venv="source venv/bin/activate"
+alias venv="source .venv/bin/activate"
 alias serve='python -m http.server'
 
 # TMUX
@@ -55,3 +53,5 @@ alias updateTheme='cdTheme && composer update'
 alias buildTheme='cdTheme && npm run build'
 alias buildThemeProd='cdTheme && npm run build:production'
 alias watchTheme='cdTheme && npm run start'
+
+alias mpy='manage.py'
