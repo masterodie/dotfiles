@@ -50,4 +50,4 @@
 ;(unpin! t)
 
 (package! vue-mode)
-(package! pony-mode)
+;(package! pony-mode)

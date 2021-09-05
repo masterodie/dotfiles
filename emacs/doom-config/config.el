@@ -55,6 +55,9 @@
 
 (setq confirm-kill-emacs nil)
 
-(add-hook 'vue-mode-hook #'lsp!)
+(setq lsp-pylsp-plugins-pylint-enabled t)
 
-(use-package! pony-mode)
+(use-package vue-mode
+  :mode "\\.vue\\'"
+  :config
+  (add-hook 'vue-mode-hook #'lsp))

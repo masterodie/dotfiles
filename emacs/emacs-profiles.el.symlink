@@ -3,7 +3,7 @@
   ("doom" . (
     (user-emacs-directory . "~/.dotfiles/emacs/doom-emacs")
     (env . (
-      ("DOOMDIR" . "~/.dotfiles/emacs/doom.d.symlink")
+      ("DOOMDIR" . "~/.dotfiles/emacs/doom-config")
     ))
   ))
 )

@@ -13,11 +13,7 @@ antigen bundle pip
 antigen bundle virtualenv
 antigen bundle direnv
 antigen bundle zsh-users/zsh-syntax-highlighting
-
-# Fish-like auto suggestions
 antigen bundle zsh-users/zsh-autosuggestions
-
-# Extra zsh completions
 antigen bundle zsh-users/zsh-completions
 
 antigen theme masterodie/zsh-theme-odie odie
