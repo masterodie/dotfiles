@@ -28,3 +28,6 @@
 [submodule "emacs/emacs.d.symlink"]
 	path = emacs/emacs.d.symlink
 	url = https://github.com/plexus/chemacs2.git
+[submodule "neovim/config/nvim.symlink"]
+	path = neovim/config/nvim.symlink
+	url = https://github.com/masterodie/nvim.git
