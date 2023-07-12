@@ -1,27 +1,29 @@
 [alias]
-  aa = add --all
-  ca = commit --amend
-  co = checkout
-  delete-branch = !sh -c 'git push origin :refs/heads/$1 && git branch -D $1' -
-  merge-branch = !git checkout master && git merge @{-1}
-  st = status
+	aa = add --all
+	ca = commit --amend
+	co = checkout
+	delete-branch = !sh -c 'git push origin :refs/heads/$1 && git branch -D $1' -
+	merge-branch = !git checkout master && git merge @{-1}
+	st = status
 
 [push]
 	default = matching
 
 [core]
-	excludesfile = /Users/odie/.gitignore
-  autocrlf = input
+	autocrlf = input
 
 [include]
-  path = .gitconfig.local
+	path = .gitconfig.local
 
 [commit]
 	template = ~/.gitmessage
+
 [user]
 	email = odie86@gmail.com
 	name = Patrick Neff
+
 [pull]
 	rebase = false
+
 [init]
 	defaultBranch = master
