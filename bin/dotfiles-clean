@@ -7,4 +7,4 @@ DOTFILES_PATH="${DOTFILES_PATH:-${HOME}/.dotfiles}"
 # Navigate to the parent directory of this script (generally ~/.dotfiles/.bin)
 cd "$(dirname "$(dirname "$(readlink -f "$0")")")" || exit
 
-echo stow --dir="$DOTFILES_PATH" --target="${HOME}" --delete
+/usr/bin/stow --dir="$DOTFILES_PATH" --target="${HOME}" --delete .
