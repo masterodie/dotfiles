@@ -1,3 +1,0 @@
-#File for Machine Specific Settings
-#plugins=(git ssh-agent $plugins)
-plugins=($plugins)

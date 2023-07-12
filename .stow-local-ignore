@@ -1,0 +1,5 @@
+.*\.md
+.*\.bak
+\.git
+\.gitignore
+bin

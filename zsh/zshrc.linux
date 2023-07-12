@@ -1,9 +1,0 @@
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
-alias archey='LC_ALL=en_US.UTF8 archey'
-alias newncmpc="urxvt -e ncmpc"
-alias trende="google-translate en de"
-alias scrot="scrot -e 'mv \$f ~/screenshots/'"
-alias mvim=/usr/bin/gvim
-
-[ -e /etc/arch-release ] && plugins=($plugins archlinux)

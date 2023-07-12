@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+# Sync dotfiles
+#
+# Applies local changes to git stash if there were any, pulls in chages from remote repo
+# and pops back the stash if there have been local changes
+
+set -e
+
+GIT_REPO="origin"
+GIT_BRANCH="master"
+
+# Navigate to the parent directory of this script (generally ~/.dotfiles/.bin)
+cd "$(dirname "$(dirname "$(readlink -f "$0")")")" || exit
+
+echo -e "Stashing existing changes..."
+stash_result=$(/usr/bin/git stash push -m "sync-dotfiles: Before syncing dotfiles")
+needs_pop=1
+if [ "$stash_result" = "No local changes to save" ]; then
+    needs_pop=0
+fi
+
+echo -e "Pulling updates from dotfiles repo..."
+echo
+/usr/bin/git pull "${GIT_REPO}" "${GIT_BRANCH}"
+echo
+
+if [[ $needs_pop -eq 1 ]]; then
+    echo -e "Popping stashed changes..."
+    echo
+    /usr/bin/git stash pop
+fi
+
+dotfiles-upddate
