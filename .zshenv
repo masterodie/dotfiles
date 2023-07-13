@@ -1,3 +1,5 @@
+export $(envsubst < .env)
+
 export EDITOR="vi"
 [ -f /usr/bin/vim ] && export EDITOR="vim"
 [ -f /usr/bin/nvim ] && export EDITOR="nvim"
