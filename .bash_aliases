@@ -23,35 +23,19 @@ alias vim='$EDITOR'
 alias vi='vim'
 alias e=vim
 
-# Python
-alias venv="source .venv/bin/activate"
 alias serve='python -m http.server'
 
-# TMUX
-alias muxs='mux start default'
-
 # Network
-alias ports='netstat -tulpna'
-
-# Web Development
-alias lamp='sudo systemctl start nginx php-fpm mysqld'
-alias slamp='sudo systemctl stop nginx php-fpm mysqld'
-alias rlamp='sudo systemctl restart nginx php-fpm mysqld'
+alias ports='ss -tulpn'
 
 # Shortcuts
-alias cdV='cd ~/.vim'
-alias eV='$EDITOR ~/.vimrc'
-alias cdA='cd ~/.config/awesome'
-alias eA='$EDITOR ~/.config/awesome/rc.lua'
+alias cdv='cd ${XDG_CONFIG_HOME}/nvim'
+alias cdd='cd ${XDG_DATA_HOME}/dotfiles'
+alias eV='$EDITOR ~/.'
 alias cdD='cd ~/.dotfiles'
 alias eZ='$EDITOR ~/.zshrc'
 alias eZl='$EDITOR ~/.zshrc.local'
-alias cdSite='cd ${HOME}/code/web/neff-steindesign.de/site'
-alias updateSite='cdSite && composer update'
-alias cdTheme='cd ${HOME}/code/web/neff-steindesign.de/site/web/app/themes/neff-2-0'
-alias updateTheme='cdTheme && composer update'
-alias buildTheme='cdTheme && npm run build'
-alias buildThemeProd='cdTheme && npm run build:production'
-alias watchTheme='cdTheme && npm run start'
 
 alias mpy='python manage.py'
+
+alias artisan="php artisan"
