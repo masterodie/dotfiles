@@ -1,10 +1,14 @@
+ZDOTDIR=${ZDOTDIR:-$HOME}
+ANTIDOTE_DIR="${ZDOTDIR}/.antidote" ]]
+[[ -d "${ANTIDOTE_DIR}/.antidote" ]] || git clone https://github.com/mattmc3/antidote.git ${ZDOTDIR}/.antidote
+
 # Set the name of the static .zsh plugins file antidote will generate.
-zsh_plugins=${ZDOTDIR:-~}/.zsh_plugins.zsh
+zsh_plugins=${ZDOTDIR}/.zsh_plugins.zsh
 
 # Ensure you have a .zsh_plugins.txt file where you can add plugins.
 [[ -f ${zsh_plugins:r}.txt ]] || touch ${zsh_plugins:r}.txt
 
-fpath+=(${ZDOTDIR:-~}/.antidote)
+fpath+=(${ZDOTDIR}/.antidote)
 autoload -Uz compinit bashcompinit $fpath[-1]/antidote
 compinit
 bashcompinit
