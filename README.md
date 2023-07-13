@@ -6,7 +6,7 @@
 
 - Clone this repo to `${XDG_DATA_HOME}/dotfiles` (typically this is
 `/home/<username>/.local/share/dotfiles`)
-- Inside `${XDG_DATA_HOME}/dotfiles` execute `stow --target=$HOME .`
+- Execute `${XDG_DATA_HOME}/dotfiles/bin/dotfiles-install`
 
 ### Manual installation
 
