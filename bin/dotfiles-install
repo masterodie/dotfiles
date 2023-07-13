@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Create needed directories
+ensure_directories=(
+  "${XDG_CONFIG_HOME}"
+  "${XDG_DATA_HOME}/vim/tmp"
+  "${XDG_DATA_HOME}/vim/undo"
+  "${XDG_DATA_HOME}/vim/backup"
+  "${XDG_CONFIG_HOME}/ranger/plugins"
+  "${HOME}/.tmux/plugins"
+)
+for directory in "${ensure_directories[@]}"
+do
+  [[ -d "$directory" ]] || mkdir -p "$directory"  # Create directory if not existing
+done
+
+# Install git repositories
+
+declare -a ensure_repositories
+ensure_repositories["https://github.com/alfunx/ranger-colorschemes" ]="${XDG_CONFIG_HOME}/ranger/colorschemes"
+ensure_repositories["https://github.com/alexanderjeurissen/ranger_devicons"]="${XDG_CONFIG_HOME}/ranger/plugins/ranger_devicons"
+ensure_repositories["https://github.com/tmux-plugins/tpm"]="${HOME}/tmux/plugins/tpm"
+ensure_repositories["https://github.com/masterodie/nvim"]="${XDG_CONFIG_HOME}/nvim"
+for repository in "${!ensure_repositories[@]}"
+do
+  # Clone repository if directory does not exist
+  [[ -d "${ensure_repositories[$repository]}" ]] || /usr/bin/git clone "${repository}" "${ensure_repositories[$repository]}"
+done
+
+# Run stow
+dotfiles_directory="$(dirname "$(readlink -f "$0")")"
+"$dotfiles_directory/dotfiles-update"
+"$dotfiles_directory/custom-font-install"

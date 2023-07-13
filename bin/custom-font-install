@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -e
+
+names=("FiraCode" "Meslo" "CascadiaCode")
+
+repo="ryanoasis/nerd-fonts"
+
+fonts=$(/usr/bin/curl https://api.github.com/repos/${repo}/releases/latest | jq '.assets[].browser_download_url')
+
+for font in ${fonts}
+do
+  if [[ "$font" != *".tar.xz"* ]]
+  then
+    continue
+  fi
+  font=$(printf "%s" "$font" | tr -d '"')
+  fontname=$(basename "$font" ".tar.xz")
+  for name in "${names[@]}"
+  do
+    [[ "$name" == "$fontname" ]] && wget -O "/tmp/${fontname}.tar.xz" "$font" && tar -xJf "/tmp/${fontname}.tar.xz" --directory "${XDG_DATA_HOME}/fonts/" --wildcards '*.ttf'
+  done
+done
