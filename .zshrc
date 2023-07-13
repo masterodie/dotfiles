@@ -9,6 +9,9 @@ autoload -Uz compinit bashcompinit $fpath[-1]/antidote
 compinit
 bashcompinit
 
+zstyle ':completion:*' menu select
+zstyle ':completion:complete:*' gain-privileges 1
+
 
 # Generate static file in a subshell when .zsh_plugins.txt is updated.
 if [[ ! $zsh_plugins -nt ${zsh_plugins:r}.txt ]]; then
