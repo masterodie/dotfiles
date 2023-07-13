@@ -1,6 +1,6 @@
 ZDOTDIR=${ZDOTDIR:-$HOME}
-ANTIDOTE_DIR="${ZDOTDIR}/.antidote" ]]
-[[ -d "${ANTIDOTE_DIR}/.antidote" ]] || git clone https://github.com/mattmc3/antidote.git ${ZDOTDIR}/.antidote
+ANTIDOTE_DIR="${ZDOTDIR}/.antidote"
+[[ ! -d "${ANTIDOTE_DIR}" ]] && git clone https://github.com/mattmc3/antidote.git ${ZDOTDIR}/.antidote
 
 # Set the name of the static .zsh plugins file antidote will generate.
 zsh_plugins=${ZDOTDIR}/.zsh_plugins.zsh
