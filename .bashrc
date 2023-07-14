@@ -2,7 +2,7 @@
 # ~/.bashrc
 #
 
-export $(envsubst < .env)
+export $(envsubst < ${HOME}/.env)
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return

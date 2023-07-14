@@ -1,4 +1,4 @@
-export $(envsubst < .env)
+export $(envsubst < ${HOME}/.env)
 
 export EDITOR="vi"
 [ -f /usr/bin/vim ] && export EDITOR="vim"
