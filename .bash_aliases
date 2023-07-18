@@ -32,7 +32,6 @@ alias ports='ss -tulpn'
 alias cdv='cd ${XDG_CONFIG_HOME}/nvim'
 alias cdd='cd ${XDG_DATA_HOME}/dotfiles'
 alias eV='$EDITOR ~/.'
-alias cdD='cd ~/.dotfiles'
 alias eZ='$EDITOR ~/.zshrc'
 alias eZl='$EDITOR ~/.zshrc.local'
 
