@@ -80,4 +80,6 @@ setopt HIST_REDUCE_BLANKS  # remove unnecessary blanks
 setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately after execution
 setopt EXTENDED_HISTORY
 
+eval "$(starship init zsh)"
+
 [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
