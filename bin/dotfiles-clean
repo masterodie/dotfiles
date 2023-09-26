@@ -2,9 +2,26 @@
 
 set -e
 
-DOTFILES_PATH="${DOTFILES_PATH:-${HOME}/.dotfiles}"
+# Navigate to the package root for this script (generally ~/.dotfiles/config)
+cd "$(dirname "$(dirname "$(readlink -f "$0")")")/config" || exit
 
-# Navigate to the parent directory of this script (generally ~/.dotfiles/.bin)
-cd "$(dirname "$(dirname "$(readlink -f "$0")")")" || exit
-
-/usr/bin/stow --dir="$DOTFILES_PATH" --target="${HOME}" --delete .
+/usr/bin/stow --target="${HOME}" --delete \
+  alacritty \
+  bash \
+  btop \
+  environment \
+  eww \
+  fontconfig \
+  git \
+  hyprland \
+  ipython \
+  kitty \
+  lf \
+  mako \
+  neovim \
+  ranger \
+  tmux \
+  vim \
+  waybar \
+  wofi \
+  zsh

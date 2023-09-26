@@ -1,0 +1,67 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: FiraCode Nerd Font;
+    font-size: 12px;
+    min-height: 0;
+    font-weight: bold;
+}
+
+window#waybar {
+  padding: 6px;
+  background: transparent;
+}
+
+#clock,
+#cpu,
+#memory,
+#mpd,
+#mpris,
+#network.wireless,
+#pulseaudio,
+#temperature,
+#tray,
+#window,
+#workspaces
+{
+  min-height: 0;
+  margin-left: 3px;
+  margin-right: 3px;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  border-radius: 0 0 .5rem .5rem;
+  background: #282828;
+  opacity: 0.8;
+  color: #fbf1c7;
+}
+
+#window.empty {
+  background: transparent;
+}
+
+#clock {
+  margin-right: 6px;
+}
+
+#workspaces {
+  padding: 0;
+  margin-left: 6px;
+}
+
+#workspaces button {
+  padding: 0;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  border-radius: inherit;
+}
+
+#workspaces button.active {
+  color: #83a598;
+  background: #1d2021
+}
+
+#workspaces button:hover {
+  color: #fb4934;
+}

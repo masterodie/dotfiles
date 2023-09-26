@@ -1,0 +1,49 @@
+(include "widgets.yuck")
+
+
+; BAR SETUP
+
+(defwidget bar_monitor_1 []
+  (centerbox :orientation "h"
+             :class "container"
+    (box :orientation "h"
+         :class "bar"
+         :space-evenly false
+         :spacing 6
+      (workspaces_monitor_1))
+    (box :orientation "h"
+         :class "bar"
+         :space-evenly false
+         :spacing 6
+      (window_title_monitor_1))
+      (box :orientation "h"
+           :class "bar"
+           :space-evenly false
+           :halign "end"
+           :spacing 6
+        (cpu)
+        (ram)
+        (volume)
+        (time)
+        (systray :class "systray"))))
+
+(defwidget bar_monitor_0 []
+  (centerbox :orientation "h"
+             :class "container"
+    (box :orientation "h"
+       :class "bar"
+       :space-evenly false
+       :spacing 6
+    (workspaces_monitor_0))
+    (box :orientation "h"
+       :class "bar"
+       :space-evenly false
+       :spacing 6
+    (window_title_monitor_0))
+    (box :orientation "h"
+       :class "bar"
+       :space-evenly false
+       :halign "end"
+       :spacing 6
+    (time))))
+

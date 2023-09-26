@@ -2,7 +2,7 @@
 
 set -e
 
-names=("FiraCode" "Meslo" "CascadiaCode")
+names=("NerdFontsSymbolsOnly")
 
 repo="ryanoasis/nerd-fonts"
 

@@ -1,0 +1,157 @@
+$clrRosewater: #f5e0dc;
+$clrFlamingo: #f2cdcd;
+$clrPink: #f5c2e7;
+$clrMauve: #cba6f7;
+$clrRed: #f38ba8;
+$clrMaroon: #eba0ac;
+$clrPeach: #fab387;
+$clrYellow: #f9e2af;
+$clrGreen: #a6e3a1;
+$clrTeal: #94e2d5;
+$clrSky: #89dceb;
+$clrSapphire: #94e2d5;
+$clrBlue: #89b4fa;
+$clrLavender: #b4befe;
+$clrText: #cdd4f4;
+$clrSubtext1: #bac2de;
+$clrSubtext0: #a6adc8;
+$clrOverlay2: #9399b2;
+$clrOverlay1: #7f849c;
+$clrOverlay0: #6c7086;
+$clrSurface2: #585b70;
+$clrSurface1: #45475a;
+$clrSurface0: #313244;
+$clrBase: #1e1e2e;
+$clrMantle: #181825;
+$clrCrust: #11111b;
+
+* {
+  all: unset; //Unsets everything so you can style everything from scratch
+}
+
+window {
+  font-family: "JetBrains Mono";
+  font-weight: 700;
+  font-size: 13.5px;
+  color: $clrText;
+}
+
+.container {
+  margin-top: 6px;
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+// Styles on classes (see eww.yuck for more information)
+
+.icon {
+  color: $clrSky;
+  font-size: 16px;
+  padding: 0;
+}
+
+.systray,
+.windowtitle,
+.volume,
+.value,
+.workspaces {
+  background-color: rgba($clrBase, 0.9);
+  border-radius: 6px;
+}
+
+.systray,
+.windowtitle,
+.volume,
+.value {
+  padding: 2px 10px;
+}
+
+.systray {
+  menuitem {
+    background-color: rgba($clrBase, 0.9);
+    padding: 0 3px;
+  }
+
+  menuitem:first-child {
+    padding: 0 3px 0 0;
+  }
+
+  menu {
+    border-radius: 6px;
+
+    menuitem {
+      padding: 2px 10px;
+      border-radius: 6px;
+    }
+
+    menuitem:first-child {
+      padding: 5px 10px;
+    }
+
+    menuitem:hover {
+      background-color: $clrMantle;
+    }
+  }
+}
+
+.windowtitle {
+  min-width: 20px;
+}
+
+.workspaces {
+  button {
+    background-color: rgba($clrBase, 0.9);
+    color: $clrText;
+    padding: 2px 10px;
+
+    &:hover {
+      color: $clrSky;
+    }
+
+    &.active {
+      color: $clrBlue;
+    }
+
+    &.urgent {
+      color: $clrRed;
+    }
+
+    border-radius: inherit;
+    .workspace-active {
+      color: $clrGreen;
+    }
+  }
+}
+
+.powermenu-container {
+  margin-top: -6px;
+  .powermenu {
+    padding: 6px;
+    background-color: $clrBase;
+    border-radius: 6px;
+
+    button {
+      margin: 3px;
+      padding: 12px;
+      background-color: $clrMantle;
+      border-radius: 6px;
+
+      &:hover {
+        background-color: $clrCrust;
+        color: $clrSky;
+      }
+    }
+
+    .suspend,
+    .logout,
+    .lock,
+    .poweroff,
+    .reboot {
+      font-size: 24px;
+    }
+
+    .cancel {
+      font-size: 36px;
+    }
+  }
+}

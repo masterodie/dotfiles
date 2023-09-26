@@ -31,4 +31,4 @@ if [[ $needs_pop -eq 1 ]]; then
     /usr/bin/git stash pop
 fi
 
-dotfiles-upddate
+./dotfiles-update

@@ -1,0 +1,3 @@
+lua/odie/custom/*
+!lua/odie/custom/.gitkeep
+*.bak

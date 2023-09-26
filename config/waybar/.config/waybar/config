@@ -1,0 +1,66 @@
+{
+  "layer": "top",
+  "modules-left": [
+    "wlr/workspaces",
+    "mpris"
+  ],
+  "modules-center": [
+    "hyprland/window"
+  ],
+  "modules-right": [
+    "network",
+    "pulseaudio",
+    "temperature",
+    "cpu",
+    "memory",
+    "clock",
+    "tray"
+  ],
+  "spacing": 0,
+  "ipc": true,
+  "mpris": {
+    "tooltip": false,
+    "interval": 1,
+    "format": "{status_icon} {artist} - {title}",
+    "format-paused": "{status_icon} {artist} - {title}",
+    "status-icons": {
+      "playing": "<span font='10' color='#83a598'></span>",
+      "paused": "<span font='10' color='#83a598'></span>",
+      "stopped": "<span font='10' color='#83a598'></span>"
+    }
+  },
+  "pulseaudio": {
+    "tooltip": false,
+    "scroll-step": 5,
+    "format": "{icon} {volume}%",
+    "format-icons": {
+      "default": [
+        "<span font='12' color='#83a598'>奄</span>",
+        "<span font='12' color='#83a598'>奔</span>",
+        "<span font='12' color='#83a598'>墳</span>"
+      ]
+    }
+  },
+  "network": {
+    "tooltip": false,
+    "format-wifi": " {essid}",
+    "format-ethernet": ""
+  },
+  "cpu": {
+    "tooltip": false,
+    "interval": 5,
+    "format": "<span font='12' color='#83a598'></span> {usage}%"
+  },
+  "memory": {
+    "tooltip": false,
+    "interval": 5,
+    "format": "<span font='12' color='#83a598'>󰘚 </span>{}%"
+  },
+  "clock": {
+    "format": "<span font='12' color='#83a598'> </span>{:%a %d.%m.%Y %H:%M:%S}",
+    "interval": 1
+  },
+  "temperature": {
+    "format": "<span font='12' color='#83a598'> </span>{temperatureC}°C"
+  }
+}

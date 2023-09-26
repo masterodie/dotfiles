@@ -5,6 +5,7 @@ set -e
 # Create needed directories
 ensure_directories=(
   "${XDG_CONFIG_HOME}"
+  "${XDG_CONFIG_HOME}/zsh"
   "${XDG_DATA_HOME}/vim/tmp"
   "${XDG_DATA_HOME}/vim/undo"
   "${XDG_DATA_HOME}/vim/backup"
@@ -18,15 +19,19 @@ done
 
 # Install git repositories
 
-declare -a ensure_repositories
-ensure_repositories["https://github.com/alfunx/ranger-colorschemes" ]="${XDG_CONFIG_HOME}/ranger/colorschemes"
-ensure_repositories["https://github.com/alexanderjeurissen/ranger_devicons"]="${XDG_CONFIG_HOME}/ranger/plugins/ranger_devicons"
-ensure_repositories["https://github.com/tmux-plugins/tpm"]="${HOME}/tmux/plugins/tpm"
-ensure_repositories["https://github.com/masterodie/nvim"]="${XDG_CONFIG_HOME}/nvim"
-for repository in "${!ensure_repositories[@]}"
+ensure_repositories=(
+  "alfunx/ranger-colorschemes;${XDG_CONFIG_HOME}/ranger/colorschemes"
+  "alexanderjeurissen/ranger_devicons;${XDG_CONFIG_HOME}/ranger/plugins/ranger_devicons"
+  "tmux-plugins/tpm;${HOME}/.tmux/plugins/tpm"
+  "masterodie/nvim;${XDG_CONFIG_HOME}/nvim"
+)
+for repository in "${ensure_repositories[@]}"
 do
   # Clone repository if directory does not exist
-  [[ -d "${ensure_repositories[$repository]}" ]] || /usr/bin/git clone "${repository}" "${ensure_repositories[$repository]}"
+  repo_info=($(echo $repository | tr ";" "\n"))
+  repo=${repo_info[0]}
+  target=${repo_info[1]}
+  [[ -d "$target" ]] || /usr/bin/git clone "https://github.com/${repo}" "${target}"
 done
 
 # Run stow

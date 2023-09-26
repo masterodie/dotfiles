@@ -1,0 +1,32 @@
+(include "bars.yuck")
+
+(defwindow bar_monitor_1
+  :monitor 1
+  :exclusive true
+  :geometry (geometry :x "0%"
+                      :y "0%"
+                      :width "100%"
+                      :anchor "top center")
+  (bar_monitor_1))
+
+(defwindow bar_monitor_0
+  :monitor 0
+  :exclusive true
+  :geometry (geometry :x "0%"
+                      :y "0%"
+                      :width "100%"
+                      :anchor "top center")
+  (bar_monitor_0))
+
+
+(defwindow powermenu
+  :wm-ignore true
+  :monitor 1
+  :stacking "overlay"
+  :geometry (geometry 
+    :x "0px"
+    :y "0px"
+    :width "100%"
+    :height "100%"
+    :anchor "top left")
+(powermenu))

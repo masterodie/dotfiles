@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+set -e
+
+cd "$(dirname "$(dirname "$(readlink -f "$0")")")" || exit
+
+sudo nixos-rebuild switch --flake .#

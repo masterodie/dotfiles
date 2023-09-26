@@ -1,0 +1,102 @@
+(defwidget labelvalue [label value]
+  (box :orientation "h"
+       :class "value"
+       :space-evenly false
+       :spacing 6
+    (label :text label
+           :class "icon")
+    value))
+
+
+;;;;; Date Time
+
+(defpoll time :interval "1s"
+  "date '+%a %d.%m.%Y %H:%M:%S'")
+(defwidget time []
+   (labelvalue
+     :label ""
+     :value time))
+
+;;;;; Volume
+
+(defpoll volume :interval "1s"
+  "pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | tr -d '%'")
+(defwidget volume []
+   (labelvalue
+     :label "󰕾"
+     :value volume))
+
+
+;;;;; RAM
+
+(defwidget ram[]
+   (labelvalue
+     :label "󰘚"
+     :value {round(EWW_RAM.used_mem_perc, 1)}))
+
+
+;;;;; CPU
+
+(defwidget cpu[]
+   (labelvalue
+     :label ""
+     :value {round(EWW_CPU.avg, 1)}))
+
+
+;;;;; Workspaces
+
+(deflisten workspaces_monitor_0 "/home/odie/Code/rust/eww-hyprland/target/debug/workspaces `hyprctl monitors -j | jq -r \".[0].name\"`")
+(defwidget workspaces_monitor_0 []
+  (eventbox :onscroll "hyprctl dispatch workspace `echo {} | sed 's/up/+/\' | sed 's/down/-/'`1"
+    (box :class "workspaces"
+      (for i in workspaces_monitor_0
+        (button
+          :onclick "hyprctl dispatch workspace ${i.id}"
+          :class "${i.class}"
+          "${i.name}")))))
+
+(deflisten workspaces_monitor_1 "/home/odie/Code/rust/eww-hyprland/target/debug/workspaces `hyprctl monitors -j | jq -r \".[1].name\"`")
+(defwidget workspaces_monitor_1 []
+  (eventbox :onscroll "hyprctl dispatch workspace `echo {} | sed 's/up/+/\' | sed 's/down/-/'`1"
+    (box :class "workspaces"
+      (for i in workspaces_monitor_1
+        (button
+          :onclick "hyprctl dispatch workspace ${i.id}"
+          :class "${i.class}"
+          "${i.name}")))))
+
+
+;;;;; Window Titles
+
+(deflisten window_title_monitor_0 "/home/odie/Code/rust/eww-hyprland/target/debug/active_window `hyprctl monitors -j | jq -r \".[0].name\"`")
+(defwidget window_title_monitor_0 []
+    (label :text "${window_title_monitor_0.title}"
+           :limit-width 50
+           :show_truncated true
+           :class "windowtitle"))
+
+(deflisten window_title_monitor_1 "/home/odie/Code/rust/eww-hyprland/target/debug/active_window `hyprctl monitors -j | jq -r \".[1].name\"`")
+(defwidget window_title_monitor_1 []
+    (label :text "${window_title_monitor_1.title}"
+           :limit-width 50
+           :show_truncated true
+           :class "windowtitle"))
+
+
+;;;;; Power Menu
+
+(defwidget powermenu [] 
+  (eventbox :onclick "eww close powermenu"
+    :class "powermenu-container"
+  (box :orientation "h" 
+            :spacing 6 
+            :space-evenly false 
+            :class "powermenu"
+            :onclick "eww close powermenu"
+            :valign "center"
+            :halign "center"
+    (button :class "poweroff" :onclick "systemctl poweroff" "")
+    (button :class "reboot" :onclick "systemctl reboot" "")
+    (button :class "lock" :onclick "gtklock" "")
+    (button :class "suspend" :onclick "playerctl pause && systemctl suspend" "")
+    (button :class "logout" :onclick "hyprctl dispatch exit" ""))))
