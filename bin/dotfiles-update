@@ -23,4 +23,5 @@ cd "$(dirname "$(dirname "$(readlink -f "$0")")")/config" || exit
   vim \
   waybar \
   wofi \
+  rofi \
   zsh
