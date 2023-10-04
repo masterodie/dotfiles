@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   home = {
     packages = with pkgs; [
@@ -6,7 +6,7 @@
     ];
     file.alacritty = {
       target = ".config/alacritty";
-      source = ../../config/alacritty/.config/alacritty;
+      source = ../../../config/alacritty/.config/alacritty;
       recursive = true;
     };
   };

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   home = {
     packages = with pkgs; [
@@ -6,7 +6,7 @@
     ];
     file.tmux = {
       target = ".tmux.conf";
-      source = ../../config/tmux/.tmux.conf;
+      source = ../../../config/tmux/.tmux.conf;
     };
   };
 }

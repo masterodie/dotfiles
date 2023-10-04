@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{  pkgs, ... }:
 {
   home = {
     packages = with pkgs; [
@@ -7,7 +7,7 @@
     ];
     file.lf = {
       target = ".config/lf";
-      source = ../../config/lf/.config/lf;
+      source = ../../../config/lf/.config/lf;
       recursive = true;
     };
   };

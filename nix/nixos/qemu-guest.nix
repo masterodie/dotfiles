@@ -35,4 +35,5 @@
     qemu-utils
   ];
 
+  virtualisation.qemu.guestAgent.enable = true;
 }

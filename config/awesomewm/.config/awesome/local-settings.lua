@@ -1,5 +1,5 @@
 local settings = {
-  terminal = "kitty"
+  terminal = "alacritty"
 }
 
 return settings

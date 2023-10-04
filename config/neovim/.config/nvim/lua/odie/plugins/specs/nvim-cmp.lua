@@ -81,7 +81,6 @@ M.config = function(_, _)
       { name = 'orgmode' },
       { name = "crates" },
       { name = "buffer" },
-      { name = "fuzzy_path" },
       { name = "emoji" },
     }),
   }
@@ -92,7 +91,6 @@ M.config = function(_, _)
       completeopt = "menu,menuone,noselect",
     },
     sources = cmp.config.sources({
-      { name = "fuzzy_path" },
     }, {
       { name = "cmdline" },
     }),
